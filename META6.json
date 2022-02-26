@@ -1,0 +1,24 @@
+{
+  "authors": [
+    "sumanstats"
+  ],
+  "build-depends": [
+  ],
+  "depends": [
+  ],
+  "description": "Raku module for doing statistics",
+  "license": "Artistic-2.0",
+  "name": "Stats",
+  "perl": "6.d",
+  "provides": {
+    "Stats": "lib/Stats.rakumod"
+  },
+  "resources": [
+  ],
+  "source-url": "",
+  "tags": [
+  ],
+  "test-depends": [
+  ],
+  "version": "0.0.1"
+}
