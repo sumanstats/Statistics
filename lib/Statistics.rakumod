@@ -30,6 +30,14 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 
 Many things are in the roadmap, only few are done.
 
+
+=head2 NOTE
+
+Because of absence of easy to use matrix library like numpy in Raku, implementing many of the tests
+is very difficult. Whatever can be done with Python statistics module 
+will all be implemented.
+
+
 =head1 AUTHOR
 
 Dr Suman Khanal <suman81765@gmail.com>

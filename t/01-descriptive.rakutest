@@ -5,7 +5,7 @@ my @new_data = [1,2,3,4,5,5,6,6,6];
 my @data = [6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4];
 is-approx mean(@new_data), 4.222222;
 is mean([3, 4]), 3.5;
-is mean(@data), 6.1785;
+is mean(@data), 6.1875;
 is mean([0]), 0;
 
 
@@ -20,6 +20,15 @@ is range([1,2,5,6,7,8]), (1,8);
 
 is range([1,2,5,6,7,8, "a","b","z"]), (1,"z");
 is range(["a","b","y","w","x"]), ("a","y");
+
+my @test-data2 = [2.75, 1.75, 1.25, 0.25, 0.5, 1.25, 3.5];
+my @test-data3 = [0.0, 0.25, 0.25, 1.25, 1.5, 1.75, 2.75, 3.25];
+
+is-approx variance(@test-data2), 1.3720238095238095;
+is variance(@test-data3, sample => False), 1.25;
+is-approx sd(@test-data2), 1.171334200612195;
+is-approx sd(@test-data2, sample => False), 1.084444746477784;
+
 
 
 done-testing

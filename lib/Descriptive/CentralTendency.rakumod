@@ -25,12 +25,12 @@ sub mean(@data) is export {
 
 
 # Geometric mean
-
+# geometric_mean
 
 
 
 # Harmonic mean
-
+# harmonic_mean
 
 
 # Median 
@@ -49,10 +49,27 @@ sub median(@nums) is export {
 }
 
 
+# median_low
+
+
+
+
+# median_high
+
+
+
+
+# median_grouped
+
+
+
 # Mode
 
 
 
+
+
+# multimode
 
 
 
