@@ -29,6 +29,7 @@ is variance(@test-data3, sample => False), 1.25;
 is-approx sd(@test-data2), 1.171334200612195;
 is-approx sd(@test-data2, sample => False), 1.084444746477784;
 
-
+is-approx sd(@data), 1.7859216469465444;
+is-approx sd(@data, sample => False), 1.757795138803154;
 
 done-testing
