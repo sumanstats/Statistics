@@ -1,3 +1,5 @@
+unit module Descriptive::CentralTendency;
+
 sub mean(@data) is export {
   my $number_of_elements=@data.elems;
   die "Data is Empty, provide data values." if $number_of_elements == 0;
@@ -21,6 +23,16 @@ sub mean(@data) is export {
 # }
 
 
+
+# Geometric mean
+
+
+
+
+# Harmonic mean
+
+
+
 # Median 
 # sorting the array 
 # if odd: middle element is the median
@@ -37,5 +49,12 @@ sub median(@nums) is export {
 }
 
 
+# Mode
 
+
+
+
+
+
+# Quantiles 
 

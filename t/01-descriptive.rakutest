@@ -1,13 +1,25 @@
 use Test;
 use Descriptive::CentralTendency;
+use Descriptive::Dispersion;
 my @new_data = [1,2,3,4,5,5,6,6,6];
+my @data = [6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4];
 is-approx mean(@new_data), 4.222222;
 is mean([3, 4]), 3.5;
+is mean(@data), 6.1785;
 is mean([0]), 0;
 
 
 my @test_data = [1,2,3,4,5,5,6,6,6,10];
 is median(@new_data), 5;
 is median(@test_data), 5;
+is median(@data), 6;
+
+is range([1]), (1,1);
+is range([1,2,5,6,7,8]), (1,8);
+# is range([1,2,5,6,7,8, "a","b","z"]), (1,"z");
+
+is range([1,2,5,6,7,8, "a","b","z"]), (1,"z");
+is range(["a","b","y","w","x"]), ("a","y");
+
 
 done-testing
