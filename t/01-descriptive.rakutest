@@ -1,6 +1,6 @@
 use Test;
 use Descriptive::CentralTendency;
-my @new_data = <1 2 3 4 5 5 6 6 6>;
+my @new_data = [1,2,3,4,5,5,6,6,6];
 is-approx mean(@new_data), 4.222222;
 is mean([3, 4]), 3.5;
 is mean([0]), 0;
