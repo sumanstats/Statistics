@@ -1,4 +1,8 @@
 Revision history for Stats
 
+
+{{$NEXT}}
+– Publish to the Raku module Zef repository
+
 {{$NEXT}}
     - Initial version

@@ -27,8 +27,8 @@ sd(@test1); # 1.7859216469465444
 sd(@test1, sample => False); # 1.757795138803154
 
 # correlation coefficients
-pearson_correlation_coef(@test1, @test2); # 0.9020328721469989
-spearman_correlation_coefficient(@test1, @test2); # 0.9276515785415314
+pearson_cor_coef(@test1, @test2); # 0.9020328721469989
+spearman_cor_coef(@test1, @test2); # 0.9276515785415314
 kendall_cor_coef(@test1, @test2); # 0.8144262510988963
 ```
 

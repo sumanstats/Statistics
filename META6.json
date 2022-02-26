@@ -1,6 +1,7 @@
 {
+  "auth": "cpan:SUMAN",
   "authors": [
-    "sumanstats"
+    "Suman Khanal"
   ],
   "build-depends": [
   ],
@@ -24,6 +25,8 @@
   ],
   "source-url": "https://github.com/sumanstats/Statistics.git",
   "tags": [
+    "statistics",
+    "maths"
   ],
   "test-depends": [
   ],
