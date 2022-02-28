@@ -27,6 +27,9 @@ sub fractional_ranking(@data is copy) {
 
 # Function for calculating pearson correlation coefficient
 
+# Ultimate goal is to use one-pass and numerically stable algorithm as in paper
+# https://crypto.fit.cvut.cz/sites/default/files/publications/fulltexts/pearson.pdf
+
 sub pearson_cor_coef(@x, @y) is export {
     my $n = @x.elems;
     # exit if two variables have differing number of values
