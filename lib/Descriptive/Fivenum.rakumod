@@ -1,7 +1,6 @@
 unit module Descriptive::FiveNum;
 
 
-
 sub fivenum(@data is copy) is export {
 
   #`[ Return fivenum summary of data
