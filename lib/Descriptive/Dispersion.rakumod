@@ -1,6 +1,4 @@
-# unit module Descriptive::Dispersion;
-
-# use Descriptive::CentralTendency;
+unit module Descriptive::Dispersion;
 
 # simple but has to do double pass
 
