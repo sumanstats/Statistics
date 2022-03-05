@@ -1,6 +1,6 @@
-unit module Descriptive::Dispersion;
+# unit module Descriptive::Dispersion;
 
-use Descriptive::CentralTendency;
+# use Descriptive::CentralTendency;
 
 # simple but has to do double pass
 
@@ -72,6 +72,28 @@ sub variance(@data, :$sample = True) is export {
 
 
 
+# Coefficient of variation 
+# sd/mean * 100
+
+sub coef_variation(@data) is export {
+  my $number_of_elements = @data.elems;
+  return NaN if $number_of_elements < 2;
+  # for the time being return NaN while in R it gives NA (not available)
+  # work on new type NA
+  my $mean = @data[0];
+  my $sum_of_squares_of_differences_from_the_current_mean = 0;
+  for 1..($number_of_elements-1) {
+    my $x = @data[$_];
+    my $old_mean = $mean;
+    my $old_sum_of_squares_of_differences_from_the_current_mean=$sum_of_squares_of_differences_from_the_current_mean;
+    $mean = $old_mean + ($x-$old_mean)/($_+1);
+    $sum_of_squares_of_differences_from_the_current_mean = $old_sum_of_squares_of_differences_from_the_current_mean + ($x-$mean)*($x-$old_mean);
+  }
+  my $variance = $sum_of_squares_of_differences_from_the_current_mean/($number_of_elements-1);
+  return sqrt($variance)/$mean * 100
+}
+
+
 
 
 
@@ -97,4 +119,4 @@ sub sd(@data, :$sample = True) is export {
 
 
 
-# coefficient of variation
+
