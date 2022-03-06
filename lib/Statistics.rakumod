@@ -39,10 +39,17 @@ sd(@test1); # 1.7859216469465444
 # population standard deviation
 sd(@test1, sample => False); # 1.757795138803154
 
+# Coefficient of variation
+coef_variation(@test2); # 53.71779066522493
+
+# Five number summary
+fivenum(@test2); # (71.1 120.65 196.3 334 472)
+
 # correlation coefficients
 pearson_cor_coef(@test1, @test2); # 0.9020328721469989
 spearman_cor_coef(@test1, @test2); # 0.9276515785415314
 kendall_cor_coef(@test1, @test2); # 0.8144262510988963
+
 
 =end code
 
