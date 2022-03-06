@@ -1,10 +1,16 @@
+sub EXPORT() {
+    {
+        use Descriptive::CentralTendency;
+        use Descriptive::Dispersion;
+        use Descriptive::FiveNum;
+        use Correlation::PearsonSpearman;
+        use Correlation::Kendall;
+        return ::.pairs.grep(*.key ne '$_').Map;
+    }
+}
+
 unit module Statistics;
 
-use Descriptive::CentralTendency;
-use Descriptive::Dispersion;
-use Descriptive::FiveNum;
-use Correlation::PearsonSpearman;
-use Correlation::Kendall;
 
 =begin pod
 
