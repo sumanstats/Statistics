@@ -9,11 +9,8 @@ unit module Kendall;
 # TODO write more efficient O(nlogn) algorithm
 
 sub concordant_discordant_rties_sties(@var1,@var2) {    
-    my $i=0;
-    my $concordant=0;
-    my $discordant=0;
-    my $r_ties=0;
-    my $s_ties=0;
+    # multiple variable declarations
+    my ($i, $concordant, $discordant, $r_ties, $s_ties) = (0, 0, 0, 0, 0);
     my $number_of_elements=@var1.elems;
     while $i != $number_of_elements - 1 {
         my $j = $i + 1;
