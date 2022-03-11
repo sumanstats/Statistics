@@ -63,9 +63,7 @@ sub variance(@data, :$sample = True) is export {
     $mean = $old_mean + ($x-$old_mean)/($_+1);
     $sum_of_squares_of_differences_from_the_current_mean = $old_sum_of_squares_of_differences_from_the_current_mean + ($x-$mean)*($x-$old_mean);
   }
-  $sample == False ?? 
-    return $sum_of_squares_of_differences_from_the_current_mean/($number_of_elements) !!
-    return $sum_of_squares_of_differences_from_the_current_mean/($number_of_elements - 1)
+  return $sum_of_squares_of_differences_from_the_current_mean/($number_of_elements - ($sample ?? 1 !! 0))
 }
 
 
