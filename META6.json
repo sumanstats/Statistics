@@ -12,6 +12,7 @@
   "name": "Statistics",
   "perl": "6.d",
   "provides": {
+    "Correlation::BiweightMid": "lib/Correlation/BiweightMid.rakumod",
     "Correlation::Kendall": "lib/Correlation/Kendall.rakumod",
     "Correlation::PearsonSpearman": "lib/Correlation/PearsonSpearman.rakumod",
     "Descriptive::CentralTendency": "lib/Descriptive/CentralTendency.rakumod",

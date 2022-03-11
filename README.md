@@ -36,6 +36,10 @@ fivenum(@test2); # (71.1 120.65 196.3 334 472)
 pearson_cor_coef(@test1, @test2); # 0.9020328721469989
 spearman_cor_coef(@test1, @test2); # 0.9276515785415314
 kendall_cor_coef(@test1, @test2); # 0.8144262510988963
+
+# Biweight_midcorrelation 
+# more robust, less sensitive to outliers
+bi_cor_coef(@test1, @test2); # 0.9146470012038392
 ```
 
 DESCRIPTION
