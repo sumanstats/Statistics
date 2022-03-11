@@ -23,5 +23,8 @@ is kendall_cor_coef(@test1, @test2), 0.8144262510988963;
 is-approx kendall_cor_coef(@data1, @data2), -0.47140452;
 is-approx kendall_cor_coef(@data3, @data4), -0.066666667;
 
+is bi_cor_coef(@test1, @test2), 0.9146470012038392;
+is bi_cor_coef(@data1, @data2), -0.5856205826464312;
+
 
 done-testing;

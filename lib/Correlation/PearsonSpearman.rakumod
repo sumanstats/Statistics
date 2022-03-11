@@ -1,4 +1,4 @@
-unit module PearsonSpearman;
+unit module Correlation::PearsonSpearman;
 
 # Fractional ranks in a set of data 
 

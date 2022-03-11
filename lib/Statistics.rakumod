@@ -5,6 +5,7 @@ sub EXPORT() {
         use Descriptive::FiveNum;
         use Correlation::PearsonSpearman;
         use Correlation::Kendall;
+        use Correlation::BiweightMid;
         return ::.pairs.grep(*.key ne '$_').Map;
     }
 }
@@ -50,6 +51,9 @@ pearson_cor_coef(@test1, @test2); # 0.9020328721469989
 spearman_cor_coef(@test1, @test2); # 0.9276515785415314
 kendall_cor_coef(@test1, @test2); # 0.8144262510988963
 
+# Biweight_midcorrelation 
+# more robust, less sensitive to outliers
+bi_cor_coef(@test1, @test2); # 0.9146470012038392
 
 =end code
 

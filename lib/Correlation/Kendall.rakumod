@@ -1,4 +1,4 @@
-unit module Kendall;
+unit module Correlation::Kendall;
 
 # Kendall tau-b correlation coefficient in Raku
 # Run time Big O(n^2)
