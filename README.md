@@ -52,7 +52,15 @@ Many things are in the roadmap, only few are done.
 NOTE
 ----
 
-Because of absence of easy to use matrix library like numpy in Raku, implementing many of the tests is very difficult. Whatever can be done with Python statistics module will all be implemented.
+Because of absence of an easy to use matrix library like numpy in Raku, implementing many of the tests is difficult. Whatever can be done with Python statistics module will all be implemented.
+
+### ISSUES
+
+https://github.com/sumanstats/Statistics/issues
+
+### PULL REQUESTS
+
+Improvement of the code base and efficient implementation of the algorithms are welcome. Send PR.
 
 AUTHOR
 ======
@@ -62,7 +70,7 @@ Dr Suman Khanal <suman81765@gmail.com>
 COPYRIGHT AND LICENSE
 =====================
 
-Copyright 2022 Suman Khanal
+Copyright 2022 Dr Suman Khanal
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
