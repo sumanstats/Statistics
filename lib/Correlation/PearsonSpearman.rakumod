@@ -11,8 +11,8 @@ sub fractional_ranking(@data is copy) {
             %internal_hash.push(.key => $i); 
             $i+=1
         } else {
-                %internal_hash.push(.key => $i + (.value - 1)/2); # push  r + (n-1)/2
-                $i = $i + .value
+            %internal_hash.push(.key => $i + (.value - 1)/2); # push  r + (n-1)/2
+            $i = $i + .value
         }
     }
 
@@ -61,4 +61,3 @@ sub spearman_cor_coef(@data1, @data2) is export {
     )
 
 }
-
