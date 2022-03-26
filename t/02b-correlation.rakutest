@@ -1,10 +1,25 @@
 use Test;
 use Statistics;
 
-srand(1);
-my @x = (1..1000).roll(1000);
-my @y = (200..7000).roll(1000);
-is kendall_cor_coef(@x, @y), 0.0022575558527578145;
+
+if $*KERNEL ~~ 'win32' {
+    srand(1); # From Raku docs: Note that srand is called with a platform dependent value when a Raku program is started.
+    # This is tested in Windows 10
+    my @x = (1..1000).roll(1000);
+    my @y = (200..7000).roll(1000);
+    is kendall_cor_coef(@x, @y), 0.0022575558527578145;
+}
+elsif $*KERNEL ~~ 'linux' {
+    srand(1); # From Raku docs: Note that srand is called with a platform dependent value when a Raku program is started.
+    # This is tested on repl.it Linux platform
+    my @x = (1..1000).roll(1000);
+    my @y = (200..7000).roll(1000);
+    is kendall_cor_coef(@x, @y), 0.028950499271910752;
+
+}
+else {
+    skip "Not tested on Mac !", 1;
+}
 
 
 done-testing;
