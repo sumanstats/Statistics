@@ -4,7 +4,7 @@ use Statistics;
 
 if $*KERNEL ~~ 'win32' {
     srand(1); # From Raku docs: Note that srand is called with a platform dependent value when a Raku program is started.
-    # This is tested in Windows 10
+    # This is tested on my own Windows 10
     my @x = (1..1000).roll(1000);
     my @y = (200..7000).roll(1000);
     is kendall_cor_coef(@x, @y), 0.0022575558527578145;
