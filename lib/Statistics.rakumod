@@ -80,7 +80,6 @@ https://github.com/sumanstats/Statistics/issues
 =head3 PULL REQUESTS
 
 Improvement of the code base and efficient implementation of the algorithms are welcome.
-Send PR.
 
 
 =head1 AUTHOR

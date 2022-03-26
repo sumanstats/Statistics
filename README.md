@@ -60,7 +60,7 @@ https://github.com/sumanstats/Statistics/issues
 
 ### PULL REQUESTS
 
-Improvement of the code base and efficient implementation of the algorithms are welcome. Send PR.
+Improvement of the code base and efficient implementation of the algorithms are welcome.
 
 AUTHOR
 ======
