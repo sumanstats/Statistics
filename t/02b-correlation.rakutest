@@ -1,0 +1,10 @@
+use Test;
+use Statistics;
+
+srand(1);
+my @x = (1..1000).roll(1000);
+my @y = (200..7000).roll(1000);
+is kendall_cor_coef(@x, @y), 0.0022575558527578145;
+
+
+done-testing;
