@@ -7,6 +7,7 @@ nav:
     - index.md
     - 'Descriptive Statistics': descriptive.md
     - 'Correlation': correlation.md
+    - 'Planned features': Planned_features.md
 markdown_extensions:
     - toc:
         permalink: "#"
