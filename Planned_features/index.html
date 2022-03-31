@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Dr Suman Khanal">
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Planned features - Statistics module for Raku</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Planned features";
+    var mkdocs_page_input_path = "Planned_features.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Statistics module for Raku</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Welcome to Statistics module</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../descriptive/">Descriptive Statistics</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../correlation/">Correlation</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Planned features</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Statistics module for Raku</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Planned features</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="statistical-comparisons">Statistical Comparisons<a class="headerlink" href="#statistical-comparisons" title="Permanent link">#</a></h2>
+<ul>
+<li>Paired or unpaired t tests. Reports P values and confidence intervals.</li>
+<li>Automatically generate volcano plot (difference vs. P value) from multiple t test analysis.</li>
+<li>Nonparametric Mann-Whitney test, including confidence interval of difference of medians.</li>
+<li>Kolmogorov-Smirnov test to compare two groups.</li>
+<li>Wilcoxon test with confidence interval of median.</li>
+<li>Perform many t tests at once, using False Discovery Rate (or Bonferroni multiple comparisons) to choose which comparisons are discoveries to study further.</li>
+<li>Ordinary or repeated measures ANOVA followed by the Tukey, Newman-Keuls, Dunnett, Bonferroni or Holm-Sidak multiple comparison tests, the post-test for trend, or Fisher’s Least Significant tests.</li>
+<li>One-way ANOVA without assuming populations with equal standard deviations using Brown-Forsythe and Welch ANOVA, followed by appropriate comparisons tests (Games-Howell, Tamhane T2, Dunnett T3)</li>
+<li>Many multiple comparisons test are accompanied by confidence intervals and multiplicity adjusted P values.</li>
+<li>Greenhouse-Geisser correction so repeated measures one-, two-, and three-way ANOVA do not have to assume sphericity. When this is chosen, multiple comparison tests also do not assume sphericity.</li>
+<li>Kruskal-Wallis or Friedman nonparametric one-way ANOVA with Dunn's post test.</li>
+<li>Fisher's exact test or the chi-square test. Calculate the relative risk and odds ratio with confidence intervals.</li>
+<li>Two-way ANOVA, even with missing values with some post tests.</li>
+<li>Two-way ANOVA, with repeated measures in one or both factors. Tukey, Newman-Keuls, Dunnett, Bonferroni, Holm-Sidak, or Fisher’s LSD multiple comparisons testing main and simple effects.</li>
+<li>Three-way ANOVA (limited to two levels in two of the factors, and any number of levels in the third).</li>
+<li>Analysis of repeated measures data (one-, two-, and three-way) using a mixed effects model (similar to repeated measures ANOVA, but capable of handling missing data).</li>
+<li>Kaplan-Meier survival analysis. Compare curves with the log-rank test (including test for trend).</li>
+<li>Comparison of data from nested data tables using nested t test or nested one-way ANOVA (using mixed effects model).</li>
+</ul>
+<h2 id="nonlinear-regression">Nonlinear Regression<a class="headerlink" href="#nonlinear-regression" title="Permanent link">#</a></h2>
+<ul>
+<li>Fit one of our 105 built-in equations, or enter your own. Now including family of growth equations: exponential growth, exponential plateau, Gompertz, logistic, and beta (growth and then decay).</li>
+<li>Enter differential or implicit equations.</li>
+<li>Enter different equations for different data sets.</li>
+<li>Global nonlinear regression – share parameters between data sets.</li>
+<li>Robust nonlinear regression.</li>
+<li>Automatic outlier identification or elimination.</li>
+<li>Compare models using extra sum-of-squares F test or AICc.</li>
+<li>Compare parameters between data sets.</li>
+<li>Apply constraints.</li>
+<li>Differentially weight points by several methods and assess how well your weighting method worked.</li>
+<li>Accept automatic initial estimated values or enter your own.</li>
+<li>Automatically graph curve over specified range of X values.</li>
+<li>Quantify precision of fits with SE or CI of parameters. Confidence intervals can be symmetrical (as is traditional) or asymmetrical (which is more accurate).</li>
+<li>Quantify symmetry of imprecision with Hougaard’s skewness.</li>
+<li>Plot confidence or prediction bands.</li>
+<li>Test normality of residuals.</li>
+<li>Runs or replicates test of adequacy of model.</li>
+<li>Report the covariance matrix or set of dependencies.</li>
+<li>Easily interpolate points from the best fit curve.</li>
+<li>Fit straight lines to two data sets and determine the intersection point and both slopes.</li>
+</ul>
+<h2 id="column-statistics">Column Statistics<a class="headerlink" href="#column-statistics" title="Permanent link">#</a></h2>
+<ul>
+<li>Calculate descriptive statistics: min, max, quartiles, mean, SD, SEM, CI, CV, skewness, kurtosis.</li>
+<li>Mean or geometric mean with confidence intervals.</li>
+<li>Frequency distributions (bin to histogram), including cumulative histograms.</li>
+<li>Normality testing by four methods (new: Anderson-Darling).</li>
+<li>Lognormality test and likelihood of sampling from normal (Gaussian) vs. lognormal distribution.</li>
+<li>Create QQ Plot as part of normality testing.</li>
+<li>One sample t test or Wilcoxon test to compare the column mean (or median) with a theoretical value.</li>
+<li>Identify outliers using Grubbs or ROUT method.</li>
+<li>Analyze a stack of P values, using Bonferroni multiple comparisons or the FDR approach to identify "significant" findings or discoveries.</li>
+</ul>
+<h2 id="linear-regression-and-correlation">Linear Regression and Correlation<a class="headerlink" href="#linear-regression-and-correlation" title="Permanent link">#</a></h2>
+<ul>
+<li>Calculate slope and intercept with confidence intervals</li>
+<li>Force the regression line through a specified point.</li>
+<li>Fit to replicate Y values or mean Y.</li>
+<li>Test for departure from linearity with a runs test.</li>
+<li>Calculate and graph residuals in four different ways (including QQ plot).</li>
+<li>Compare slopes and intercepts of two or more regression lines.</li>
+<li>Interpolate new points along the standard curve.</li>
+<li>Pearson or Spearman (nonparametric) correlation.</li>
+<li>Multiple linear regression (including Poisson regression) using the new multiple variables data table.</li>
+</ul>
+<h2 id="clinical-diagnostic-lab-statistics">Clinical (Diagnostic) Lab Statistics<a class="headerlink" href="#clinical-diagnostic-lab-statistics" title="Permanent link">#</a></h2>
+<ul>
+<li>Bland-Altman plots.</li>
+<li>Receiver operator characteristic (ROC) curves.</li>
+<li>Deming regression (type II linear regression).</li>
+</ul>
+<h2 id="simulations">Simulations<a class="headerlink" href="#simulations" title="Permanent link">#</a></h2>
+<ul>
+<li>Simulate XY, Column or Contingency tables.</li>
+<li>Repeat analyses of simulated data as a Monte-Carlo analysis.</li>
+<li>Plot functions from equations you select or enter and parameter values you choose.</li>
+</ul>
+<h2 id="other-calculations">Other Calculations<a class="headerlink" href="#other-calculations" title="Permanent link">#</a></h2>
+<ul>
+<li>Area under the curve, with confidence interval.</li>
+<li>Transform data.</li>
+<li>Normalize.</li>
+<li>Identify outliers.</li>
+<li>Normality tests.</li>
+<li>Transpose tables.</li>
+<li>Subtract baseline (and combine columns).</li>
+<li>Compute each value as a fraction of its row, column or grand total.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../correlation/" class="btn btn-neutral" title="Correlation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../correlation/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
