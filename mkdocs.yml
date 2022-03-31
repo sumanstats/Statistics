@@ -1,0 +1,12 @@
+site_name: Statistics module for Raku
+site_description: Documentation of Statistics module for Raku
+site_author: Dr Suman Khanal
+theme:
+  name: readthedocs
+nav:
+    - index.md
+    - 'Descriptive Statistics': descriptive.md
+    - 'Correlation': correlation.md
+markdown_extensions:
+    - toc:
+        permalink: "#"
