@@ -15,6 +15,8 @@ unit module Statistics;
 
 =begin pod
 
+[![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
+
 =head1 NAME
 
 Statistics - Raku module for doing statistics
