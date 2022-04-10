@@ -10,7 +10,7 @@
   "description": "Raku module for doing statistics",
   "license": "Artistic-2.0",
   "name": "Statistics",
-  "perl": "6.d",
+  "perl": "6.*",
   "provides": {
     "Correlation::BiweightMid": "lib/Correlation/BiweightMid.rakumod",
     "Correlation::Kendall": "lib/Correlation/Kendall.rakumod",
