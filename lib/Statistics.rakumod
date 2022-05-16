@@ -17,6 +17,14 @@ unit module Statistics;
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
 
+   _____ _        _   _     _   _          
+  / ____| |      | | (_)   | | (_)         
+ | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___ 
+  \___ \| __/ _` | __| / __| __| |/ __/ __|
+  ____) | || (_| | |_| \__ \ |_| | (__\__ \
+ |_____/ \__\__,_|\__|_|___/\__|_|\___|___/v0.0.4
+                                           
+
 =head1 NAME
 
 Statistics - Raku module for doing statistics
