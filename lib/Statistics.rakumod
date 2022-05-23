@@ -10,7 +10,18 @@ sub EXPORT() {
     }
 }
 
+
 unit module Statistics;
+
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:08:40
+# ~: Statistics module
+# File: Statistics.rakumod
+#======================================================#
+
+
+
 
 
 =begin pod

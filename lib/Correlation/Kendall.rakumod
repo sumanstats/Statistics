@@ -1,5 +1,20 @@
 unit module Correlation::Kendall;
 
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:10:40
+# ~: Kendall tau correlation coef, Knight's algorithm
+# File: Kendall.rakumod
+#======================================================#
+
+# References
+
+# Knight, W. R. (1966). A Computer Method for Calculating Kendall's Tau with Ungrouped Data. Journal of the American Statistical Association, 314(61) Part 1, 436-439.
+# Christensen D. (2005). Fast algorithms for the calculation of Kendall's Tau. Journal of Computational Statistics 20, 51-62.
+# Abrevaya J. (1999). Computation of the Maximum Rank Correlation Estimator. Economic Letters 62, 279-285.
+
+
+
 # Kendall tau-b correlation coefficient in Raku
 # Run time Big O(n^2)
 

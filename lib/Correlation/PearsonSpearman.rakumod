@@ -1,5 +1,13 @@
 unit module Correlation::PearsonSpearman;
 
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:09:36
+# ~: Pearson and spearman correlation coefficients
+# File: PearsonSpearman.rakumod
+#======================================================#
+
+
 # Fractional ranks in a set of data 
 
 sub fractional_ranking(@data is copy) {

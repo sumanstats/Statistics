@@ -1,5 +1,13 @@
 unit module Descriptive::Dispersion;
 
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:14:06
+# ~: Measures of dispersion
+# File: Dispersion.rakumod
+#======================================================#
+
+
 # simple but has to do double pass
 
 # big array may take time 
@@ -51,7 +59,7 @@ sub range(@data) is export {
 sub variance(@data, :$sample = True) is export {
     my $number_of_elements = @data.elems;
     return NaN if $number_of_elements < 2;
-    # for the time being return NaN while in R it gives NA (not available)
+    # for the time being return NaN while in R it gives NA (NA not available in Raku)
     # work on new type NA
     my $mean = @data[0];
     my $sum_of_squares_of_differences_from_the_current_mean = 0;

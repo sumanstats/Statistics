@@ -1,5 +1,13 @@
 unit module Descriptive::CentralTendency;
 
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:13:27
+# ~: Central tendencies
+# File: CentralTendency.rakumod
+#======================================================#
+
+
 sub mean(@data) is export {
   my $number_of_elements=@data.elems;
   die "Data is Empty, provide data values." if $number_of_elements == 0;
