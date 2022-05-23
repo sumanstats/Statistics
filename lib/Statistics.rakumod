@@ -15,15 +15,20 @@ unit module Statistics;
 
 =begin pod
 
+[![Actions Status](https://github.com/sumanstats/Statistics/workflows/test/badge.svg)](https://github.com/sumanstats/Statistics/actions)
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
 
-   _____ _        _   _     _   _          
-  / ____| |      | | (_)   | | (_)         
- | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___ 
-  \___ \| __/ _` | __| / __| __| |/ __/ __|
-  ____) | || (_| | |_| \__ \ |_| | (__\__ \
- |_____/ \__\__,_|\__|_|___/\__|_|\___|___/v0.0.4
-                                           
+
+=begin code
+  _____ _        _   _     _   _          
+ / ____| |      | | (_)   | | (_)         
+| (___ | |_ __ _| |_ _ ___| |_ _  ___ ___ 
+ \___ \| __/ _` | __| / __| __| |/ __/ __|
+ ____) | || (_| | |_| \__ \ |_| | (__\__ \
+|_____/ \__\__,_|\__|_|___/\__|_|\___|___/v0.0.4
+
+=end code                                          
+
 
 =head1 NAME
 
@@ -74,12 +79,16 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 Many things are in the roadmap, only few are done.
 
 
-=head2 NOTE
+=head2 Expected Features
 
-Because of absence of an easy to use matrix library like numpy in Raku, 
-implementing many of the tests is difficult. 
-Whatever can be done with Python statistics module 
-will all be implemented.
+=item basic descriptive statistics
+=item correlation coefficients
+=item pdf, cdf of probability distributions 
+=item random number generators
+=item parametric tests
+=item non-parametric tests
+
+
 
 
 =head3 ISSUES
