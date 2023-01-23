@@ -14,8 +14,8 @@ my @data2_ints_floats = [30.24,24.16,20.46,45,6.7,4.8,4.9,22.0,2.23,7.49];
 
 
 is kendall_cor_coef(@x, @y), 0.07074995524624558;
-is kendall_cor_coef(@@data1_ints, @data2_ints), 0.0222222222222222;
-is kendall_cor_coef(@@data1_ints_floats, @data2_ints_floats), 0.1555555555555556;
+is kendall_cor_coef(@@data1_ints, @data2_ints), 0.022222222222222223;
+is kendall_cor_coef(@@data1_ints_floats, @data2_ints_floats), 0.15555555555555556;
 
 done-testing;
 
