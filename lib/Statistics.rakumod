@@ -1,4 +1,6 @@
 sub EXPORT() {
+    # Idea obtained from stackoverflow 
+    # https://stackoverflow.com/questions/71365690/making-exported-functions-in-submodules-accessible-in-global-namespace-in-raku
     {
         use Descriptive::CentralTendency;
         use Descriptive::Dispersion;
