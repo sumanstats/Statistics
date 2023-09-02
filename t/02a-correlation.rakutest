@@ -17,12 +17,14 @@ my @data4 = [20,16,30,18,25,17];
 
 
 
-is pearson_cor_coef(@test1, @test2), 0.9020328721469989;
-is spearman_cor_coef(@test1, @test2), 0.9276515785415314;
-is kendall_cor_coef(@test1, @test2), 0.8144262510988963;
-is-approx kendall_cor_coef(@data1, @data2), -0.47140452;
-is-approx kendall_cor_coef(@data3, @data4), -0.066666667;
 
+diag("Testing pearson_cor_coef...");
+is pearson_cor_coef(@test1, @test2), 0.9020328721469989;
+
+diag("Testing spearman_cor_coef...");
+is spearman_cor_coef(@test1, @test2), 0.9276515785415314;
+
+diag("Testing bi_cor_coef...");
 is bi_cor_coef(@test1, @test2), 0.9146470012038392;
 is bi_cor_coef(@data1, @data2), -0.5856205826464312;
 

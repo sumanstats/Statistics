@@ -13,9 +13,25 @@ my @data1_ints_floats = [7.54,74,62.3,73.7,39,83.0,5.4,91.4,25.0,3.75];
 my @data2_ints_floats = [30.24,24.16,20.46,45,6.7,4.8,4.9,22.0,2.23,7.49];
 
 
+
+
+diag("Testing kendall_cor_coef...");
 is kendall_cor_coef(@x, @y), 0.07074995524624558;
-is kendall_cor_coef(@@data1_ints, @data2_ints), 0.022222222222222223;
-is kendall_cor_coef(@@data1_ints_floats, @data2_ints_floats), 0.15555555555555556;
+is kendall_cor_coef(@data1_ints, @data2_ints), 0.022222222222222223;
+is kendall_cor_coef(@data1_ints_floats, @data2_ints_floats), 0.15555555555555556;
+is kendall_cor_coef([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]), 1.0;
+is kendall_cor_coef([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]), -1.0;
+is kendall_cor_coef([1, 2, 3, 4, 5], [3, 4, 1, 5, 2]), 0.0;
+is-approx kendall_cor_coef([1, 2, 2, 4, 5], [5, 4, 3, 2, 1]), -0.94868, 0.00001;
+is kendall_cor_coef([1, 2, 3, 4, 5, 6, 7, 8], [1, 4, 9, 16, 25, 36, 49, 64]), 1.0;
+is-approx kendall_cor_coef([15,18,10,20,25,14], [20,16,30,18,25,17]), -0.066666667;
+is-approx kendall_cor_coef([6,6,4,6,8,6,8,4,4,6,6,8,8,8,8,8,8,4,4,4,4,8,8,8,8,4,4,4,8,6,8,4],
+                     [160.0,160.0,108.0,258.0,360.0,225.0,360.0,146.7,140.8,167.6,167.6,
+                     275.8,275.8,275.8,472.0,460.0,440.0,78.7,75.7,71.1,120.1,318.0,304.0,
+                     350.0,400.0,79.0,120.3,95.1,351.0,145.0,301.0,121.0]), 0.8144262510988963, 0.00005;
+
+
+
 
 done-testing;
 
