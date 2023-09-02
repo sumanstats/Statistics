@@ -59,7 +59,7 @@ Many things are in the roadmap, only few are done.
 Expected Features
 -----------------
 
-  * basic descriptive statistics
+  * descriptive statistics
 
   * correlation coefficients
 

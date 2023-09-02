@@ -94,7 +94,7 @@ Many things are in the roadmap, only few are done.
 
 =head2 Expected Features
 
-=item basic descriptive statistics
+=item descriptive statistics
 =item correlation coefficients
 =item pdf, cdf of probability distributions 
 =item random number generators
