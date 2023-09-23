@@ -8,6 +8,7 @@ sub EXPORT() {
         use Correlation::PearsonSpearman;
         use Correlation::Kendall;
         use Correlation::BiweightMid;
+        use Probability::Distribution;
         return ::.pairs.grep(*.key ne '$_').Map;
     }
 }
@@ -28,7 +29,12 @@ unit module Statistics;
 
 =begin pod
 
-[![Actions Status](https://github.com/sumanstats/Statistics/workflows/test/badge.svg)](https://github.com/sumanstats/Statistics/actions)
+[![Actions Status](https://github.com/sumanstats/Statistics/workflows/linux/badge.svg)](https://github.com/sumanstats/Statistics/actions)
+[![Actions Status](https://github.com/sumanstats/Statistics/workflows/windows-spec/badge.svg)](https://github.com/sumanstats/Statistics/actions)
+[![Actions Status](https://github.com/sumanstats/Statistics/workflows/macos/badge.svg)](https://github.com/sumanstats/Statistics/actions)
+
+
+
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
 
 

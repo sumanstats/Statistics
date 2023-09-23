@@ -4,10 +4,11 @@
     "Suman Khanal"
   ],
   "build-depends": [
+    "File::Directory::Tree"
   ],
   "depends": [
   ],
-  "description": "Raku module for doing statistics",
+  "description": "Doing statistics in Raku",
   "license": "Artistic-2.0",
   "name": "Statistics",
   "perl": "6.*",
@@ -20,9 +21,11 @@
     "Descriptive::FiveNum": "lib/Descriptive/FiveNum.rakumod",
     "Descriptive::Kurtosis": "lib/Descriptive/Kurtosis.rakumod",
     "Descriptive::Skewness": "lib/Descriptive/Skewness.rakumod",
+    "Probability::Distribution": "lib/Probability/Distribution.rakumod",
     "Statistics": "lib/Statistics.rakumod"
   },
   "resources": [
+    "libraries/Rmath"
   ],
   "source-url": "https://github.com/sumanstats/Statistics.git",
   "tags": [

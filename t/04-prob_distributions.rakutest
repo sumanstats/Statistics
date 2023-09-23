@@ -1,0 +1,75 @@
+use Test;
+use Statistics;
+use Probability::Distribution;
+
+
+# Normal distribution
+
+is raku_dnorm(5), 1.4867195147342977e-06;
+is raku_pnorm(5), 0.9999997133484281;
+is raku_qnorm(5), NaN;
+
+
+# The (non-central) Chi-Squared Distribution
+
+is raku_dchisq(4,3), 0.10798193302637614;    
+is raku_dchisq(4,3,ncp => 4), 0.09970211254391682;
+is raku_dchisq(4,3,ncp => 4, log => True ), -2.3055684132326415;
+is raku_pchisq(3,4), 0.44217459962892536;
+is raku_pchisq(0,0), 0;
+is raku_pchisq(0,0, ncp => 4, lower_tail => False, log_p => True), -0.14541345786885906;
+is raku_qchisq(5,4), NaN;
+is raku_qchisq(4,4), NaN;
+is raku_qchisq(1,3), Inf;
+is raku_qchisq(0,4, ncp => 3), 0;
+is raku_qchisq(0,0, ncp => 4, lower_tail => False, log_p => True), 0;
+is raku_qchisq(75,25, ncp => 4, lower_tail => False, log_p => True), NaN;
+
+# Student t distribution
+
+is raku_pt(5,4), 0.9962547830593627;
+is raku_pt(5,4, lower_tail => False, log_p => True), -5.587275735616685;
+
+
+# Cauchy-Lorentzian Distribution
+
+
+
+# Gamma Distribution
+
+
+# Beta Distribution 
+
+
+# Exponential Distribution
+
+
+
+# Logistic distribution
+
+
+# Log normal distribution
+
+# Weibull distribution
+
+
+
+# Other functions
+
+is factorial(9), 362880;
+is factorial(0), 1;
+is-approx factorial(0.2), 0.9181687423997607, 0.01;
+is-approx factorial(10.2), 5819090.083978569, 0.01;
+
+is raku_choose(3,1), 3;
+is raku_choose(0,0), 1;
+is raku_choose(3,5), 0;
+
+
+is multinomial_coef(0,0), 1;
+is multinomial_coef(0,2), 1;
+is multinomial_coef(1,1), 2;
+is multinomial_coef(3,4,5), 27720;
+is multinomial_coef(3,4,5,9), 8147739600;
+
+done-testing;

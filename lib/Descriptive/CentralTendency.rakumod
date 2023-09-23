@@ -35,6 +35,15 @@ sub mean(@data) is export {
 # Geometric mean
 # geometric_mean
 
+sub geometric_mean(@data) {
+    if @data.any < 0 { return "geometric mean requires a non-empty dataset containing positive numbers" };
+    if @data.any == 0 { return 0 };
+    my $sum;
+    for @data {
+        $sum += log($_);
+    }   
+    exp($sum/@data.elems)               
+}
 
 
 # Harmonic mean
