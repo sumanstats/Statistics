@@ -1,6 +1,6 @@
-[![Actions Status](https://github.com/sumanstats/Statistics/workflows/linux/badge.svg)](https://github.com/sumanstats/Statistics/actions)
-[![Actions Status](https://github.com/sumanstats/Statistics/workflows/windows-spec/badge.svg)](https://github.com/sumanstats/Statistics/actions)
-[![Actions Status](https://github.com/sumanstats/Statistics/workflows/macos/badge.svg)](https://github.com/sumanstats/Statistics/actions)
+[![Linux](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml)
+[![Win64](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml)
+[![MacOS](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml)
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
 
