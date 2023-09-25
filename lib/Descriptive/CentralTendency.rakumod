@@ -45,6 +45,13 @@ sub geometric_mean(@data) is export {
     exp($sum/@data.elems)               
 }
 
+# Other version is 
+# sub geometric_mean(@data) {
+#     ([*] @data) ** (1/+@data)
+# }
+# It handles cases with zero values or all values with the same sign
+# It also is more accurate
+
 
 # Harmonic mean
 # harmonic_mean
