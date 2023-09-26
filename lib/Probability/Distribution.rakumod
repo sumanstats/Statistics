@@ -377,24 +377,33 @@ sub bessel_y(num64, num64) returns num64
 
 
 
+####	Random number generators	####
 
+sub norm_rand() returns num64
+    is native( RMATH ) { * };
 
+sub unif_rand() returns num64
+    is native( RMATH ) { * };
 
+sub exp_rand() returns num64
+    is native( RMATH ) { * };
 
-multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
-    my $prob = pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , 0);
-    $log_p ?? log($prob) !! $prob
+sub set_seed(int32, int32)
+    is native( RMATH ) { * };
+
+sub get_seed(int32 is rw, int32 is rw)
+    is native( RMATH ) { * };
+
+sub raku_set_seed($a, $b) is export {
+    set_seed($a.Int, $b.Int)
 }
 
-# Also valid 
-# multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
-#     pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , $log_p ?? 1 !! 0);
-# }
+####	Normal distribution	####
 
-multi raku_pt(@x, $n, :$lower_tail = True, :$log_p = False) is export {
-    @x.map: { raku_pt($_, $n, :$lower_tail, :$log_p)}
-}
-
+# dnorm(x, mean = 0, sd = 1, log = FALSE)
+# pnorm(q, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+# qnorm(p, mean = 0, sd = 1, lower.tail = TRUE, log.p = FALSE)
+# rnorm(n, mean = 0, sd = 1)
 
 
 sub raku_dnorm($x, :$mean = 0 , :$sd = 1, :$log = False ) is export {
@@ -417,7 +426,56 @@ sub raku_rnorm($n, :$mean = 0, :$sd = 1) is export {
     (1..$n).map: {rnorm($mean.Num, $sd.Num)}
 }
 
-# The (non-central) Chi-Squared Distribution
+####	Uniform distribution	####
+
+# dunif(x, min = 0, max = 1, log = FALSE)
+# punif(q, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+# qunif(p, min = 0, max = 1, lower.tail = TRUE, log.p = FALSE)
+# runif(n, min = 0, max = 1)
+
+sub raku_dunif($x, :$min = 0 , :$max = 1, :$log = False) 
+    is export {
+    return dunif($x.Num, $min.Num, $max.Num, $log ?? 1 !! 0);
+
+}
+
+sub raku_punif($q, :$min = 0 , :$max = 1, :$lower_tail = True, :$log_p = False) 
+    is export {
+    return punif($q.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);;
+
+}
+
+sub raku_qunif($p, :$min = 0 , :$max = 1, :$lower_tail = True, :$log_p = False) 
+    is export {
+    return qunif($p.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+
+}
+
+sub raku_runif($n, :$min = 0 , :$max = 1) 
+    is export {
+    (1..$n).map: {runif($min.Num, $max.Num)}
+}
+
+
+
+
+multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
+    my $prob = pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , 0);
+    $log_p ?? log($prob) !! $prob
+}
+
+# Also valid 
+# multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
+#     pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , $log_p ?? 1 !! 0);
+# }
+
+multi raku_pt(@x, $n, :$lower_tail = True, :$log_p = False) is export {
+    @x.map: { raku_pt($_, $n, :$lower_tail, :$log_p)}
+}
+
+
+####	The (non-central) Chi-Squared Distribution	####
+
 
 sub raku_dchisq($x, $df, :$ncp?, :$log = False) is export { 
     if defined $ncp and $ncp < 0 {
