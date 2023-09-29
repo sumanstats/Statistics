@@ -513,15 +513,13 @@ sub raku_qchisq($p, $df, :$ncp?, :$lower_tail = True, :$log_p = False) is export
 
 
 
-sub raku_rchisq($n, $df, :$ncp?) is export { 
-    if defined $ncp and $ncp < 0 {
-        die "ncp should be non-negative";
-    }
-    if defined $ncp and $ncp >= 0 {
+sub raku_rchisq($n, $df, :$ncp) is export { 
+    if !$ncp.defined {
+        return (1..$n).map: {rchisq($df.Num)}
+    } else {
+        $ncp //= 0;
         return (1..$n).map: {rnchisq($df.Num, $ncp.Num)}
     }
-    return (1..$n).map: {rchisq($df.Num)}
-
 }
 
 
