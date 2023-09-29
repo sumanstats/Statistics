@@ -636,41 +636,35 @@ multi raku_pt(@x, $n, :$lower_tail = True, :$log_p = False) is export {
 }
 
 
-####	The (non-central) Chi-Squared Distribution	####
+####	Chi-squared distribution	####
 
 
-sub raku_dchisq($x, $df, :$ncp?, :$log = False) is export { 
-    if defined $ncp and $ncp < 0 {
-        die "ncp should be non-negative";
-    }
-    if defined $ncp and $ncp >= 0 {
+sub raku_dchisq($x, $df, :$ncp, :$log = False) is export { 
+    if !$ncp.defined {
+        dchisq($x.Num, $df.Num, $log ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
         return dnchisq($x.Num, $df.Num, $ncp.Num, $log ?? 1 !! 0 )
     }
-    return dchisq($x.Num, $df.Num, $log ?? 1 !! 0 )
 }
 
 sub raku_pchisq($q, $df, :$ncp?, :$lower_tail = True, :$log_p = False) is export { 
-    if defined $ncp and $ncp < 0 {
-        die "ncp should be non-negative";
-    }
-    if defined $ncp and $ncp >= 0 {
+    if !$ncp.defined {
+        pchisq($q.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
         return pnchisq($q.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
     }
-    return pchisq($q.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-
 }
 
 
 sub raku_qchisq($p, $df, :$ncp?, :$lower_tail = True, :$log_p = False) is export { 
-    if defined $ncp and $ncp < 0 {
-        die "ncp should be non-negative";
-    }
-    if defined $ncp and $ncp >= 0 {
+    if !$ncp.defined {
+        qchisq($p.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
         return qnchisq($p.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
     }
-    return qchisq($p.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-
-
  }
 
 
@@ -683,6 +677,7 @@ sub raku_rchisq($n, $df, :$ncp) is export {
         return (1..$n).map: {rnchisq($df.Num, $ncp.Num)}
     }
 }
+
 
 
 
