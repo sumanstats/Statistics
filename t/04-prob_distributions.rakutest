@@ -47,6 +47,28 @@ is raku_pbeta(0.5, 2, 4, ncp => 2, log_p => True), -0.41695699020227484;
 ####	Testing raku_qbeta	####
 is raku_qbeta(3, 4, 6), NaN;
 
+
+####	Testing raku_dlnorm	####
+is-approx raku_dlnorm(3), 0.07272825613999472,0.000000000001;
+is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744,0.000000000001
+
+####	Testing raku_plnorm	####
+is-approx raku_plnorm(3),0.8640313923585756, 1e-10;
+is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-10
+
+####	Testing raku_qlnorm	####
+is raku_qlnorm(2), NaN;
+is raku_qlnorm(0.5), 1;
+is raku_qlnorm(0), 0;
+is-approx raku_qlnorm(0.1), 0.2776062418520097, 1e-10;
+
+
+####	Testing raku_rlnorm	####
+is sub ($n) {raku_set_seed(1,3);raku_rlnorm($n)}(3), (1.1751666576815853, 1.551169741442785, 0.35333870325756733);
+is sub ($n) {raku_set_seed(2,5);raku_rlnorm($n)}(3), (0.32145646272210726, 0.6608107230044763, 0.588862748840785);
+
+
+
 # The (non-central) Chi-Squared Distribution
 
 is raku_dchisq(4,3), 0.10798193302637614;    
