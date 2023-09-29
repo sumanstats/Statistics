@@ -411,13 +411,13 @@ sub raku_dnorm($x, :$mean = 0 , :$sd = 1, :$log = False ) is export {
 
 }
 
-sub raku_pnorm($x, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
+sub raku_pnorm($q, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
     is export {
     return pnorm5($x.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 
 }
 
-sub raku_qnorm($x, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
+sub raku_qnorm($p, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
     is export {
     return qnorm5($x.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 }
@@ -455,6 +455,143 @@ sub raku_runif($n, :$min = 0 , :$max = 1)
     is export {
     (1..$n).map: {runif($min.Num, $max.Num)}
 }
+
+
+####	Gamma distribution 	####
+
+
+# dgamma(x, shape, rate = 1, scale = 1/rate, log = FALSE)
+# pgamma(q, shape, rate = 1, scale = 1/rate, lower.tail = TRUE,
+#        log.p = FALSE)
+# qgamma(p, shape, rate = 1, scale = 1/rate, lower.tail = TRUE,
+#        log.p = FALSE)
+# rgamma(n, shape, rate = 1, scale = 1/rate)
+
+
+
+sub raku_dgamma($x, $shape , :$rate is copy, :$scale is copy, :$log = False) 
+    is export {
+    if $rate.defined && $scale.defined {
+        if abs($rate*$scale - 1) < 1e-15 {
+            warn("Warning:\n\tspecify 'rate' or 'scale' but not both")
+        }
+        else {
+            die "specify 'rate' or 'scale' but not both"
+        }
+    } 
+    $rate //= 1;
+    $scale //= 1/$rate;
+    return dgamma($x.Num, $shape.Num, $scale.Num, $log ?? 1 !! 0);
+    
+}
+
+
+sub raku_pgamma($q, $shape , :$rate is copy, :$scale is copy, :$lower_tail = True, :$log_p = False) 
+    is export {
+    if $rate.defined && $scale.defined {
+        if abs($rate*$scale - 1) < 1e-15 {
+            warn("Warning:\n\tspecify 'rate' or 'scale' but not both")
+        }
+        else {
+            die "specify 'rate' or 'scale' but not both"
+        }
+    } 
+    $rate //= 1;
+    $scale //= 1/$rate;
+    return pgamma($q.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);
+    
+}
+
+
+sub raku_qgamma($p, $shape , :$rate is copy, :$scale is copy, :$lower_tail = True, :$log_p = False) 
+    is export {
+    if $rate.defined && $scale.defined {
+        if abs($rate*$scale - 1) < 1e-15 {
+            warn("Warning:\n\tspecify 'rate' or 'scale' but not both")
+        }
+        else {
+            die "specify 'rate' or 'scale' but not both"
+        }
+    } 
+    $rate //= 1;
+    $scale //= 1/$rate;
+    return qgamma($p.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);
+    
+}
+
+
+
+sub raku_rgamma($n, $shape , :$rate is copy, :$scale is copy) 
+    is export {
+    if $rate.defined && $scale.defined {
+        if abs($rate*$scale - 1) < 1e-15 {
+            warn("Warning:\n\tspecify 'rate' or 'scale' but not both")
+        }
+        else {
+            die "specify 'rate' or 'scale' but not both"
+        }
+    } 
+    $rate //= 1;
+    $scale //= 1/$rate;
+    (1..$n).map: {rgamma($shape.Num, $scale.Num)}
+}
+
+
+
+####	Beta distribution	####
+# dbeta(x, shape1, shape2, ncp = 0, log = FALSE)
+# pbeta(q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+# qbeta(p, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+# rbeta(n, shape1, shape2, ncp = 0)
+
+
+sub raku_dbeta($x, $shape1, $shape2, :$ncp is copy, :$log = False)
+    is export {
+        if !$ncp.defined {
+            return dbeta($x.Num, $shape1.Num, $shape2.Num, $log ?? 1 !! 0)
+        } else {
+            $ncp //= 0;
+            return dnbeta($x.Num, $shape1.Num, $shape2.Num, $ncp.Num, $log ?? 1 !! 0)
+        }
+    }
+
+
+
+sub raku_pbeta($q, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False)
+    is export {
+        if !$ncp.defined {
+            return pbeta($q.Num, $shape1.Num, $shape2.Num, $lower_tail ?? 1 !! 0 ,$log_p ?? 1 !! 0)
+        } else {
+            $ncp //= 0;
+            return pnbeta($q.Num, $shape1.Num, $shape2.Num, $ncp.Num, $lower_tail ?? 1 !! 0 ,$log_p ?? 1 !! 0)
+        }
+    }
+
+
+
+sub raku_qbeta($p, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False)
+    is export {
+        if !$ncp.defined {
+            return qbeta($p.Num, $shape1.Num, $shape2.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else {
+            $ncp //= 0;
+            return qnbeta($p.Num, $shape1.Num, $shape2.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+
+    }
+
+
+# needs raku_chisq function
+sub raku_rbeta($n, $shape1, $shape2, :$ncp)
+    is export {
+        if !$ncp.defined {
+            return (1..$n).map: {rbeta($shape1.Num, $shape2.Num)}
+        } else {
+            $ncp //= 0;
+            my $x = raku_rchisq($n, 2 * $shape1, ncp => $ncp);
+            $x/($x + raku_rchisq($n, 2 * $shape2))
+        }
+    }
 
 
 
