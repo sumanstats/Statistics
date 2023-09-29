@@ -69,7 +69,7 @@ is sub ($n) {raku_set_seed(2,5);raku_rlnorm($n)}(3), (0.32145646272210726, 0.660
 
 
 
-# The (non-central) Chi-Squared Distribution
+# Chi-Squared Distribution
 
 is raku_dchisq(4,3), 0.10798193302637614;    
 is raku_dchisq(4,3,ncp => 4), 0.09970211254391682;
@@ -84,6 +84,25 @@ is raku_qchisq(0,4, ncp => 3), 0;
 is raku_qchisq(0,0, ncp => 4, lower_tail => False, log_p => True), 0;
 is raku_qchisq(75,25, ncp => 4, lower_tail => False, log_p => True), NaN;
 
+
+####	Testing raku_df	####
+is-approx raku_df(1,3,2), 0.27885480092693404, 1e-10;
+is-approx raku_df(1,3,2,4), 0.2255355699113039, 1e-10;
+
+####	Testing raku_pf	####
+is-approx raku_pf(1,3,2), 0.46475800154489, 1e-10;
+is-approx raku_pf(1,3,2, log_p => True), -0.7662384356489861, 1e-10;
+
+####	Testing raku_qf	####
+is raku_qf(4, 2, 1), NaN;
+is raku_qf(1, 2, 1), Inf;
+is raku_qf(0, 2, 1), 0;
+is raku_qf(0, 2, 1, log_p => True), Inf;
+
+####	Testing raku_rf	####
+is sub ($n) {raku_set_seed(2,5);raku_rf($n,1,2)}(3), (0.18435620618029944, 1.04131942262752, 14.825797754677964);
+
+
 # Student t distribution
 
 is raku_pt(5,4), 0.9962547830593627;
@@ -94,12 +113,6 @@ is raku_pt(5,4, lower_tail => False, log_p => True), -5.587275735616685;
 
 
 
-# Gamma Distribution
-
-
-# Beta Distribution 
-
-
 # Exponential Distribution
 
 
@@ -107,7 +120,6 @@ is raku_pt(5,4, lower_tail => False, log_p => True), -5.587275735616685;
 # Logistic distribution
 
 
-# Log normal distribution
 
 # Weibull distribution
 
