@@ -413,13 +413,13 @@ sub raku_dnorm($x, :$mean = 0 , :$sd = 1, :$log = False ) is export {
 
 sub raku_pnorm($q, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
     is export {
-    return pnorm5($x.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    return pnorm5($q.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 
 }
 
 sub raku_qnorm($p, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
     is export {
-    return qnorm5($x.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    return qnorm5($p.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 }
 
 sub raku_rnorm($n, :$mean = 0, :$sd = 1) is export {
