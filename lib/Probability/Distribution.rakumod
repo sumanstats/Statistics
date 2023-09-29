@@ -557,7 +557,7 @@ sub raku_dbeta($x, $shape1, $shape2, :$ncp is copy, :$log = False)
 
 
 
-sub raku_pbeta($q, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False)
+sub raku_pbeta($q, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p = False)
     is export {
         if !$ncp.defined {
             return pbeta($q.Num, $shape1.Num, $shape2.Num, $lower_tail ?? 1 !! 0 ,$log_p ?? 1 !! 0)
@@ -569,7 +569,7 @@ sub raku_pbeta($q, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False
 
 
 
-sub raku_qbeta($p, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False)
+sub raku_qbeta($p, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p = False)
     is export {
         if !$ncp.defined {
             return qbeta($p.Num, $shape1.Num, $shape2.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
@@ -582,7 +582,7 @@ sub raku_qbeta($p, $shape1, $shape2, :$ncp, :$lower_tail = True, :$log_p = False
 
 
 # needs raku_chisq function
-sub raku_rbeta($n, $shape1, $shape2, :$ncp)
+sub raku_rbeta($n, $shape1, $shape2, :$ncp is copy)
     is export {
         if !$ncp.defined {
             return (1..$n).map: {rbeta($shape1.Num, $shape2.Num)}
@@ -621,6 +621,46 @@ sub raku_rlnorm($n, :$meanlog = 0, :$sdlog = 1)
     }
 
 
+####	Chi-squared distribution	####
+
+
+sub raku_dchisq($x, $df, :$ncp is copy, :$log = False) is export { 
+    if !$ncp.defined {
+        dchisq($x.Num, $df.Num, $log ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
+        return dnchisq($x.Num, $df.Num, $ncp.Num, $log ?? 1 !! 0 )
+    }
+}
+
+sub raku_pchisq($q, $df, :$ncp is copy, :$lower_tail = True, :$log_p = False) is export { 
+    if !$ncp.defined {
+        pchisq($q.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
+        return pnchisq($q.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    }
+}
+
+sub raku_qchisq($p, $df, :$ncp is copy, :$lower_tail = True, :$log_p = False) is export { 
+    if !$ncp.defined {
+        qchisq($p.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    } else {
+        $ncp //= 0;
+        return qnchisq($p.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
+    }
+ }
+
+sub raku_rchisq($n, $df, :$ncp is copy) is export { 
+    if !$ncp.defined {
+        return (1..$n).map: {rchisq($df.Num)}
+    } else {
+        $ncp //= 0;
+        return (1..$n).map: {rnchisq($df.Num, $ncp.Num)}
+    }
+}
+
+
 multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
     my $prob = pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , 0);
     $log_p ?? log($prob) !! $prob
@@ -633,49 +673,6 @@ multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
 
 multi raku_pt(@x, $n, :$lower_tail = True, :$log_p = False) is export {
     @x.map: { raku_pt($_, $n, :$lower_tail, :$log_p)}
-}
-
-
-####	Chi-squared distribution	####
-
-
-sub raku_dchisq($x, $df, :$ncp, :$log = False) is export { 
-    if !$ncp.defined {
-        dchisq($x.Num, $df.Num, $log ?? 1 !! 0 )
-    } else {
-        $ncp //= 0;
-        return dnchisq($x.Num, $df.Num, $ncp.Num, $log ?? 1 !! 0 )
-    }
-}
-
-sub raku_pchisq($q, $df, :$ncp?, :$lower_tail = True, :$log_p = False) is export { 
-    if !$ncp.defined {
-        pchisq($q.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-    } else {
-        $ncp //= 0;
-        return pnchisq($q.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-    }
-}
-
-
-sub raku_qchisq($p, $df, :$ncp?, :$lower_tail = True, :$log_p = False) is export { 
-    if !$ncp.defined {
-        qchisq($p.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-    } else {
-        $ncp //= 0;
-        return qnchisq($p.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0 )
-    }
- }
-
-
-
-sub raku_rchisq($n, $df, :$ncp) is export { 
-    if !$ncp.defined {
-        return (1..$n).map: {rchisq($df.Num)}
-    } else {
-        $ncp //= 0;
-        return (1..$n).map: {rnchisq($df.Num, $ncp.Num)}
-    }
 }
 
 
