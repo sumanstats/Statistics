@@ -593,7 +593,32 @@ sub raku_rbeta($n, $shape1, $shape2, :$ncp)
         }
     }
 
+####	Lognormal distribution	####
 
+# dlnorm(x, meanlog = 0, sdlog = 1, log = FALSE)
+# plnorm(q, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
+# qlnorm(p, meanlog = 0, sdlog = 1, lower.tail = TRUE, log.p = FALSE)
+# rlnorm(n, meanlog = 0, sdlog = 1)
+
+sub raku_dlnorm($x, :$meanlog = 0, :$sdlog = 1, :$log = False)
+    is export {
+        dlnorm($x.Num, $meanlog.Num, $sdlog.Num, $log ?? 1 !! 0)
+    }
+
+sub raku_plnorm($q, :$meanlog = 0, :$sdlog = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        plnorm($q.Num, $meanlog.Num, $sdlog.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+sub raku_qlnorm($p, :$meanlog = 0, :$sdlog = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qlnorm($p.Num, $meanlog.Num, $sdlog.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+sub raku_rlnorm($n, :$meanlog = 0, :$sdlog = 1)
+    is export {
+        (1..$n).map: {rlnorm($meanlog.Num, $sdlog.Num)}
+    }
 
 
 multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
