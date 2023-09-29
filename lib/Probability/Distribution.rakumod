@@ -661,6 +661,54 @@ sub raku_rchisq($n, $df, :$ncp is copy) is export {
 }
 
 
+####	F Distribution	####
+# df(x, df1, df2, ncp, log = FALSE)
+# pf(q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE)
+# qf(p, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE)
+# rf(n, df1, df2, ncp)
+
+
+sub raku_df($x!, $df1!, $df2!, $ncp?, :$log = False) 
+    is export {
+        with $ncp {
+            return dnf($x.Num, $df1.Num, $df2.Num, $ncp.Num, $log ?? 1 !! 0)
+        } else {
+            return df($x.Num, $df1.Num, $df2.Num, $log ?? 1 !! 0)
+        }
+    }
+
+
+sub raku_pf($q!, $df1!, $df2!, $ncp?, :$lower_tail = True, :$log_p = False) 
+    is export {
+        with $ncp {
+            return pnf($q.Num, $df1.Num, $df2.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else {
+            return pf($q.Num, $df1.Num, $df2.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+sub raku_qf($p!, $df1!, $df2!, $ncp?, :$lower_tail = True, :$log_p = False) 
+    is export {
+        with $ncp {
+            return qnf($p.Num, $df1.Num, $df2.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else {
+            return qf($p.Num, $df1.Num, $df2.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+sub raku_rf($n, $df1!, $df2!, $ncp?) 
+    is export {
+        with $ncp {
+            return (1..$n).map: {(rnchisq($df1.Num, $ncp.Num)/$df1)/(rchisq($df2.Num)/$df2)}
+        } else {
+            return (1..$n).map: {rf($df1.Num, $df2.Num)}
+        }
+    }
+
+
+
 multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
     my $prob = pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , 0);
     $log_p ?? log($prob) !! $prob
