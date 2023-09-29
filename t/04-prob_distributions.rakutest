@@ -10,6 +10,43 @@ is raku_pnorm(5), 0.9999997133484281;
 is raku_qnorm(5), NaN;
 
 
+####	Testing raku_dgammma	####
+is raku_dgamma(2,4, rate => 1), 0.1804470443154836;
+is raku_dgamma(2,4, scale => 2), 0.030656620097620196;
+is raku_dgamma(2,4, rate => 7, scale => 1/7), 0.0026620006060902226;
+is raku_dgamma(2,4, scale => 1/7), 0.0026620006060902226;
+is raku_dgamma(2,4, scale => 2, log => True), -3.4849066497880004;
+
+####	Testing raku_pgamma	####
+is raku_pgamma(2,4), 0.142876539501453;
+is raku_pgamma(2,4, log_p => True), -1.9457743817619386;
+is raku_pgamma(2,4, scale => 4, log_p => True), -6.34721274558465;
+is raku_pgamma(2,4, rate => 4, scale => 1/4, log_p => True), -0.04330435635721676;
+
+####	Testing raku_qgamma	####
+is raku_qgamma(2,4), NaN;
+is raku_qgamma(1,0.5,log_p => True), NaN;
+is raku_qgamma(1,2), Inf;
+
+
+
+####	Testing raku_dbeta	####
+is raku_dbeta(2,4, 2), 0;
+is raku_dbeta(2,4, 2, log => True), -Inf;
+is raku_dbeta(1, 1, 0, ncp => 2,log => True), NaN;
+
+
+
+####	Testing raku_pbeta	####
+is raku_pbeta(1,1,1), 1;
+is raku_pbeta(0.5,1,1), 0.5;
+is raku_pbeta(0.5, 2, 4, ncp => 2), 0.6590492649101354;
+is raku_pbeta(0.5, 2, 4, ncp => 2, log_p => True), -0.41695699020227484;
+
+
+####	Testing raku_qbeta	####
+is raku_qbeta(3, 4, 6), NaN;
+
 # The (non-central) Chi-Squared Distribution
 
 is raku_dchisq(4,3), 0.10798193302637614;    
