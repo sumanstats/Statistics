@@ -50,11 +50,11 @@ is raku_qbeta(3, 4, 6), NaN;
 
 ####	Testing raku_dlnorm	####
 is-approx raku_dlnorm(3), 0.07272825613999472,0.000000000001;
-is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744,0.000000000001
+is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744,0.000000000001;
 
 ####	Testing raku_plnorm	####
 is-approx raku_plnorm(3),0.8640313923585756, 1e-10;
-is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-10
+is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-10;
 
 ####	Testing raku_qlnorm	####
 is raku_qlnorm(2), NaN;
