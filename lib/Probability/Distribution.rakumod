@@ -495,7 +495,6 @@ sub raku_qgamma($p, $shape , :$rate is copy, :$scale is copy, :$lower_tail = Tru
 }
 
 
-
 sub raku_rgamma($n, $shape , :$rate is copy, :$scale is copy) 
     is export {
     if $rate.defined && $scale.defined {
@@ -594,6 +593,10 @@ sub raku_rlnorm($n, :$meanlog = 0, :$sdlog = 1)
 
 ####	Chi-squared distribution	####
 
+# dchisq(x, df, ncp = 0, log = FALSE)
+# pchisq(q, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+# qchisq(p, df, ncp = 0, lower.tail = TRUE, log.p = FALSE)
+# rchisq(n, df, ncp = 0)
 
 sub raku_dchisq($x, $df, :$ncp is copy, :$log = False) is export { 
     if !$ncp.defined {
@@ -633,6 +636,7 @@ sub raku_rchisq($n, $df, :$ncp is copy) is export {
 
 
 ####	F Distribution	####
+
 # df(x, df1, df2, ncp, log = FALSE)
 # pf(q, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE)
 # qf(p, df1, df2, ncp, lower.tail = TRUE, log.p = FALSE)
@@ -679,20 +683,86 @@ sub raku_rf($n, $df1!, $df2!, $ncp?)
     }
 
 
-multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
-    my $prob = pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , 0);
-    $log_p ?? log($prob) !! $prob
-}
 
-# Also valid 
-# multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
-#     pt($x.Num, $n.Num, $lower_tail ?? 1 !! 0 , $log_p ?? 1 !! 0);
-# }
+####	Student t distribution	####
 
-multi raku_pt(@x, $n, :$lower_tail = True, :$log_p = False) is export {
-    @x.map: { raku_pt($_, $n, :$lower_tail, :$log_p)}
-}
+# dt(x, df, ncp, log = FALSE)
+# pt(q, df, ncp, lower.tail = TRUE, log.p = FALSE)
+# qt(p, df, ncp, lower.tail = TRUE, log.p = FALSE)
+# rt(n, df, ncp)
 
+sub raku_dt($x!, $df!, $ncp?, :$log = False) 
+    is export {
+        with $ncp {
+            dnt($x.Num, $df.Num, $ncp.Num, $log ?? 1 !! 0)
+        } else {
+            dt($x.Num, $df.Num, $log ?? 1 !! 0)
+        }
+    }
+
+
+sub raku_pt($q!, $df!, $ncp?, :$lower_tail = True, :$log_p = False) 
+    is export {
+        with $ncp {
+            pnt($q.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else{
+            pt($q.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+
+sub raku_qt($p!, $df!, $ncp?, :$lower_tail = True, :$log_p = False) 
+    is export {
+        with $ncp {
+            qnt($p.Num, $df.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else{
+            qt($p.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+
+sub raku_rt($n, $df, $ncp?) 
+    is export {
+        with $ncp {
+            (1..$n).map: {rnorm($ncp.Num, 1.Num)/sqrt(rchisq($df.Num)/$df)}
+        } else {
+            (1..$n).map: {rt($df.Num)}
+        }
+    }
+
+
+####	Binomial distribution	####
+
+# dbinom(x, size, prob, log = FALSE)
+# pbinom(q, size, prob, lower.tail = TRUE, log.p = FALSE)
+# qbinom(p, size, prob, lower.tail = TRUE, log.p = FALSE)
+# rbinom(n, size, prob)
+
+
+sub raku_dbinom($x!, $size!, $prob!, :$log = False)
+    is export {
+        dbinom($x.Num, $size.Num, $prob.Num, $log ?? 1 !! 0)
+    }
+
+
+sub raku_pbinom($q!, $size!, $prob!, :$lower_tail = True, :$log_p = False)
+    is export {
+        pbinom($q.Num, $size.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_qbinom($p, $size, $prob, :$lower_tail = True, :$log_p = False)
+    is export {
+        qbinom($p.Num, $size.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_rbinom($n!, $size!, $prob!)
+    is export {
+        (1..$n).map: {rbinom($size.Num, $prob.Num)}
+    }
 
 
 
