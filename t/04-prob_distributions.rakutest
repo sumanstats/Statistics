@@ -158,6 +158,29 @@ is sub ($n) {raku_set_seed(1,9); raku_rbinom($n,2,0.2)}(3), (0, 0, 1);
 is sub ($n) {raku_set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
 
 
+####	Testing raku_dcauchy	####
+is-approx raku_dcauchy(1), 0.15915494309189535, 1e-12;
+is-approx raku_dcauchy(1,2), 0.15915494309189535, 1e-12;
+is-approx raku_dcauchy(1,2,3), 0.0954929658551372, 1e-12;
+
+####	Testing raku_pcauchy	####
+is raku_pcauchy(1), 0.75;
+is raku_pcauchy(1,2), 0.25;
+is-approx raku_pcauchy(1,2,3), 0.39758361765043326, 1e-12;
+
+####	Testing raku_qcauchy	####
+is raku_qcauchy(1), Inf;
+is raku_qcauchy(1,2), Inf;
+is raku_qcauchy(1,2,3), Inf;
+is-approx raku_qcauchy(0.1), -3.077683537175254  , 1e-12;
+is-approx raku_qcauchy(0.9),  3.0776835371752544 , 1e-12;
+is raku_qcauchy(0.9, log_p => True),  NaN;
+is raku_qcauchy(0), -Inf;
+
+####	Testing raku_rcauchy	####
+element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rcauchy($n)}(5), 
+                                    (0.42607842113327926, -3.589933350285371, 1.8099808111776452, -0.5705944232265042, 1.3602101594780192),
+                                    1e-12;
 
 
 

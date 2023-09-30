@@ -764,6 +764,37 @@ sub raku_rbinom($n!, $size!, $prob!)
         (1..$n).map: {rbinom($size.Num, $prob.Num)}
     }
 
+####	Cauchy distribution	####
+
+# dcauchy(x, location = 0, scale = 1, log = FALSE)
+# pcauchy(q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# qcauchy(p, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# rcauchy(n, location = 0, scale = 1)
+
+sub raku_dcauchy($x, $location = 0, $scale = 1, :$log = False)
+    is export {
+        dcauchy($x.Num, $location.Num, $scale.Num, $log ?? 1 !! 0);
+    }
+
+
+sub raku_pcauchy($q, $location = 0, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        pcauchy($q.Num, $location.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+
+sub raku_qcauchy($p, $location = 0, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qcauchy($p.Num, $location.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+sub raku_rcauchy($n, $location = 0, $scale = 1)
+    is export {
+        (1..$n).map: {rcauchy($location.Num, $scale.Num)}
+    }
+
 
 
 # Other functions
