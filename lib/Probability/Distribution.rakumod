@@ -764,6 +764,24 @@ sub raku_rbinom($n!, $size!, $prob!)
         (1..$n).map: {rbinom($size.Num, $prob.Num)}
     }
 
+#===========================================================
+#===========================================================
+####	Multinomial distribution	####
+
+# TODO
+
+# https://stackoverflow.com/questions/63368639/how-to-use-multinomial-function-in-c-with-rmath-h
+# sub rmultinom(int32, CArray[num64], int32, CArray[int32])
+#     is native( RMATH ) { * }; 
+# sub raku_rmultinom($n, $size, @prob ) {
+#     
+#     }
+# sub raku_dmultinom($x, $size = NULL, $prob, $log = False)
+#     is export {
+
+#     }
+
+
 ####	Cauchy distribution	####
 
 # dcauchy(x, location = 0, scale = 1, log = FALSE)
@@ -822,6 +840,33 @@ sub raku_qexp($p, $rate = 1, :$lower_tail = True, :$log_p = False)
 sub raku_rexp($n, $rate = 1)
     is export {
         (1..$n).map: {rexp((1/$rate).Num)}
+    }
+
+####	Geometric distribution	####
+
+# dgeom(x, prob, log = FALSE)
+# pgeom(q, prob, lower.tail = TRUE, log.p = FALSE)
+# qgeom(p, prob, lower.tail = TRUE, log.p = FALSE)
+# rgeom(n, prob)
+
+sub raku_dgeom($x!, $prob!, :$log = False)
+    is export {
+        dgeom($x.Num, $prob.Num, $log ?? 1 !! 0);
+    }
+
+sub raku_pgeom($q!, $prob!, :$lower_tail = True, :$log_p = False)
+    is export {
+        pgeom($q.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+sub raku_qgeom($p!, $prob!, :$lower_tail = True, :$log_p = False)
+    is export {
+        qgeom($p.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+sub raku_rgeom($n!, $prob!)
+    is export {
+        (1..$n).map: {rgeom($prob.Num)}
     }
 
 # Other functions

@@ -213,7 +213,27 @@ element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rexp($n, 
                                     (0.35299367368365775, 0.04323759693494933),
                                     1e-12;
 
+####	Testing raku_dgeom	####
+is raku_dgeom(1,0.5), 0.25 ;
+is raku_dgeom(1, 1), 0 ;
+is raku_dgeom(1, 1, log => True), -Inf;
 
+####	Testing raku_pgeom	####
+is raku_pgeom(1,0.5), 0.75 ;
+is raku_pgeom(1, 1), 1 ;
+is raku_pgeom(1, 1, log_p => True), 0;
+is raku_pgeom(1,2), NaN;
+
+####	Testing raku_qgeom	####
+is raku_qgeom(1,0.5), Inf ;
+is raku_qgeom(1, 1), 0 ;
+is raku_qgeom(1, 1, log_p => True), NaN;
+is raku_qgeom(1,2), NaN;
+is raku_qgeom(1,0), NaN;
+
+####	Testing raku_rgeom	####
+is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.1)}(2), (13, 5);
+is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.6)}(4), (1, 1, 1, 0);
 
 
 # Other functions
