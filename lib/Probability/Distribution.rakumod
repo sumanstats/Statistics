@@ -795,7 +795,34 @@ sub raku_rcauchy($n, $location = 0, $scale = 1)
         (1..$n).map: {rcauchy($location.Num, $scale.Num)}
     }
 
+####	Exponential distribution	####
 
+# dexp(x, rate = 1, log = FALSE)
+# pexp(q, rate = 1, lower.tail = TRUE, log.p = FALSE)
+# qexp(p, rate = 1, lower.tail = TRUE, log.p = FALSE)
+# rexp(n, rate = 1)
+
+sub raku_dexp($x!, $rate = 1, :$log = False)
+    is export {
+        dexp($x.Num, (1/$rate).Num, $log ?? 1 !! 0 )
+    }
+
+
+sub raku_pexp($q, $rate = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        pexp($q.Num, (1/$rate).Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+sub raku_qexp($p, $rate = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qexp($p.Num, (1/$rate).Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_rexp($n, $rate = 1)
+    is export {
+        (1..$n).map: {rexp((1/$rate).Num)}
+    }
 
 # Other functions
 
