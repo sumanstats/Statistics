@@ -22,13 +22,10 @@ constant RMATH = %?RESOURCES<libraries/Rmath>;
 
 sub dnorm4(num64, num64, num64, int32) returns num64
     is native( RMATH ) { * };
-
 sub pnorm5(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * };
-
 sub qnorm5(num64, num64, num64, int32, int32) returns num64
-    is native( RMATH ) { * };    
-
+    is native( RMATH ) { * };
 sub rnorm(num64, num64) returns num64
     is native( RMATH ) { * };   
 
@@ -86,7 +83,6 @@ sub rlnorm(num64, num64) returns num64
 
 sub dchisq(num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub pchisq(num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qchisq(num64, num64, int32, int32) returns num64
@@ -99,7 +95,6 @@ sub rchisq(num64) returns num64
 
 sub dnchisq(num64, num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub pnchisq(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qnchisq(num64, num64, num64, int32, int32) returns num64
@@ -112,10 +107,8 @@ sub rnchisq(num64, num64) returns num64
 
 sub df(num64, num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub pf(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub qf(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub rf(num64, num64) returns num64
@@ -127,8 +120,6 @@ sub rf(num64, num64) returns num64
 
 sub dt(num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
-
 sub pt(num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qt(num64, num64, int32, int32) returns num64
@@ -141,7 +132,6 @@ sub rt(num64) returns num64
 
 sub dbinom(num64, num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub pbinom(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qbinom(num64, num64, num64, int32, int32) returns num64
@@ -151,7 +141,7 @@ sub rbinom(num64, num64) returns num64
 
 #	/* Multnomial Distribution */
 
-sub rmultinom(int32, num64 is rw, int32, int32 is rw)
+sub rmultinom(int32, CArray[num64], int32, CArray[int32])
     is native( RMATH ) { * }; 
 
 
@@ -161,9 +151,6 @@ sub rmultinom(int32, num64 is rw, int32, int32 is rw)
 
 sub dcauchy(num64, num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
-
-
 sub pcauchy(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qcauchy(num64, num64, num64, int32, int32) returns num64
@@ -178,7 +165,6 @@ sub rcauchy(num64, num64) returns num64
 
 sub dexp(num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub pexp(num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qexp(num64, num64, int32, int32) returns num64
@@ -194,7 +180,6 @@ sub rexp(num64) returns num64
 
 sub dgeom(num64, num64, int32) returns num64
     is native( RMATH ) { * };
-
 sub pgeom(num64, num64, int32, int32) returns num64
     is native( RMATH ) { * };
 sub qgeom(num64, num64, int32, int32) returns num64
@@ -208,7 +193,6 @@ sub rgeom(num64) returns num64
 
 sub dhyper(num64, num64, num64, num64, int32) returns num64
     is native( RMATH ) { * }; 
-
 sub phyper(num64, num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * }; 
 sub qhyper(num64, num64, num64, num64, int32, int32) returns num64
@@ -342,10 +326,9 @@ sub rsignrank(num64) returns num64
 #	/* Gamma and Related Functions */
 
 sub gammafn(num64) returns num64
-    is native( RMATH ) { * }; #gamma in R
+    is native( RMATH ) { * }; # gamma in R
 sub lgammafn(num64) returns num64 
     is native( RMATH ) { * }; # lgamma in R
-
 sub psigamma(num64, num64) returns num64 
     is native( RMATH ) { * };
 sub digamma(num64) returns num64 
@@ -408,13 +391,11 @@ sub raku_set_seed($a, $b) is export {
 
 sub raku_dnorm($x, :$mean = 0 , :$sd = 1, :$log = False ) is export {
     return dnorm4($x.Num, $mean.Num, $sd.Num, $log ?? 1 !! 0);
-
 }
 
 sub raku_pnorm($q, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
     is export {
     return pnorm5($q.Num, $mean.Num, $sd.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
-
 }
 
 sub raku_qnorm($p, :$mean = 0 , :$sd = 1, :$lower_tail = True, :$log_p = False) 
@@ -435,30 +416,27 @@ sub raku_rnorm($n, :$mean = 0, :$sd = 1) is export {
 
 sub raku_dunif($x, :$min = 0 , :$max = 1, :$log = False) 
     is export {
-    return dunif($x.Num, $min.Num, $max.Num, $log ?? 1 !! 0);
-
+    dunif($x.Num, $min.Num, $max.Num, $log ?? 1 !! 0);
 }
 
 sub raku_punif($q, :$min = 0 , :$max = 1, :$lower_tail = True, :$log_p = False) 
     is export {
-    return punif($q.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);;
-
+    punif($q.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 }
 
 sub raku_qunif($p, :$min = 0 , :$max = 1, :$lower_tail = True, :$log_p = False) 
     is export {
-    return qunif($p.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    qunif($p.Num, $min.Num, $max.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
 
 }
 
 sub raku_runif($n, :$min = 0 , :$max = 1) 
     is export {
-    (1..$n).map: {runif($min.Num, $max.Num)}
+    (1..$n).map: {runif($min.Num, $max.Num)};
 }
 
 
 ####	Gamma distribution 	####
-
 
 # dgamma(x, shape, rate = 1, scale = 1/rate, log = FALSE)
 # pgamma(q, shape, rate = 1, scale = 1/rate, lower.tail = TRUE,
@@ -481,8 +459,7 @@ sub raku_dgamma($x, $shape , :$rate is copy, :$scale is copy, :$log = False)
     } 
     $rate //= 1;
     $scale //= 1/$rate;
-    return dgamma($x.Num, $shape.Num, $scale.Num, $log ?? 1 !! 0);
-    
+    return dgamma($x.Num, $shape.Num, $scale.Num, $log ?? 1 !! 0);    
 }
 
 
@@ -498,8 +475,7 @@ sub raku_pgamma($q, $shape , :$rate is copy, :$scale is copy, :$lower_tail = Tru
     } 
     $rate //= 1;
     $scale //= 1/$rate;
-    return pgamma($q.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);
-    
+    return pgamma($q.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);    
 }
 
 
@@ -515,8 +491,7 @@ sub raku_qgamma($p, $shape , :$rate is copy, :$scale is copy, :$lower_tail = Tru
     } 
     $rate //= 1;
     $scale //= 1/$rate;
-    return qgamma($p.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);
-    
+    return qgamma($p.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0,  $log_p ?? 1 !! 0);    
 }
 
 
@@ -539,6 +514,7 @@ sub raku_rgamma($n, $shape , :$rate is copy, :$scale is copy)
 
 
 ####	Beta distribution	####
+
 # dbeta(x, shape1, shape2, ncp = 0, log = FALSE)
 # pbeta(q, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE)
 # qbeta(p, shape1, shape2, ncp = 0, lower.tail = TRUE, log.p = FALSE)
@@ -555,8 +531,6 @@ sub raku_dbeta($x, $shape1, $shape2, :$ncp is copy, :$log = False)
         }
     }
 
-
-
 sub raku_pbeta($q, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p = False)
     is export {
         if !$ncp.defined {
@@ -567,8 +541,6 @@ sub raku_pbeta($q, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p
         }
     }
 
-
-
 sub raku_qbeta($p, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p = False)
     is export {
         if !$ncp.defined {
@@ -577,7 +549,6 @@ sub raku_qbeta($p, $shape1, $shape2, :$ncp is copy, :$lower_tail = True, :$log_p
             $ncp //= 0;
             return qnbeta($p.Num, $shape1.Num, $shape2.Num, $ncp.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
         }
-
     }
 
 
@@ -706,7 +677,6 @@ sub raku_rf($n, $df1!, $df2!, $ncp?)
             return (1..$n).map: {rf($df1.Num, $df2.Num)}
         }
     }
-
 
 
 multi raku_pt($x, $n, :$lower_tail = True, :$log_p = False) is export {
