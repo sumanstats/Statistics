@@ -2,6 +2,14 @@ use Test;
 use Statistics;
 use Probability::Distribution;
 
+# Local function for testing two arrays with desired precision
+sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $precision) {
+    die "Provide equal elements!" if +@functionoutput != +@expectedoutput;
+    loop (my $i = 0; $i < +@functionoutput; $i++)  {
+        is-approx @functionoutput[$i], @expectedoutput[$i], $precision;
+    }
+}
+
 
 # Normal distribution
 
@@ -49,18 +57,18 @@ is raku_qbeta(3, 4, 6), NaN;
 
 
 ####	Testing raku_dlnorm	####
-is-approx raku_dlnorm(3), 0.07272825613999472,0.000000000001;
-is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744,0.000000000001;
+is-approx raku_dlnorm(3), 0.07272825613999472, 1e-12;
+is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744, 1e-12;
 
 ####	Testing raku_plnorm	####
-is-approx raku_plnorm(3),0.8640313923585756, 1e-10;
-is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-10;
+is-approx raku_plnorm(3),0.8640313923585756, 1e-12;
+is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-12;
 
 ####	Testing raku_qlnorm	####
 is raku_qlnorm(2), NaN;
 is raku_qlnorm(0.5), 1;
 is raku_qlnorm(0), 0;
-is-approx raku_qlnorm(0.1), 0.2776062418520097, 1e-10;
+is-approx raku_qlnorm(0.1), 0.2776062418520097, 1e-12;
 
 
 ####	Testing raku_rlnorm	####
@@ -86,12 +94,12 @@ is raku_qchisq(75,25, ncp => 4, lower_tail => False, log_p => True), NaN;
 
 
 ####	Testing raku_df	####
-is-approx raku_df(1,3,2), 0.27885480092693404, 1e-10;
-is-approx raku_df(1,3,2,4), 0.2255355699113039, 1e-10;
+is-approx raku_df(1,3,2), 0.27885480092693404, 1e-12;
+is-approx raku_df(1,3,2,4), 0.2255355699113039, 1e-12;
 
 ####	Testing raku_pf	####
-is-approx raku_pf(1,3,2), 0.46475800154489, 1e-10;
-is-approx raku_pf(1,3,2, log_p => True), -0.7662384356489861, 1e-10;
+is-approx raku_pf(1,3,2), 0.46475800154489, 1e-12;
+is-approx raku_pf(1,3,2, log_p => True), -0.7662384356489861, 1e-12;
 
 ####	Testing raku_qf	####
 is raku_qf(4, 2, 1), NaN;
@@ -100,28 +108,57 @@ is raku_qf(0, 2, 1), 0;
 is raku_qf(0, 2, 1, log_p => True), Inf;
 
 ####	Testing raku_rf	####
-is sub ($n) {raku_set_seed(2,5);raku_rf($n,1,2)}(3), (0.18435620618029944, 1.04131942262752, 14.825797754677964);
+element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rf($n, 1, 2)}(3), 
+                                    (0.18435620618029944, 1.04131942262752, 14.825797754677964),
+                                    1e-12;
 
 
 # Student t distribution
 
+####	Testing raku_dt	####
+is raku_dt(1,2), 0.19245008972987526, 1e-12;
+is raku_dt(1,2,4), 0.011764946752329405, 1e-12;
+
+####	Testing raku_pt	####
+is-approx raku_pt(1,2), 0.7886751345948129, 1e-12;
 is raku_pt(5,4), 0.9962547830593627;
 is raku_pt(5,4, lower_tail => False, log_p => True), -5.587275735616685;
 
+####	Testing raku_qt	####
+is raku_qt(1,2), Inf;
+is-approx raku_qt(0.2,2), -1.060660171779821, 1e-12;
 
-# Cauchy-Lorentzian Distribution
+####	Testing raku_rt	####
 
-
-
-# Exponential Distribution
-
-
-
-# Logistic distribution
-
+element_wise_testing_with_precision sub ($n) {raku_set_seed(3,10); raku_rt($n, 3, 4)}(5), 
+                                    (3.2166139332581323, 2.9985780896164873, 3.4756218027009744, 5.833058113048503, 5.671377806342658),
+                                    1e-12;
 
 
-# Weibull distribution
+
+####	Testing raku_dbinom	####
+is-approx raku_dbinom(1,2,0.5), 0.49999999999999994, 1e-12;
+is raku_dbinom(1,2,1), 0;
+is raku_dbinom(1,2,4), NaN;
+is-approx raku_dbinom(1,2,0.2, log => True), -1.1394342831883648, 1e-12;
+
+####	Testing raku_pbinom	####
+is raku_pbinom(1,2,0.2), 0.96;
+is-approx raku_pbinom(1,2,0.2, log_p => True), -0.04082199452025514, 1e-12;
+is-approx raku_pbinom(1,2,0.2, lower_tail => False, log_p => True), -3.2188758248682006, 1e-12;
+
+
+####	Testing raku_qbinom	####
+is raku_qbinom(1,2,0.2), 2;
+is raku_qbinom(1,2,3), NaN;
+is raku_qbinom(1,2,3, log_p => True), NaN;
+
+####	Testing raku_rbinom	####
+is sub ($n) {raku_set_seed(1,9); raku_rbinom($n,2,0.2)}(3), (0, 0, 1);
+is sub ($n) {raku_set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
+
+
+
 
 
 
