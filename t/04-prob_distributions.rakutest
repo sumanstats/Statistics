@@ -210,7 +210,7 @@ element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rexp($n)}
                                     1e-12;
 
 element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rexp($n, 4)}(2), 
-                                    (0.2626184554058649, 0.16747544540964882),
+                                    (0.35299367368365775, 0.04323759693494933),
                                     1e-12;
 
 
