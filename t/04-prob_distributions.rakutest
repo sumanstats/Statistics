@@ -236,11 +236,11 @@ is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.1)}(2), (13, 5);
 is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.6)}(4), (1, 1, 1, 0);
 
 ####	Testing raku_dhyper	####
-is raku_dhyper(1, 2, 3, 4), 0.4;  
+is-approx raku_dhyper(1, 2, 3, 4), 0.4, 1e-12;  
 
 ####	Testing raku_phyper	####
-is raku_phyper(1, 2, 3, 4), 0.4;  
-is raku_phyper(1, 2, 3, 4, lower_tail => False), 0.6;  
+is-approx raku_phyper(1, 2, 3, 4), 0.4, 1e-12;  
+is-approx raku_phyper(1, 2, 3, 4, lower_tail => False), 0.6, 1e-12;  
 is raku_phyper(1, 2, 3, 6), NaN;  
 is raku_phyper(1, 2, 3, 5, lower_tail => False), 1;  
 
