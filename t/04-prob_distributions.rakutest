@@ -235,6 +235,29 @@ is raku_qgeom(1,0), NaN;
 is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.1)}(2), (13, 5);
 is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.6)}(4), (1, 1, 1, 0);
 
+####	Testing raku_dhyper	####
+is raku_dhyper(1, 2, 3, 4), 0.4;  
+
+####	Testing raku_phyper	####
+is raku_phyper(1, 2, 3, 4), 0.4;  
+is raku_phyper(1, 2, 3, 4, lower_tail => False), 0.6;  
+is raku_phyper(1, 2, 3, 6), NaN;  
+is raku_phyper(1, 2, 3, 5, lower_tail => False), 1;  
+
+
+####	Testing raku_qhyper	####
+is raku_qhyper(1, 2, 3, 4), 2;  
+is raku_qhyper(1, 2, 3, 4, lower_tail => False), 1;  
+is raku_qhyper(1, 2, 3, 6), NaN;  
+is raku_qhyper(1, 2, 3, 5, lower_tail => False), 2;  
+is raku_qhyper(0, 2, 3, 5, lower_tail => False), 2;  
+is raku_qhyper(0.5, 2, 3, 5, lower_tail => False), 2;
+is raku_qhyper(0, 20, 3, 6, lower_tail => False), 6; 
+is raku_qhyper(0.7, 2, 3, 6, lower_tail => False), NaN;  
+
+####	Testing raku_rhyper	####
+is sub ($n) {raku_set_seed(1,9); raku_rhyper($n,2,3,4)}(1), (2);
+is sub ($n) {raku_set_seed(12,7); raku_rhyper($n,2,3,4)}(7), (1, 2, 2, 2, 1, 2, 2);
 
 # Other functions
 

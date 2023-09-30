@@ -869,6 +869,36 @@ sub raku_rgeom($n!, $prob!)
         (1..$n).map: {rgeom($prob.Num)}
     }
 
+####	Hypergeometric distribution	####
+
+# dhyper(x, m, n, k, log = FALSE)
+# phyper(q, m, n, k, lower.tail = TRUE, log.p = FALSE)
+# qhyper(p, m, n, k, lower.tail = TRUE, log.p = FALSE)
+# rhyper(nn, m, n, k)
+
+sub raku_dhyper($x!, $m!, $n!, $k!, :$log = False)
+    is export {
+        dhyper($x.Num, $m.Num, $n.Num, $k.Num, $log ?? 1 !! 0);
+    }
+
+ 
+sub raku_phyper($q!, $m!, $n!, $k!, :$lower_tail = True, :$log_p = False)
+    is export {
+        phyper($q.Num, $m.Num, $n.Num, $k.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+sub raku_qhyper($p!, $m!, $n!, $k!, :$lower_tail = True, :$log_p = False)
+    is export {
+        qhyper($p.Num, $m.Num, $n.Num, $k.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+ 
+sub raku_rhyper($nn, $m, $n, $k)
+    is export {
+        (1..$nn).map: {rhyper($m.Num, $n.Num, $k.Num)}
+    }
+
 # Other functions
 
 sub factorial($x) is export {
