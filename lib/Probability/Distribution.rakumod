@@ -975,6 +975,38 @@ sub raku_rnbinom($n, $size, :$prob, :$mu)
         }
     }
 
+####	Poisson distribution	####
+
+# dpois(x, lambda, log = FALSE)
+# ppois(q, lambda, lower.tail = TRUE, log.p = FALSE)
+# qpois(p, lambda, lower.tail = TRUE, log.p = FALSE)
+# rpois(n, lambda)
+
+sub raku_dpois($x, $lambda, :$log = False)
+    is export {
+        dpois($x.Num, $lambda.Num, $log ?? 1 !! 0)
+    }
+
+
+
+sub raku_ppois($q, $lambda, :$lower_tail = True, :$log_p = False)
+    is export {
+        ppois($q.Num, $lambda.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+
+
+sub raku_qpois($p, $lambda, :$lower_tail = True, :$log_p = False)
+    is export {
+        qpois($p.Num, $lambda.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_rpois($n, $lambda)
+    is export {
+        (1..$n).map: {rpois($lambda.Num)}
+    }
 
 # Other functions
 
