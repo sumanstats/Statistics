@@ -215,7 +215,14 @@ sub rnbinom(num64, num64) returns num64
     is native( RMATH ) { * };
 
 
-
+sub dnbinom_mu(num64, num64, num64, int32) returns num64
+    is native( RMATH ) { * };
+sub pnbinom_mu(num64, num64, num64, int32, int32) returns num64
+    is native( RMATH ) { * };
+sub qnbinom_mu(num64, num64, num64, int32, int32) returns num64
+    is native( RMATH ) { * };
+sub rnbinom_mu(num64, num64) returns num64
+    is native( RMATH ) { * };
 
 
 
@@ -898,6 +905,76 @@ sub raku_rhyper($nn, $m, $n, $k)
     is export {
         (1..$nn).map: {rhyper($m.Num, $n.Num, $k.Num)}
     }
+
+####	Negative binomial distribution	####
+
+# dnbinom(x, size, prob, mu, log = FALSE)
+# pnbinom(q, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
+# qnbinom(p, size, prob, mu, lower.tail = TRUE, log.p = FALSE)
+# rnbinom(n, size, prob, mu)
+
+sub raku_dnbinom($x, $size, :$prob, :$mu, :$log = False)
+    is export {
+        if $mu.defined {
+            if $prob.defined {
+                die("'prob' and 'mu' both specified")
+            }
+            dnbinom_mu($x.Num, $size.Num, $mu.Num, $log ?? 1 !! 0)
+        } else {
+            dnbinom($x.Num, $size.Num, $prob.Num, $log ?? 1 !! 0)
+        }
+    }
+
+
+
+
+sub raku_pnbinom($q, $size, :$prob, :$mu, :$lower_tail = True, :$log_p = False)
+    is export {
+        if $mu.defined {
+            if $prob.defined {
+                die("'prob' and 'mu' both specified")
+            }
+            pnbinom_mu($q.Num, $size.Num, $mu.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else {
+            pnbinom($q.Num, $size.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+
+
+
+sub raku_qnbinom($p, $size, :$prob, :$mu, :$lower_tail = True, :$log_p = False)
+    is export {
+        if $mu.defined {
+            if $prob.defined {
+                die("'prob' and 'mu' both specified")
+            }
+            qnbinom_mu($p.Num, $size.Num, $mu.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        } else {
+            qnbinom($p.Num, $size.Num, $prob.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+        }
+    }
+
+
+
+
+
+sub raku_rnbinom($n, $size, :$prob, :$mu)
+    is export {
+        if !$prob.defined && !$mu.defined {
+            die "Supply atleast \$prob or \$mu"
+        }
+        if $mu.defined {
+            if $prob.defined {
+                die("'prob' and 'mu' both specified")
+            }
+            (1..$n).map: {rnbinom_mu($size.Num, $mu.Num)}
+        } else {
+            (1..$n).map: {rnbinom($size.Num, $prob.Num)}
+        }
+    }
+
 
 # Other functions
 

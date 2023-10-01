@@ -259,6 +259,37 @@ is raku_qhyper(0.7, 2, 3, 6, lower_tail => False), NaN;
 is sub ($n) {raku_set_seed(1,9); raku_rhyper($n,2,3,4)}(1), (2);
 is sub ($n) {raku_set_seed(12,7); raku_rhyper($n,2,3,4)}(7), (1, 2, 2, 2, 1, 2, 2);
 
+
+####	Testing raku_dnbinom	####
+is-approx raku_dnbinom(2, 3, prob => 0.2), 0.030719999999999997, 1e-12;
+is-approx raku_dnbinom(2, 3, mu => 1), 0.1582031249999999, 1e-12;
+is-approx raku_dnbinom(5, 10, mu => 1), 0.004792628828370662, 1e-12;
+is raku_dnbinom(5, 10, prob => 1), 0;
+
+
+####	Testing raku_pnbinom	####
+is-approx raku_pnbinom(2, 3, prob => 0.2), 0.05792, 1e-12;
+is-approx raku_pnbinom(2, 3, mu => 1), 0.8964843749999999, 1e-12;
+is-approx raku_pnbinom(5, 10, mu => 1), 0.9986311157049472, 1e-12;
+is raku_pnbinom(5, 10, prob => 1), 1;
+
+####	Testing raku_qnbinom	####
+is raku_qnbinom(2, 3, prob => 0.2), NaN;
+is raku_qnbinom(2, 3, mu => 1), NaN;
+is raku_qnbinom(5, 10, mu => 1), NaN;
+is raku_qnbinom(5, 10, prob => 1), 0;
+is raku_qnbinom(1, 10, prob => 0.5), Inf;
+
+####	Testing raku_rnbinom	####
+
+# Run these commands you will get same random values in C and R
+# RNGkind("Marsaglia-Multicarry")
+# .Random.seed <- c(401L, 111L, 222L)
+
+is -> $n {raku_set_seed(111,222); raku_rnbinom($n, 2, mu => 3)}(5), (2,8,1,4,3);
+is -> $n {raku_set_seed(111,222); raku_rnbinom($n, 2, prob => 0.2)}(10), (6,17,8,12,0,9,18,20,9,6);
+
+
 # Other functions
 
 is factorial(9), 362880;
