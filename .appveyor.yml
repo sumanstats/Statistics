@@ -1,0 +1,47 @@
+# version format
+version: 1.0.{build}
+
+# Build worker image (VM template)
+image: Visual Studio 2022
+
+build: off
+platform:
+  - x64
+
+# branches to build
+branches:
+  # whitelist
+  only:
+    - master
+    
+  # blacklist
+  except:
+    - gh-pages
+
+# Do not build on tags (GitHub, Bitbucket, GitLab, Gitea)
+skip_tags: true
+
+# Skipping commits affecting specific files (GitHub only). More details here: /docs/appveyor-yml
+skip_commits:
+ files:
+   - docs/*
+
+# Maximum number of concurrent jobs for the project
+max_jobs: 1
+
+# set clone depth
+clone_depth: 3                      
+
+
+install:
+  # run the powershell script, note .\
+  - ps: .\rakudo.ps1
+  
+
+test_script:
+  - cmd: '"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"'
+    # Install only dependencies, disable testing
+    # Disable fetching dependencies
+  - ps: zef install --/test --/test-depends --deps-only .
+  - ps: zef build . # Run Build.rakumod as per zef docs
+  - ps: zef test .  # Test project in current directory
