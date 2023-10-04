@@ -348,6 +348,39 @@ element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rweibull
                                     (0.6968172175503865,0.7740536098601472,1.0485885352658328,0.41787120802475414,0.7720923839980706),
                                     1e-12;
 
+####	Testing raku_dlogis	####
+is-approx raku_dlogis(3), 0.045176659730912144, 1e-12;
+is-approx raku_dlogis(3, 2, 3), 0.08106072033492359 , 1e-12;
+is-approx raku_dlogis(4,2,3, log => True), -2.5940191290389203 , 1e-12;
+is-approx raku_dlogis(14, 7), 0.0009102211801218265, 1e-12;
+is-approx raku_dlogis(1, 3), 0.1049935854035065, 1e-12;
+
+
+####	Testing raku_plogis	####
+is-approx raku_plogis(3), 0.9525741268224334, 1e-12;
+is-approx raku_plogis(3, 2, 3), 0.5825702064623147 , 1e-12;
+is-approx raku_plogis(4,2,3, log_p => True), -0.41437008685207205 , 1e-12;
+is-approx raku_plogis(14, 7), 0.9990889488055994, 1e-12;
+is-approx raku_plogis(1, 3), 0.11920292202211755, 1e-12;
+
+####	Testing raku_qlogis	####
+is raku_qlogis(0), -Inf;
+is-approx raku_qlogis(0.2, 2, 3), -2.1588830833596715 , 1e-12;
+is raku_qlogis(1,2,3, log_p => True), NaN;
+is raku_qlogis(14, 7), NaN;
+is raku_qlogis(0.5, 3), 3;
+
+
+####	Testing raku_rlogis	####
+element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rlogis($n)}(5),
+                                    (0.46988294460554764,0.19773530926871702,-0.6945353008974018,1.6565857139688709,0.20447545664046937),
+                                    1e-12;
+
+element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rlogis($n,2)}(5),
+                                    (2.4698829446055477,2.197735309268717,1.3054646991025982,3.656585713968871,2.2044754566404694),
+                                    1e-12;
+
+
 # Other functions
 
 is factorial(9), 362880;

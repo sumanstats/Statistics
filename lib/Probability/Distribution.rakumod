@@ -1038,7 +1038,38 @@ sub raku_rweibull($n, $shape, $scale = 1)
         (1..$n).map: {rweibull($shape.Num, $scale.Num)}
     }
 
+####	Logistic distribution	####
 
+# dlogis(x, location = 0, scale = 1, log = FALSE)
+# plogis(q, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# qlogis(p, location = 0, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# rlogis(n, location = 0, scale = 1)
+
+
+
+sub raku_dlogis($x, $location = 0, $scale = 1, :$log = False)
+    is export {
+        dlogis($x.Num, $location.Num, $scale.Num, $log ?? 1 !! 0)
+    }
+
+
+sub raku_plogis($q, $location = 0, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        plogis($q.Num, $location.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_qlogis($p, $location = 0, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qlogis($p.Num, $location.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+
+    }
+
+
+sub raku_rlogis($n, $location = 0, $scale = 1)
+    is export {
+        (1..$n).map: {rlogis($location.Num, $scale.Num)}
+    }
 
 # Other functions
 
