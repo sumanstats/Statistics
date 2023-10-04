@@ -4,7 +4,9 @@ version: 1.0.{build}
 # Build worker image (VM template)
 image: Visual Studio 2022
 
+# Avoid MSBuild
 build: off
+
 platform:
   - x64
 
