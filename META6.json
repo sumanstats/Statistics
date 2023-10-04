@@ -4,7 +4,7 @@
     "Suman Khanal"
   ],
   "build-depends": [
-    "File::Directory::Tree"
+    // "File::Directory::Tree"
   ],
   "depends": [
   ],
