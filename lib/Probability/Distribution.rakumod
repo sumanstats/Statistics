@@ -1008,6 +1008,38 @@ sub raku_rpois($n, $lambda)
         (1..$n).map: {rpois($lambda.Num)}
     }
 
+####	Weibull Distribution	####
+
+# dweibull(x, shape, scale = 1, log = FALSE)
+# pweibull(q, shape, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# qweibull(p, shape, scale = 1, lower.tail = TRUE, log.p = FALSE)
+# rweibull(n, shape, scale = 1)
+
+sub raku_dweibull($x, $shape, $scale = 1, :$log = False)
+    is export {
+        dweibull($x.Num, $shape.Num, $scale.Num, $log ?? 1 !! 0)
+    }
+
+
+sub raku_pweibull($q, $shape, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        pweibull($q.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_qweibull($p, $shape, $scale = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qweibull($p.Num, $shape.Num, $scale.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_rweibull($n, $shape, $scale = 1)
+    is export {
+        (1..$n).map: {rweibull($shape.Num, $scale.Num)}
+    }
+
+
+
 # Other functions
 
 sub factorial($x) is export {

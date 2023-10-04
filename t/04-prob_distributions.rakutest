@@ -317,7 +317,36 @@ is raku_qpois(0.2, 2), 1;
 is -> $n {raku_set_seed(111,222); raku_rpois($n, 2)}(5), (2, 2, 1, 3, 2);
 is -> $n {raku_set_seed(111,222); raku_rpois($n, 0.2)}(10), (0, 0, 0, 1, 0, 1, 0, 0, 0, 0);
 
+####	Testing raku_dweibull	####
+is-approx raku_dweibull(3,1,2), 0.11156508007421491, 1e-12;
+is-approx raku_dweibull(3,1,2,log => True), -2.1931471805599454, 1e-12;
+is raku_dweibull(3,7), 0;
+is-approx raku_dweibull(30,1,0.2), 3.5875479865822053e-65, 1e-12;
 
+####	Testing raku_pweibull	####
+is-approx raku_pweibull(3, 1, 2), 0.7768698398515702, 1e-12;
+is-approx raku_pweibull(3, 1, 2,log_p => True), -0.25248245892545396, 1e-12;
+is raku_pweibull(3, 7), 1;
+is raku_pweibull(30, 1, 0.2), 1;
+
+
+
+####	Testing raku_qweibull	####
+is raku_qweibull(1, 1, 2), Inf;
+is raku_qweibull(0.2, 1, 2,log_p => True), NaN;
+is-approx raku_qweibull(0.2, 1, 2), 0.44628710262841953, 1e-12;
+is raku_qweibull(0, 7), 0;
+is-approx raku_qweibull(0.5, 1, 0.2), 0.13862943611198905, 1e-12;
+
+
+####	Testing raku_rweibull	####
+element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rweibull($n, 2, 2)}(10), 
+                                    (1.393634435100773,1.5481072197202943,2.0971770705316657,0.8357424160495083,1.5441847679961411,0.4677604053455371,2.715328317118502,1.5935163877485303,2.626334393988074,1.1832568107733237),
+                                    1e-12;
+
+element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rweibull($n, 2)}(5),
+                                    (0.6968172175503865,0.7740536098601472,1.0485885352658328,0.41787120802475414,0.7720923839980706),
+                                    1e-12;
 
 # Other functions
 
