@@ -51,27 +51,27 @@ multi sub rmtree (IO::Path:D $path) {
 
 
 class Build {
-    method build($dist-path) {
-        my $CURRENT_DIR = $*CWD;
-        my $SRC_DIR = "src";
-        my $BUILD_DIR = "build";
-        my $source_directory = $CURRENT_DIR.IO.add("$SRC_DIR");
-        my $build_directory = $CURRENT_DIR.IO.add("$BUILD_DIR");
-        mkdir $build_directory if $build_directory.IO !~~ :d & :e;
-        my $libraries = $CURRENT_DIR.IO.add("resources/libraries");
+    method build(IO() $work_dir = $*CWD) {
+        my $SRC_DIR = $work_dir.IO.add("src");
+        my $BUILD_DIR = $work_dir.IO.add("build");
+        mkdir $BUILD_DIR if $BUILD_DIR.IO !~~ :d & :e;
+        my $libraries = $work_dir.IO.add("resources/libraries");
         mkdir $libraries if $libraries.IO !~~ :d & :e;
-        chdir $build_directory;
-        for $source_directory.IO.dir { 
-            # # If there are other C libraries inside src with 
-            # cmakelists they can be built into shared library
+        chdir $BUILD_DIR;
+        for $SRC_DIR.IO.dir { 
+            # If there are other C libraries inside src with 
+            # cmakelists they can be built into own shared library
+
+            # The folder name within src/ folder and the library 
+            # to be built should match in name 
             if $_.IO.d {
             run "cmake", $_, "-GNinja";
             run "ninja";
             my $filename = $*VM.platform-library-name(($_.basename).IO).basename;
             move $filename,"$libraries/$filename";
-            empty-directory $build_directory
+            empty-directory $BUILD_DIR
             }
         }
-        rmtree $build_directory
+        rmtree $BUILD_DIR
     }
 }
