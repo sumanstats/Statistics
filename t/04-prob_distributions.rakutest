@@ -13,12 +13,15 @@ sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $preci
 
 # Normal distribution
 
+diag("####	Testing raku_dnorm	####");
+
 is raku_dnorm(5), 1.4867195147342977e-06;
 is raku_pnorm(5), 0.9999997133484281;
 is raku_qnorm(5), NaN;
 
 
-####	Testing raku_dgammma	####
+diag("####	Testing raku_dgammma	####");
+
 is raku_dgamma(2,4, rate => 1), 0.1804470443154836;
 is raku_dgamma(2,4, scale => 2), 0.030656620097620196;
 is raku_dgamma(2,4, rate => 7, scale => 1/7), 0.0026620006060902226;
@@ -79,6 +82,7 @@ is sub ($n) {raku_set_seed(2,5);raku_rlnorm($n)}(3), (0.32145646272210726, 0.660
 
 # Chi-Squared Distribution
 
+diag("####    Testing raku_dchisq    ####");
 is raku_dchisq(4,3), 0.10798193302637614;    
 is raku_dchisq(4,3,ncp => 4), 0.09970211254391682;
 is raku_dchisq(4,3,ncp => 4, log => True ), -2.3055684132326415;
@@ -116,8 +120,8 @@ element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rf($n, 1,
 # Student t distribution
 
 ####	Testing raku_dt	####
-is raku_dt(1,2), 0.19245008972987526, 1e-12;
-is raku_dt(1,2,4), 0.011764946752329405, 1e-12;
+is-approx raku_dt(1,2), 0.19245008972987526, 1e-12;
+is-approx raku_dt(1,2,4), 0.011764946752329405, 1e-12;
 
 ####	Testing raku_pt	####
 is-approx raku_pt(1,2), 0.7886751345948129, 1e-12;
