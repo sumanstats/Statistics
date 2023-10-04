@@ -1,9 +1,9 @@
 # Set rakudo version to test
 $version = "2023.09"
 $location_module = $env:APPVEYOR_BUILD_FOLDER
-$location_rakudo = New-Item -ItemType Directory ..\rakudo_install
+$location_rakudo = New-Item -ItemType Directory "C:\rakudo64"
 
-# Start rakudo installation seaparately so it 
+# Start rakudo installation separately so it 
 # won't interfere within repository
 Set-Location ..
 

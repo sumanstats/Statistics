@@ -46,7 +46,7 @@
 #endif
 
 /*-- Mathlib as part of R --  define this for standalone : */
-#define MATHLIB_STANDALONE
+#define MATHLIB_STANDALONE 1
 
 #define R_VERSION_STRING "4.3.1"
 
