@@ -1071,6 +1071,22 @@ sub raku_rlogis($n, $location = 0, $scale = 1)
         (1..$n).map: {rlogis($location.Num, $scale.Num)}
     }
 
+####	Studentized Range Distribution	####
+
+# ptukey(q, nmeans, df, nranges = 1, lower.tail = TRUE, log.p = FALSE)
+# qtukey(p, nmeans, df, nranges = 1, lower.tail = TRUE, log.p = FALSE)
+
+sub raku_ptukey($q, $nmeans, $df, $nranges = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        ptukey($q.Num, $nranges.Num, $nmeans.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
+
+sub raku_qtukey($p, $nmeans, $df, $nranges = 1, :$lower_tail = True, :$log_p = False)
+    is export {
+        qtukey($p.Num, $nranges.Num, $nmeans.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
+    }
+
 # Other functions
 
 sub factorial($x) is export {

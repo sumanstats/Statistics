@@ -381,6 +381,13 @@ element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rlogis($
                                     1e-12;
 
 
+####	Testing Studentized Range Distribution	####
+is raku_ptukey(2,3,1), NaN;
+is-approx raku_ptukey(1,6,5), 0.02721150208597321, 1e-12;
+is raku_qtukey(1,6,5), Inf;
+is raku_qtukey(2,6,5), NaN;
+is-approx raku_qtukey(0.95,6,5), 6.032902683224805, 1e-12;
+
 # Other functions
 
 is factorial(9), 362880;
