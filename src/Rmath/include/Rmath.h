@@ -541,6 +541,7 @@ double dwilcox(double, double, double, int);
 double pwilcox(double, double, double, int, int);
 double qwilcox(double, double, double, int, int);
 double rwilcox(double, double);
+void wilcox_free(void);
 
 	/* Wilcoxon Signed Rank Distribution */
 
@@ -548,6 +549,7 @@ double dsignrank(double, double, int);
 double psignrank(double, double, int, int);
 double qsignrank(double, double, int, int);
 double rsignrank(double);
+void signrank_free(void);
 
 	/* Gamma and Related Functions */
 double	gammafn(double);

@@ -318,6 +318,8 @@ sub qwilcox(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * };
 sub rwilcox(num64, num64) returns num64 
     is native( RMATH ) { * };
+sub wilcox_free()
+    is native( RMATH ) { * };
 
 #	/* Wilcoxon Signed Rank Distribution */
 
@@ -328,6 +330,8 @@ sub psignrank(num64, num64, int32, int32) returns num64
 sub qsignrank(num64, num64, int32, int32) returns num64 
     is native( RMATH ) { * };
 sub rsignrank(num64) returns num64 
+    is native( RMATH ) { * };
+sub signrank_free()
     is native( RMATH ) { * };
 
 #	/* Gamma and Related Functions */
