@@ -1,5 +1,6 @@
-use Statistics;
 use Test;
+use Statistics;
+
 diag("####	Testing linspace 	####");
 # similar to numpy python function
 
