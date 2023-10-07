@@ -452,10 +452,22 @@ is factorial(0), 1;
 is-approx factorial(0.2), 0.9181687423997607, 0.01;
 is-approx factorial(10.2), 5819090.083978569, 0.01;
 
-is raku_choose(3,1), 3;
-is raku_choose(0,0), 1;
-is raku_choose(3,5), 0;
 
+diag("####  Testing choose and lchoose  ####");
+is choose(3,1), 3;
+is choose(0,0), 1;
+is choose(3,5), 0;
+is choose(30,4), 27405;
+is lchoose(3,4), -Inf;
+is-approx lchoose(30,4.2), 10.218480757480219, 1e-12;
+
+
+diag("####  Testing beta and lbeta  ####");
+is-approx beta(2,3), 0.08333333333333333, 1e-12;
+is-approx beta(30,2), 0.001075268817204301, 1e-12;
+
+is-approx lbeta(2,3), -2.4849066497880004, 1e-12;
+is-approx lbeta(30,2), -6.835184586147302, 1e-12;
 
 diag("####	Testing multinomial coefficient	####");
 

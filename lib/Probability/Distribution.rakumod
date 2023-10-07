@@ -348,13 +348,13 @@ sub trigamma(num64) returns num64
     is native( RMATH ) { * };
 
 
-sub beta(num64, num64) returns num64 
+multi beta(num64, num64) returns num64 
     is native( RMATH ) { * };
-sub lbeta(num64, num64) returns num64 
+multi lbeta(num64, num64) returns num64 
     is native( RMATH ) { * };
-sub choose(num64, num64) returns num64 
+multi choose(num64, num64) returns num64 
     is native( RMATH ) { * };
-sub lchoose(num64, num64) returns num64 
+multi lchoose(num64, num64) returns num64 
     is native( RMATH ) { * };
 
 #	/* Bessel Functions */
@@ -1161,12 +1161,34 @@ sub raku_rsignrank($nn, $n)
 
 # Other functions
 
+sub gamma($x) is export 
+{
+    return gammafn($x.Num)
+}
+
+sub lgamma($x) is export 
+{
+    return lgammafn($x.Num)
+}
+
 sub factorial($x) is export {
     gammafn(($x + 1).Num)
 }
 
-sub raku_choose($x,$y) is export {
-    choose($x.Num, $y.Num)
+multi choose(Num() $n, Num() $k) {
+    return choose(my num64 $ = $n, my num64 $ = $k)
+}
+
+multi lchoose(Num() $n, Num() $k) {
+    return lchoose(my num64 $ = $n, my num64 $ = $k)
+}
+
+multi beta(Num() $a, Num() $b) {
+    return beta(my num64 $ = $a, my num64 $ = $b)
+}
+
+multi lbeta(Num() $a, Num() $b) {
+    return lbeta(my num64 $ = $a, my num64 $ = $b)
 }
 
 sub multinomial_coef(+@array_num) is export {
@@ -1175,7 +1197,7 @@ sub multinomial_coef(+@array_num) is export {
   my $result = 1;
   my $i = 0;
   while $sum != 0 {
-    $result = $result * raku_choose($sum, @array_num[$i]);
+    $result = $result * choose($sum, @array_num[$i]);
     $sum = $sum - @array_num[$i];
     $i++;
   }
