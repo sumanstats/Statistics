@@ -74,7 +74,8 @@ class Build {
             # The folder name within src/ folder and the library 
             # to be built should match in name 
             if $_.IO.d {
-                if %*ENV<OS> eq "Windows_NT" && $*KERNEL eq "win32" {
+                if $*KERNEL eq "win32" { # %*ENV<OS> eq "Windows_NT" seen only in windows
+                                         # could not find in glot.io
                     run "cmake", $_, "-GNinja", "-DCMAKE_C_COMPILER=gcc";
                     } else {
                     run "cmake", $_, "-GNinja";
