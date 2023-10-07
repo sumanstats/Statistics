@@ -40,7 +40,7 @@ install:
   
 
 test_script:
-  - ps: $Env:PATH += ";C:\Program Files\LLVM\bin"     
+  - ps: $Env:PATH += ";C:\msys64\mingw32\bin"     
     # Install only dependencies, disable testing
     # Disable fetching dependencies
   - cmd: zef install --/test --test-depends --deps-only .

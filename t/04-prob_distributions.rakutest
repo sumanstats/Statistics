@@ -416,6 +416,8 @@ is raku_choose(0,0), 1;
 is raku_choose(3,5), 0;
 
 
+diag("####	Testing multinomial coefficient	####");
+
 is multinomial_coef(0,0), 1;
 is multinomial_coef(0,2), 1;
 is multinomial_coef(1,1), 2;
