@@ -21,7 +21,8 @@
     "Descriptive::Kurtosis": "lib/Descriptive/Kurtosis.rakumod",
     "Descriptive::Skewness": "lib/Descriptive/Skewness.rakumod",
     "Probability::Distribution": "lib/Probability/Distribution.rakumod",
-    "Statistics": "lib/Statistics.rakumod"
+    "Statistics": "lib/Statistics.rakumod",
+    "Misc": "lib/Misc.rakumod"
   },
   "resources": [
     "libraries/Rmath"

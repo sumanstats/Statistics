@@ -54,9 +54,18 @@ class Build {
     method build(IO() $work_dir = $*CWD) {
         my $SRC_DIR = $work_dir.IO.add("src");
         my $BUILD_DIR = $work_dir.IO.add("build");
-        mkdir $BUILD_DIR if $BUILD_DIR.IO !~~ :d & :e;
+        if $BUILD_DIR.IO.e {
+            empty-directory $BUILD_DIR # empty if previous files are littered
+        } else {
+            mkdir $BUILD_DIR
+        }
         my $libraries = $work_dir.IO.add("resources/libraries");
-        mkdir $libraries if $libraries.IO !~~ :d & :e;
+        if $libraries.IO.e {
+            empty-directory $libraries # empty resources/libraries
+            # TODO find a mechanism not to build every time
+        } else {
+            mkdir $libraries
+        }
         chdir $BUILD_DIR;
         for $SRC_DIR.IO.dir { 
             # If there are other C libraries inside src with 
@@ -65,11 +74,15 @@ class Build {
             # The folder name within src/ folder and the library 
             # to be built should match in name 
             if $_.IO.d {
-            run "cmake", $_, "-GNinja";
-            run "ninja";
-            my $filename = $*VM.platform-library-name(($_.basename).IO).basename;
-            move $filename,"$libraries/$filename";
-            empty-directory $BUILD_DIR
+                if %*ENV<OS> eq "Windows_NT" && $*KERNEL eq "win32" {
+                    run "cmake", $_, "-GNinja", "-DCMAKE_C_COMPILER=gcc";
+                    } else {
+                    run "cmake", $_, "-GNinja";
+                    }
+                run "ninja";
+                my $filename = $*VM.platform-library-name(($_.basename).IO).basename;
+                move $filename,"$libraries/$filename";
+                empty-directory $BUILD_DIR            
             }
         }
         rmtree $BUILD_DIR

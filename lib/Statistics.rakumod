@@ -9,6 +9,7 @@ sub EXPORT() {
         use Correlation::Kendall;
         use Correlation::BiweightMid;
         use Probability::Distribution;
+        use Misc;
         return ::.pairs.grep(*.key ne '$_').Map;
     }
 }
@@ -87,23 +88,40 @@ kendall_cor_coef(@data1, @data2); # 0.8144262510988963
 # more robust, less sensitive to outliers
 bi_cor_coef(@data1, @data2); # 0.9146470012038392
 
+
+# numpy linspace
+linspace(2.1, 3.2, 5, endpoint => False, retstep => False); # [2.1, 2.32, 2.54, 2.76, 2.98]
+linspace(1, 3, 3, endpoint => False, retstep => True); # ([1, 1.666667, 2.333333], 0.666667)
+
+
+# Normal distribution
+raku_dnorm(5); # 1.4867195147342977e-06
+raku_pnorm(5); # 0.9999997133484281
+raku_qnorm(5); # NaN
+raku_pnorm(4, mean => 2, sd => 3); # 0.7475074624530771
+raku_pnorm(4, mean => 2, sd => 3, log_p => True); # -0.29101099055230867
+
+# Random number generator for normal distribution 
+raku_set_seed(111,222);
+raku_rnorm(12) # (0.2933064931910023 -0.43157564134676835 0.1280404124560668 -1.001461811038476 
+                 -0.9219453227924342 1.2988990178409578 -0.46867271131577315 -1.2678609176619775 
+                  0.3596981905325252 0.35262105537769173 0.5770092689090144 -1.0392300758070165)
 =end code
 
 =head1 DESCRIPTION
 
 Statistics is a module to make it easier to do statistics in Raku programming language.
 
-Many things are in the roadmap, only few are done.
 
 
-=head2 Expected Features
+=head2 Features
 
-=item descriptive statistics
-=item correlation coefficients
-=item pdf, cdf of probability distributions 
-=item random number generators
-=item parametric tests
-=item non-parametric tests
+=item [x] descriptive statistics
+=item [x] correlation coefficients
+=item [x] pdf, cdf of probability distributions 
+=item [x] random number generators
+=item [ ] parametric tests
+=item [ ] non-parametric tests
 
 
 

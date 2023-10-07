@@ -1,6 +1,6 @@
 use Test;
 use Statistics;
-use Probability::Distribution;
+# use Probability::Distribution;
 
 # Local function for testing two arrays with desired precision
 sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $precision) {
@@ -16,9 +16,21 @@ sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $preci
 diag("####	Testing raku_dnorm	####");
 
 is raku_dnorm(5), 1.4867195147342977e-06;
+
+diag("####	Testing raku_pnorm	####");
+
 is raku_pnorm(5), 0.9999997133484281;
 is raku_qnorm(5), NaN;
+is-approx raku_pnorm(4, mean => 2, sd => 3), 0.7475074624530771, 1e-12;
+is-approx raku_pnorm(4, mean => 2, sd => 3, log_p => True), -0.29101099055230867, 1e-12;
 
+diag("####	Testing raku_rnorm	####");
+
+element_wise_testing_with_precision sub ($n) {raku_set_seed(111, 222); raku_rnorm($n)}(12), 
+                                    (0.2933064931910023, -0.43157564134676835, 0.1280404124560668, -1.001461811038476,
+                                    -0.9219453227924342, 1.2988990178409578, -0.46867271131577315, -1.2678609176619775,
+                                    0.3596981905325252, 0.35262105537769173, 0.5770092689090144, -1.0392300758070165),
+                                    1e-12;
 
 diag("####	Testing raku_dgammma	####");
 
