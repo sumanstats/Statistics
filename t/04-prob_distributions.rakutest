@@ -446,12 +446,15 @@ is -> $n {raku_set_seed(111,222); raku_rsignrank($n, 2)}(5), (3, 2, 3, 2, 2);
 
 
 # Other functions
-
+diag("####  Testing factorial and lfactorial  ####");
 is factorial(9), 362880;
 is factorial(0), 1;
 is-approx factorial(0.2), 0.9181687423997607, 0.01;
 is-approx factorial(10.2), 5819090.083978569, 0.01;
-
+is-approx lfactorial(4), 3.1780538303479458, 1e-12;
+is lfactorial(-4), Inf;
+is lfactorial(0), 0;
+is-approx lfactorial(0.2), -0.0853740900033158, 1e-12;
 
 diag("####  Testing choose and lchoose  ####");
 is choose(3,1), 3;

@@ -1176,6 +1176,11 @@ sub factorial($x) is export
     gammafn(($x + 1).Num)
 }
 
+sub lfactorial($x) is export 
+{
+    lgammafn(($x + 1).Num)
+}
+
 multi choose(Num() $n, Num() $k) is export 
 {
     return choose(my num64 $ = $n, my num64 $ = $k)
@@ -1195,6 +1200,7 @@ multi lbeta(Num() $a, Num() $b) is export
 {
     return lbeta(my num64 $ = $a, my num64 $ = $b)
 }
+
 sub multinomial_coef(+@array_num) is export {
   if @array_num.any < 0 { return "Not possible to calculate multinomial coefficient for negative values" };
   my $sum = [+] @array_num;
