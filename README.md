@@ -76,8 +76,8 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 
 
 
-Expected Features
------------------
+Features
+--------
 
 + [x] descriptive statistics
 + [x] correlation coefficients
