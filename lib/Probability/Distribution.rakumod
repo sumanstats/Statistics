@@ -229,13 +229,13 @@ sub rnbinom_mu(num64, num64) returns num64
 
 #	/* Poisson Distribution */
 
-sub	dpois(num64, num64, int32) returns num64 
+sub dpois(num64, num64, int32) returns num64 
     is native( RMATH ) { * };
-sub	ppois(num64, num64, int32, int32) returns num64 
+sub ppois(num64, num64, int32, int32) returns num64 
     is native( RMATH ) { * };
-sub	qpois(num64, num64, int32, int32) returns num64 
+sub qpois(num64, num64, int32, int32) returns num64 
     is native( RMATH ) { * };
-sub	rpois(num64) returns num64 
+sub rpois(num64) returns num64 
     is native( RMATH ) { * };
 
 #	/* Weibull Distribution */
@@ -1090,6 +1090,74 @@ sub raku_qtukey($p, $nmeans, $df, $nranges = 1, :$lower_tail = True, :$log_p = F
     is export {
         qtukey($p.Num, $nranges.Num, $nmeans.Num, $df.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0)
     }
+
+####	Wilcoxon Rank Sum Distribution	####
+
+# dwilcox(x, m, n, log = FALSE)
+# pwilcox(q, m, n, lower.tail = TRUE, log.p = FALSE)
+# qwilcox(p, m, n, lower.tail = TRUE, log.p = FALSE)
+# rwilcox(nn, m, n)
+
+sub raku_dwilcox($x, $m, $n, :$log = False)
+    is export {
+        LEAVE { wilcox_free() };
+        dwilcox($x.Num, $m.Num, $n.Num, $log ?? 1 !! 0);
+    }
+
+
+
+sub raku_pwilcox($q, $m, $n, :$lower_tail = True, :$log_p = False)
+    is export {
+        LEAVE { wilcox_free() };
+        pwilcox($q.Num, $m.Num, $n.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+sub raku_qwilcox($p, $m, $n, :$lower_tail = True, :$log_p = False)
+    is export {
+        LEAVE { wilcox_free() };
+        qwilcox($p.Num, $m.Num, $n.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+sub raku_rwilcox($nn, $m, $n)
+    is export {
+        (1..$nn).map: {rwilcox($m.Num, $n.Num)}
+    }
+
+
+####	Wilcoxon Signed Rank Distribution	####
+
+# dsignrank(x, n, log = FALSE)
+# psignrank(q, n, lower.tail = TRUE, log.p = FALSE)
+# qsignrank(p, n, lower.tail = TRUE, log.p = FALSE)
+# rsignrank(nn, n)
+
+sub raku_dsignrank($x, $n, :$log = False)
+    is export {
+        LEAVE { signrank_free() };
+        dsignrank($x.Num, $n.Num, $log ?? 1 !! 0);
+    }
+
+
+sub raku_psignrank($q, $n, :$lower_tail = True, :$log_p = False)
+    is export {
+        LEAVE { signrank_free() };
+        psignrank($q.Num, $n.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+
+
+sub raku_qsignrank($p, $n, :$lower_tail = True, :$log_p = False)
+    is export {
+        LEAVE { signrank_free() };
+        qsignrank($p.Num, $n.Num, $lower_tail ?? 1 !! 0, $log_p ?? 1 !! 0);
+    }
+ 
+sub raku_rsignrank($nn, $n)
+    is export {
+        (1..$nn).map: {rsignrank($n.Num)}
+    }
+
 
 # Other functions
 

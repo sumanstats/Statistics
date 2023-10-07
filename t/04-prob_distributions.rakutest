@@ -404,6 +404,47 @@ is raku_qtukey(1,6,5), Inf;
 is raku_qtukey(2,6,5), NaN;
 is-approx raku_qtukey(0.95,6,5), 6.032902683224805, 1e-12;
 
+
+diag("####	Testing raku_dwilcox	####");
+is-approx raku_dwilcox(3,2,4), 0.13333333333333333, 1e-12;
+is-approx raku_dwilcox(5,7,3, log => True), -3.1780538303479453, 1e-12;
+
+
+diag("####	Testing raku_pwilcox	####");
+is-approx raku_pwilcox(3,2,4), 0.4, 1e-12;
+is-approx raku_pwilcox(5,7,3, log_p => True), -2.0149030205422647, 1e-12;
+
+diag("####	Testing raku_qwilcox	####");
+is raku_qwilcox(3,2,4), NaN;
+is raku_qwilcox(0.1, 10, 5), 14;
+is raku_qwilcox(0, 10, 5), 0;
+is raku_qwilcox(1, 10, 5), 50;
+
+diag("####	Testing raku_rwilcox	####");
+#TODO unexpected output currently
+# is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 1, 2)}(2), (2, 0);
+# is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 3, 2)}(5), (4,3,4,1,1);
+
+diag("####	Testing raku_dsignrank	####");
+is raku_dsignrank(3,2), 0.25;
+is-approx raku_dsignrank(5,7, log => True), -3.753417975251507, 1e-12;
+
+diag("####	Testing raku_psignrank	####");
+is raku_psignrank(3,2), 1;
+is-approx raku_psignrank(5,7, log_p => True), -2.549445170925571, 1e-12; 
+
+diag("####	Testing raku_qsignrank	####");
+is raku_qsignrank(1,2), 3;
+is raku_qsignrank(0,7, log_p => True), 28;
+is raku_qsignrank(1, 7), 28;
+is raku_qsignrank(1, 7, log_p => True), NaN;    
+
+
+diag("####	Testing raku_rsignrank	####");
+is -> $n {raku_set_seed(111,222); raku_rsignrank($n, 40)}(3), (375, 326, 250);
+is -> $n {raku_set_seed(111,222); raku_rsignrank($n, 2)}(5), (3, 2, 3, 2, 2);
+
+
 # Other functions
 
 is factorial(9), 362880;
