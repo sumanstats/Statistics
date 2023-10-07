@@ -340,12 +340,13 @@ sub gammafn(num64) returns num64
     is native( RMATH ) { * }; # gamma in R
 sub lgammafn(num64) returns num64 
     is native( RMATH ) { * }; # lgamma in R
-sub psigamma(num64, num64) returns num64 
+multi psigamma(num64, num64) returns num64 
     is native( RMATH ) { * };
-sub digamma(num64) returns num64 
+multi digamma(num64) returns num64 
     is native( RMATH ) { * };
-sub trigamma(num64) returns num64 
+multi trigamma(num64) returns num64 
     is native( RMATH ) { * };
+
 
 
 multi beta(num64, num64) returns num64 
@@ -1161,6 +1162,16 @@ sub raku_rsignrank($nn, $n)
 
 # Other functions
 
+multi beta(Num() $a, Num() $b) is export 
+{
+    return beta(my num64 $ = $a, my num64 $ = $b)
+}
+
+multi lbeta(Num() $a, Num() $b) is export 
+{
+    return lbeta(my num64 $ = $a, my num64 $ = $b)
+}
+
 sub gamma($x) is export 
 {
     return gammafn($x.Num)
@@ -1171,14 +1182,19 @@ sub lgamma($x) is export
     return lgammafn($x.Num)
 }
 
-sub factorial($x) is export 
+multi psigamma(Num() $x, Num() $deriv = 0) is export 
 {
-    gammafn(($x + 1).Num)
+    return psigamma(my num64 $ = $x, my num64 $ = $deriv)
 }
 
-sub lfactorial($x) is export 
+multi digamma(Num() $x) is export 
 {
-    lgammafn(($x + 1).Num)
+    return digamma(my num64 $ = $x)
+}
+
+multi trigamma(Num() $x) is export 
+{
+    return trigamma(my num64 $ = $x)
 }
 
 multi choose(Num() $n, Num() $k) is export 
@@ -1191,15 +1207,16 @@ multi lchoose(Num() $n, Num() $k) is export
     return lchoose(my num64 $ = $n, my num64 $ = $k)
 }
 
-multi beta(Num() $a, Num() $b) is export 
+sub factorial($x) is export 
 {
-    return beta(my num64 $ = $a, my num64 $ = $b)
+    gammafn(($x + 1).Num)
 }
 
-multi lbeta(Num() $a, Num() $b) is export 
+sub lfactorial($x) is export 
 {
-    return lbeta(my num64 $ = $a, my num64 $ = $b)
+    lgammafn(($x + 1).Num)
 }
+
 
 sub multinomial_coef(+@array_num) is export {
   if @array_num.any < 0 { return "Not possible to calculate multinomial coefficient for negative values" };
