@@ -421,9 +421,8 @@ is raku_qwilcox(0, 10, 5), 0;
 is raku_qwilcox(1, 10, 5), 50;
 
 diag("####	Testing raku_rwilcox	####");
-#TODO unexpected output currently
-# is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 1, 2)}(2), (2, 0);
-# is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 3, 2)}(5), (4,3,4,1,1);
+is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 1, 2)}(2), (2, 2);
+is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 3, 2)}(5), (3,4,3,3,6);
 
 diag("####	Testing raku_dsignrank	####");
 is raku_dsignrank(3,2), 0.25;
