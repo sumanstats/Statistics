@@ -32,5 +32,5 @@ jobs:
         run: zef install --/test --test-depends --deps-only .
       - name: Run Tests
         run: |
-          zef build .
-          zef test . 
+          zef build . --verbose
+          zef test . --verbose
