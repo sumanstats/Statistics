@@ -1,5 +1,3 @@
-unit module Descriptive::CentralTendency;
-
 #======================================================#
 # Author: Dr Suman Khanal
 # Date creation: Tuesday May 24 2022, 00:13:27
@@ -7,6 +5,7 @@ unit module Descriptive::CentralTendency;
 # File: CentralTendency.rakumod
 #======================================================#
 
+unit module Descriptive::CentralTendency;
 
 sub mean(@data) is export {
   my $number_of_elements=@data.elems;

@@ -1,20 +1,35 @@
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Monday Oct 09 2023, 20:39:32
+# ~: Probability Distribution module
+# File: Distribution.rakumod
+#======================================================#
+
+
 unit module Probability::Distribution;
 
 use NativeCall;
 constant RMATH = %?RESOURCES<libraries/Rmath>;
-# Please note: In windows supply libraries/libRmath, not Rmath only, tested in Windows 10
-# However in Linux supply libraries/Rmath
+
+
+
+# Please note: In **windows** supply libraries/libRmath, not Rmath only, 
+#              tested in Windows 10
+#              However in **Linux** supply libraries/Rmath
 
 # Also in resources field in META6.json in windows, put "libraries/libRmath"
 # In Linux put "libraries/Rmath"
-# In windows I use msys2 shell from Rtools42, which has make available
+
+# In windows I use msys2 shell from Rtools42, which has **make** available
 # Add **gcc and make from Rtool42 in your path** before installing this module.
 
-# Better to avoid using make because it has so many names its not consistent 
-# Best would be to rather use ninja 
+# Better to avoid using **make** because it has so many different names 
+# (make, mingw32-make, gmake, nmake), not consistent 
+
+# Best would be to rather use **ninja** 
 
 
-# Function signatures
+####    Function signatures     ####
 
 
 #	/* Normal Distribution */
@@ -229,7 +244,7 @@ sub rnbinom_mu(num64, num64) returns num64
 
 #	/* Poisson Distribution */
 
-sub dpois(num64, num64, int32) returns num64 
+sub dpois(num64, num64, int32) returns num64
     is native( RMATH ) { * };
 sub ppois(num64, num64, int32, int32) returns num64 
     is native( RMATH ) { * };
@@ -248,9 +263,6 @@ sub qweibull(num64, num64, num64, int32, int32) returns num64
     is native( RMATH ) { * };
 sub rweibull(num64, num64) returns num64 
     is native( RMATH ) { * };
-
-
-
 
 
 #	/* Logistic Distribution */
@@ -383,14 +395,16 @@ sub unif_rand() returns num64
 sub exp_rand() returns num64
     is native( RMATH ) { * };
 
-sub set_seed(int32, int32)
+multi set_seed(uint32, uint32)
     is native( RMATH ) { * };
 
-sub get_seed(int32 is rw, int32 is rw)
+sub get_seed(uint32 is rw, uint32 is rw)
     is native( RMATH ) { * };
 
-sub raku_set_seed($a, $b) is export {
-    set_seed($a.Int, $b.Int)
+multi set_seed(UInt() $a, UInt() $b) is export {
+    # Don't give negative parameters
+    # Tolerates Num though, as it converts to UInt
+    set_seed(my uint32 $ = $a, my uint32 $ = $b)
 }
 
 ####	Normal distribution	####

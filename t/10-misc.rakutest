@@ -1,7 +1,7 @@
 use Test;
 use Statistics;
 
-diag("####	Testing linspace 	####");
+diag("####    Testing linspace    ####");
 # similar to numpy python function
 
 is linspace(2.1, 3.2, 5, endpoint => False, retstep => False), [2.1, 2.32, 2.54, 2.76, 2.98];

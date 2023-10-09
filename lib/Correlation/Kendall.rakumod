@@ -1,5 +1,3 @@
-unit module Correlation::Kendall;
-
 #======================================================#
 # Author: Dr Suman Khanal
 # Date creation: Tuesday May 24 2022, 00:10:40
@@ -14,15 +12,15 @@ unit module Correlation::Kendall;
 # Abrevaya J. (1999). Computation of the Maximum Rank Correlation Estimator. Economic Letters 62, 279-285.
 
 
-
 # Kendall tau-b correlation coefficient in Raku
 # Run time Big O(n^2)
-
-
 
 # Seems better than sorting in raku because it has more jit compiled frames
 # TODO write more efficient O(nlogn) algorithm
 # https://afni.nimh.nih.gov/pub/dist/src/ktaub.c
+
+unit module Correlation::Kendall;
+
 
 
 sub concordant_discordant_rties_sties(@var1,@var2) {    

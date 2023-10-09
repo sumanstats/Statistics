@@ -1,5 +1,3 @@
-unit module Correlation::PearsonSpearman;
-
 #======================================================#
 # Author: Dr Suman Khanal
 # Date creation: Tuesday May 24 2022, 00:09:36
@@ -7,6 +5,7 @@ unit module Correlation::PearsonSpearman;
 # File: PearsonSpearman.rakumod
 #======================================================#
 
+unit module Correlation::PearsonSpearman;
 
 # Fractional ranks in a set of data 
 
@@ -67,5 +66,4 @@ sub spearman_cor_coef(@data1, @data2) is export {
         fractional_ranking(@data1),
         fractional_ranking(@data2)
     )
-
 }

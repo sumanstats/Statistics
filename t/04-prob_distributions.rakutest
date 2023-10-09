@@ -1,3 +1,10 @@
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday Oct 10 2023, 00:39:03
+# ~: Tests for various prob distributions
+# File: 04-prob_distributions.rakutest
+#======================================================#
+
 use Test;
 use Statistics;
 # use Probability::Distribution;
@@ -11,96 +18,103 @@ sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $preci
 }
 
 
-# Normal distribution
+####	Normal distribution    ####
 
-diag("####	Testing raku_dnorm	####");
+diag("####    Testing raku_dnorm    ####");
+is-approx raku_dnorm(5), 1.4867195147342977e-06, 1e-12;
 
-is raku_dnorm(5), 1.4867195147342977e-06;
-
-diag("####	Testing raku_pnorm	####");
-
-is raku_pnorm(5), 0.9999997133484281;
+diag("####    Testing raku_pnorm    ####");
+is-approx raku_pnorm(5), 0.9999997133484281, 1e-12;
 is raku_qnorm(5), NaN;
 is-approx raku_pnorm(4, mean => 2, sd => 3), 0.7475074624530771, 1e-12;
-is-approx raku_pnorm(4, mean => 2, sd => 3, log_p => True), -0.29101099055230867, 1e-12;
+is-approx raku_pnorm(4, mean => 2, sd => 3, log_p => True), 
+                    -0.29101099055230867, 1e-12;
 
-diag("####	Testing raku_rnorm	####");
-
-element_wise_testing_with_precision sub ($n) {raku_set_seed(111, 222); raku_rnorm($n)}(12), 
+diag("####    Testing raku_rnorm    ####");
+element_wise_testing_with_precision sub ($n) {set_seed(111, 222); raku_rnorm($n)}(12), 
                                     (0.2933064931910023, -0.43157564134676835, 0.1280404124560668, -1.001461811038476,
                                     -0.9219453227924342, 1.2988990178409578, -0.46867271131577315, -1.2678609176619775,
                                     0.3596981905325252, 0.35262105537769173, 0.5770092689090144, -1.0392300758070165),
                                     1e-12;
 
-diag("####	Testing raku_dgammma	####");
+####	Gamma distribution    ####
 
+
+diag("####    Testing raku_dgammma    ####");
 is raku_dgamma(2,4, rate => 1), 0.1804470443154836;
 is raku_dgamma(2,4, scale => 2), 0.030656620097620196;
 is raku_dgamma(2,4, rate => 7, scale => 1/7), 0.0026620006060902226;
 is raku_dgamma(2,4, scale => 1/7), 0.0026620006060902226;
 is raku_dgamma(2,4, scale => 2, log => True), -3.4849066497880004;
 
-####	Testing raku_pgamma	####
+diag("####    Testing raku_pgamma    ####");
 is raku_pgamma(2,4), 0.142876539501453;
 is raku_pgamma(2,4, log_p => True), -1.9457743817619386;
 is raku_pgamma(2,4, scale => 4, log_p => True), -6.34721274558465;
 is raku_pgamma(2,4, rate => 4, scale => 1/4, log_p => True), -0.04330435635721676;
 
-####	Testing raku_qgamma	####
+diag("####    Testing raku_qgamma    ####");
 is raku_qgamma(2,4), NaN;
 is raku_qgamma(1,0.5,log_p => True), NaN;
 is raku_qgamma(1,2), Inf;
 
 
+####	Beta distribution 	####
 
-####	Testing raku_dbeta	####
+diag("####    Testing raku_dbeta    ####");
 is raku_dbeta(2,4, 2), 0;
 is raku_dbeta(2,4, 2, log => True), -Inf;
 is raku_dbeta(1, 1, 0, ncp => 2,log => True), NaN;
 
 
 
-####	Testing raku_pbeta	####
+diag("####    Testing raku_pbeta    ####");
 is raku_pbeta(1,1,1), 1;
 is raku_pbeta(0.5,1,1), 0.5;
 is raku_pbeta(0.5, 2, 4, ncp => 2), 0.6590492649101354;
 is raku_pbeta(0.5, 2, 4, ncp => 2, log_p => True), -0.41695699020227484;
 
 
-####	Testing raku_qbeta	####
+diag("####    Testing raku_qbeta    ####");
 is raku_qbeta(3, 4, 6), NaN;
 
 
-####	Testing raku_dlnorm	####
+####	Lognormal distribution 	####
+
+diag("####    Testing raku_dlnorm    ####");
 is-approx raku_dlnorm(3), 0.07272825613999472, 1e-12;
 is-approx raku_dlnorm(3, meanlog => 3, log => True), -3.825188436274744, 1e-12;
 
-####	Testing raku_plnorm	####
+diag("####    Testing raku_plnorm    ####");
 is-approx raku_plnorm(3),0.8640313923585756, 1e-12;
 is-approx raku_plnorm(5, meanlog => 2, sdlog => 2, log_p => True), -0.8613611948322474, 1e-12;
 
-####	Testing raku_qlnorm	####
+diag("####    Testing raku_qlnorm    ####");
 is raku_qlnorm(2), NaN;
 is raku_qlnorm(0.5), 1;
 is raku_qlnorm(0), 0;
 is-approx raku_qlnorm(0.1), 0.2776062418520097, 1e-12;
 
 
-####	Testing raku_rlnorm	####
-is sub ($n) {raku_set_seed(1,3);raku_rlnorm($n)}(3), (1.1751666576815853, 1.551169741442785, 0.35333870325756733);
-is sub ($n) {raku_set_seed(2,5);raku_rlnorm($n)}(3), (0.32145646272210726, 0.6608107230044763, 0.588862748840785);
+diag("####    Testing raku_rlnorm    ####");
+is sub ($n) {set_seed(1,3);raku_rlnorm($n)}(3), (1.1751666576815853, 1.551169741442785, 0.35333870325756733);
+is sub ($n) {set_seed(2,5);raku_rlnorm($n)}(3), (0.32145646272210726, 0.6608107230044763, 0.588862748840785);
 
 
 
-# Chi-Squared Distribution
+####	Chi-Squared Distribution	####
 
 diag("####    Testing raku_dchisq    ####");
 is raku_dchisq(4,3), 0.10798193302637614;    
 is raku_dchisq(4,3,ncp => 4), 0.09970211254391682;
 is raku_dchisq(4,3,ncp => 4, log => True ), -2.3055684132326415;
+
+diag("####    Testing raku_pchisq    ####");
 is raku_pchisq(3,4), 0.44217459962892536;
 is raku_pchisq(0,0), 0;
 is raku_pchisq(0,0, ncp => 4, lower_tail => False, log_p => True), -0.14541345786885906;
+
+diag("####    Testing raku_qchisq    ####");
 is raku_qchisq(5,4), NaN;
 is raku_qchisq(4,4), NaN;
 is raku_qchisq(1,3), Inf;
@@ -108,83 +122,88 @@ is raku_qchisq(0,4, ncp => 3), 0;
 is raku_qchisq(0,0, ncp => 4, lower_tail => False, log_p => True), 0;
 is raku_qchisq(75,25, ncp => 4, lower_tail => False, log_p => True), NaN;
 
+####	F distribution 	####
 
-####	Testing raku_df	####
+diag("####    Testing raku_df    ####");
 is-approx raku_df(1,3,2), 0.27885480092693404, 1e-12;
 is-approx raku_df(1,3,2,4), 0.2255355699113039, 1e-12;
 
-####	Testing raku_pf	####
+diag("####    Testing raku_pf    ####");
 is-approx raku_pf(1,3,2), 0.46475800154489, 1e-12;
 is-approx raku_pf(1,3,2, log_p => True), -0.7662384356489861, 1e-12;
 
-####	Testing raku_qf	####
+diag("####    Testing raku_qf    ####");
 is raku_qf(4, 2, 1), NaN;
 is raku_qf(1, 2, 1), Inf;
 is raku_qf(0, 2, 1), 0;
 is raku_qf(0, 2, 1, log_p => True), Inf;
 
-####	Testing raku_rf	####
-element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rf($n, 1, 2)}(3), 
+diag("####    Testing raku_rf    ####");
+element_wise_testing_with_precision sub ($n) {set_seed(2,5); raku_rf($n, 1, 2)}(3), 
                                     (0.18435620618029944, 1.04131942262752, 14.825797754677964),
                                     1e-12;
 
 
-# Student t distribution
+####	Student t distribution	 ####
 
-####	Testing raku_dt	####
+diag("####    Testing raku_dt    ####");
 is-approx raku_dt(1,2), 0.19245008972987526, 1e-12;
 is-approx raku_dt(1,2,4), 0.011764946752329405, 1e-12;
 
-####	Testing raku_pt	####
+diag("####    Testing raku_pt    ####");
 is-approx raku_pt(1,2), 0.7886751345948129, 1e-12;
 is raku_pt(5,4), 0.9962547830593627;
 is raku_pt(5,4, lower_tail => False, log_p => True), -5.587275735616685;
 
-####	Testing raku_qt	####
+diag("####    Testing raku_qt    ####");
 is raku_qt(1,2), Inf;
 is-approx raku_qt(0.2,2), -1.060660171779821, 1e-12;
 
-####	Testing raku_rt	####
-
-element_wise_testing_with_precision sub ($n) {raku_set_seed(3,10); raku_rt($n, 3, 4)}(5), 
+diag("####    Testing raku_rt    ####");
+element_wise_testing_with_precision sub ($n) {set_seed(3,10); raku_rt($n, 3, 4)}(5), 
                                     (3.2166139332581323, 2.9985780896164873, 3.4756218027009744, 5.833058113048503, 5.671377806342658),
                                     1e-12;
 
+####	Binomial distribution 	####
 
-
-####	Testing raku_dbinom	####
+diag("####    Testing raku_dbinom    ####");
 is-approx raku_dbinom(1,2,0.5), 0.49999999999999994, 1e-12;
 is raku_dbinom(1,2,1), 0;
 is raku_dbinom(1,2,4), NaN;
 is-approx raku_dbinom(1,2,0.2, log => True), -1.1394342831883648, 1e-12;
 
-####	Testing raku_pbinom	####
+diag("####    Testing raku_pbinom    ####");
 is raku_pbinom(1,2,0.2), 0.96;
-is-approx raku_pbinom(1,2,0.2, log_p => True), -0.04082199452025514, 1e-12;
-is-approx raku_pbinom(1,2,0.2, lower_tail => False, log_p => True), -3.2188758248682006, 1e-12;
+is-approx raku_pbinom(1,2,0.2, log_p => True), 
+                     -0.04082199452025514, 1e-12;
+is-approx raku_pbinom(1,2,0.2, lower_tail => False, log_p => True), 
+                     -3.2188758248682006, 1e-12;
 
 
-####	Testing raku_qbinom	####
+diag("####    Testing raku_qbinom    ####");
 is raku_qbinom(1,2,0.2), 2;
 is raku_qbinom(1,2,3), NaN;
 is raku_qbinom(1,2,3, log_p => True), NaN;
 
-####	Testing raku_rbinom	####
-is sub ($n) {raku_set_seed(1,9); raku_rbinom($n,2,0.2)}(3), (0, 0, 1);
-is sub ($n) {raku_set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
+diag("####    Testing raku_rbinom    ####");
+is sub ($n) {set_seed(1,9); raku_rbinom($n,2,0.2)}(3), (0, 0, 1);
+is sub ($n) {set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
 
 
-####	Testing raku_dcauchy	####
+
+####	Cauchy distribution 	####
+
+diag("####    Testing raku_dcauchy    ####");
 is-approx raku_dcauchy(1), 0.15915494309189535, 1e-12;
 is-approx raku_dcauchy(1,2), 0.15915494309189535, 1e-12;
 is-approx raku_dcauchy(1,2,3), 0.0954929658551372, 1e-12;
 
-####	Testing raku_pcauchy	####
+diag("####    Testing raku_pcauchy    ####");
 is raku_pcauchy(1), 0.75;
 is raku_pcauchy(1,2), 0.25;
 is-approx raku_pcauchy(1,2,3), 0.39758361765043326, 1e-12;
 
-####	Testing raku_qcauchy	####
+diag("####    Testing raku_qcauchy    ####");
 is raku_qcauchy(1), Inf;
 is raku_qcauchy(1,2), Inf;
 is raku_qcauchy(1,2,3), Inf;
@@ -193,25 +212,25 @@ is-approx raku_qcauchy(0.9),  3.0776835371752544 , 1e-12;
 is raku_qcauchy(0.9, log_p => True),  NaN;
 is raku_qcauchy(0), -Inf;
 
-####	Testing raku_rcauchy	####
-element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rcauchy($n)}(5), 
+diag("####    Testing raku_rcauchy    ####");
+element_wise_testing_with_precision sub ($n) {set_seed(2,5); raku_rcauchy($n)}(5), 
                                     (0.42607842113327926, -3.589933350285371, 1.8099808111776452, -0.5705944232265042, 1.3602101594780192),
                                     1e-12;
 
-####	Testing raku_dexp	####
+####	Exponential distribution 	####
+
+diag("####    Testing raku_dexp    ####");
 is-approx raku_dexp(1), 0.36787944117144233 , 1e-12;
 is-approx raku_dexp(1,2), 0.2706705664732254 , 1e-12;
 is-approx raku_dexp(1,2, log => True), -1.3068528194400546 , 1e-12;
 
-####	Testing raku_pexp	####
-
+diag("####    Testing raku_pexp    ####");
 is-approx raku_pexp(1), 0.6321205588285577 , 1e-12;
 is-approx raku_pexp(1,2), 0.8646647167633873 , 1e-12;
 is-approx raku_pexp(1,2, log_p => True), -0.14541345786885906 , 1e-12;
 is-approx raku_pexp(4,2), 0.9996645373720975, 1e-12;
 
-####	Testing raku_qexp	####
-
+diag("####    Testing raku_qexp    ####");
 is raku_qexp(1), Inf;
 is raku_qexp(1,2), Inf;
 is raku_qexp(1,2, log_p => True), NaN;
@@ -220,48 +239,56 @@ is-approx raku_qexp(0.5), 0.6931471805599453, 1e-12;
 is raku_qexp(0.5, log_p => True), NaN;
 
 
-####	Testing raku_rexp	####
-element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rexp($n)}(2), 
+diag("####    Testing raku_rexp    ####");
+element_wise_testing_with_precision sub ($n) {set_seed(2,5); raku_rexp($n)}(2), 
                                     (1.411974694734631, 0.17295038773979732),
                                     1e-12;
 
-element_wise_testing_with_precision sub ($n) {raku_set_seed(2,5); raku_rexp($n, 4)}(2), 
+element_wise_testing_with_precision sub ($n) {set_seed(2,5); raku_rexp($n, 4)}(2), 
                                     (0.35299367368365775, 0.04323759693494933),
                                     1e-12;
 
-####	Testing raku_dgeom	####
+####	Geometric distribution    ####
+
+diag("####    Testing raku_dgeom    ####");
 is raku_dgeom(1,0.5), 0.25 ;
 is raku_dgeom(1, 1), 0 ;
 is raku_dgeom(1, 1, log => True), -Inf;
 
-####	Testing raku_pgeom	####
+diag("####    Testing raku_pgeom    ####");
 is raku_pgeom(1,0.5), 0.75 ;
 is raku_pgeom(1, 1), 1 ;
 is raku_pgeom(1, 1, log_p => True), 0;
 is raku_pgeom(1,2), NaN;
 
-####	Testing raku_qgeom	####
+diag("####    Testing raku_qgeom    ####");
 is raku_qgeom(1,0.5), Inf ;
 is raku_qgeom(1, 1), 0 ;
 is raku_qgeom(1, 1, log_p => True), NaN;
 is raku_qgeom(1,2), NaN;
 is raku_qgeom(1,0), NaN;
 
-####	Testing raku_rgeom	####
-is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.1)}(2), (13, 5);
-is sub ($n) {raku_set_seed(2,5); raku_rgeom($n,0.6)}(4), (1, 1, 1, 0);
+diag("####    Testing raku_rgeom    ####");
+is sub ($n) {set_seed(2,5); raku_rgeom($n,0.1)}(2), (13, 5);
+is sub ($n) {set_seed(2,5); raku_rgeom($n,0.6)}(4), (1, 1, 1, 0);
 
-####	Testing raku_dhyper	####
+
+####	Hypergeometric distribution 	####
+
+diag("####    Testing raku_dhyper    ####");
 is-approx raku_dhyper(1, 2, 3, 4), 0.4, 1e-12;  
 
-####	Testing raku_phyper	####
+diag("####    Testing raku_phyper    ####");
 is-approx raku_phyper(1, 2, 3, 4), 0.4, 1e-12;  
 is-approx raku_phyper(1, 2, 3, 4, lower_tail => False), 0.6, 1e-12;  
 is raku_phyper(1, 2, 3, 6), NaN;  
 is raku_phyper(1, 2, 3, 5, lower_tail => False), 1;  
+is raku_phyper(11, 15, 0, 12, lower_tail => False), 1; 
+is raku_phyper(11, 15, 0, 12, lower_tail => True), 0; 
+is raku_phyper(11, 15, 0, 12, log_p => True), -Inf;  
 
 
-####	Testing raku_qhyper	####
+diag("####    Testing raku_qhyper    ####");
 is raku_qhyper(1, 2, 3, 4), 2;  
 is raku_qhyper(1, 2, 3, 4, lower_tail => False), 1;  
 is raku_qhyper(1, 2, 3, 6), NaN;  
@@ -271,49 +298,53 @@ is raku_qhyper(0.5, 2, 3, 5, lower_tail => False), 2;
 is raku_qhyper(0, 20, 3, 6, lower_tail => False), 6; 
 is raku_qhyper(0.7, 2, 3, 6, lower_tail => False), NaN;  
 
-####	Testing raku_rhyper	####
-is sub ($n) {raku_set_seed(1,9); raku_rhyper($n,2,3,4)}(1), (2);
-is sub ($n) {raku_set_seed(12,7); raku_rhyper($n,2,3,4)}(7), (1, 2, 2, 2, 1, 2, 2);
+diag("####    Testing raku_rhyper    ####");
+is sub ($n) {set_seed(1,9); raku_rhyper($n,2,3,4)}(1), (2);
+is sub ($n) {set_seed(12,7); raku_rhyper($n,2,3,4)}(7), (1, 2, 2, 2, 1, 2, 2);
 
 
-####	Testing raku_dnbinom	####
+
+####	Negative binomial distribution  	####
+
+diag("####    Testing raku_dnbinom    ####");
 is-approx raku_dnbinom(2, 3, prob => 0.2), 0.030719999999999997, 1e-12;
 is-approx raku_dnbinom(2, 3, mu => 1), 0.1582031249999999, 1e-12;
 is-approx raku_dnbinom(5, 10, mu => 1), 0.004792628828370662, 1e-12;
 is raku_dnbinom(5, 10, prob => 1), 0;
 
 
-####	Testing raku_pnbinom	####
+diag("####    Testing raku_pnbinom    ####");
 is-approx raku_pnbinom(2, 3, prob => 0.2), 0.05792, 1e-12;
 is-approx raku_pnbinom(2, 3, mu => 1), 0.8964843749999999, 1e-12;
 is-approx raku_pnbinom(5, 10, mu => 1), 0.9986311157049472, 1e-12;
 is raku_pnbinom(5, 10, prob => 1), 1;
 
-####	Testing raku_qnbinom	####
+diag("####    Testing raku_qnbinom    ####");
 is raku_qnbinom(2, 3, prob => 0.2), NaN;
 is raku_qnbinom(2, 3, mu => 1), NaN;
 is raku_qnbinom(5, 10, mu => 1), NaN;
 is raku_qnbinom(5, 10, prob => 1), 0;
 is raku_qnbinom(1, 10, prob => 0.5), Inf;
 
-####	Testing raku_rnbinom	####
+diag("####    Testing raku_rnbinom    ####");
 
 # Run these commands you will get same random values in C and R
 # RNGkind("Marsaglia-Multicarry")
 # .Random.seed <- c(401L, 111L, 222L)
+is -> $n {set_seed(111,222); raku_rnbinom($n, 2, mu => 3)}(5), (2,8,1,4,3);
+is -> $n {set_seed(111,222); raku_rnbinom($n, 2, prob => 0.2)}(10), (6,17,8,12,0,9,18,20,9,6);
 
-is -> $n {raku_set_seed(111,222); raku_rnbinom($n, 2, mu => 3)}(5), (2,8,1,4,3);
-is -> $n {raku_set_seed(111,222); raku_rnbinom($n, 2, prob => 0.2)}(10), (6,17,8,12,0,9,18,20,9,6);
 
+####	Poisson distribution 	####
 
-####	Testing raku_dpois	####
+diag("####    Testing raku_dpois    ####");
 is-approx raku_dpois(1, 2), 0.2706705664732254, 1e-12;
 is-approx raku_dpois(1, 0.2), 0.16374615061559641, 1e-12;
 is-approx raku_dpois(1, 20, log => True), -17.00426772644601, 1e-12;
 is-approx raku_dpois(5, 2), 0.03608940886309672, 1e-12;
 is-approx raku_dpois(10, 2), 3.8189850648779595e-05, 1e-12;
 
-####	Testing raku_ppois	####
+diag("####    Testing raku_ppois    ####");
 is-approx raku_ppois(1, 2), 0.4060058497098381, 1e-12;
 is-approx raku_ppois(1, 0.2), 0.9824769036935782, 1e-12;
 is-approx raku_ppois(1, 20, log_p => True), -16.955477562276577, 1e-12;
@@ -321,7 +352,7 @@ is-approx raku_ppois(5, 2), 0.9834363915193856, 1e-12;
 is-approx raku_ppois(10, 2), 0.9999916917756315, 1e-12;
 
 
-####   Testing raku_qpois	####
+diag("####    Testing raku_qpois    ####");
 is raku_qpois(1, 2), Inf;
 is raku_qpois(1, 0.2), Inf;
 is raku_qpois(0.5, 20, log_p => True), NaN;
@@ -329,17 +360,19 @@ is raku_qpois(0.1, 2), 0;
 is raku_qpois(10, 2), NaN;
 is raku_qpois(0.2, 2), 1;
 
-####	Testing raku_rpois	####
-is -> $n {raku_set_seed(111,222); raku_rpois($n, 2)}(5), (2, 2, 1, 3, 2);
-is -> $n {raku_set_seed(111,222); raku_rpois($n, 0.2)}(10), (0, 0, 0, 1, 0, 1, 0, 0, 0, 0);
+diag("####    Testing raku_rpois    ####");
+is -> $n {set_seed(111,222); raku_rpois($n, 2)}(5), (2, 2, 1, 3, 2);
+is -> $n {set_seed(111,222); raku_rpois($n, 0.2)}(10), (0, 0, 0, 1, 0, 1, 0, 0, 0, 0);
 
-####	Testing raku_dweibull	####
+####	Weibull distribution 	####
+
+diag("####    Testing raku_dweibull    ####");
 is-approx raku_dweibull(3,1,2), 0.11156508007421491, 1e-12;
 is-approx raku_dweibull(3,1,2,log => True), -2.1931471805599454, 1e-12;
 is raku_dweibull(3,7), 0;
 is-approx raku_dweibull(30,1,0.2), 3.5875479865822053e-65, 1e-12;
 
-####	Testing raku_pweibull	####
+diag("####    Testing raku_pweibull    ####");
 is-approx raku_pweibull(3, 1, 2), 0.7768698398515702, 1e-12;
 is-approx raku_pweibull(3, 1, 2,log_p => True), -0.25248245892545396, 1e-12;
 is raku_pweibull(3, 7), 1;
@@ -347,7 +380,7 @@ is raku_pweibull(30, 1, 0.2), 1;
 
 
 
-####	Testing raku_qweibull	####
+diag("####    Testing raku_qweibull    ####");
 is raku_qweibull(1, 1, 2), Inf;
 is raku_qweibull(0.2, 1, 2,log_p => True), NaN;
 is-approx raku_qweibull(0.2, 1, 2), 0.44628710262841953, 1e-12;
@@ -355,16 +388,18 @@ is raku_qweibull(0, 7), 0;
 is-approx raku_qweibull(0.5, 1, 0.2), 0.13862943611198905, 1e-12;
 
 
-####	Testing raku_rweibull	####
-element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rweibull($n, 2, 2)}(10), 
+diag("####    Testing raku_rweibull    ####");
+element_wise_testing_with_precision -> $n {set_seed(111,222); raku_rweibull($n, 2, 2)}(10), 
                                     (1.393634435100773,1.5481072197202943,2.0971770705316657,0.8357424160495083,1.5441847679961411,0.4677604053455371,2.715328317118502,1.5935163877485303,2.626334393988074,1.1832568107733237),
                                     1e-12;
 
-element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rweibull($n, 2)}(5),
+element_wise_testing_with_precision -> $n {set_seed(111,222); raku_rweibull($n, 2)}(5),
                                     (0.6968172175503865,0.7740536098601472,1.0485885352658328,0.41787120802475414,0.7720923839980706),
                                     1e-12;
 
-####	Testing raku_dlogis	####
+####	Logistic distribution 	####
+
+diag("####    Testing raku_dlogis    ####");
 is-approx raku_dlogis(3), 0.045176659730912144, 1e-12;
 is-approx raku_dlogis(3, 2, 3), 0.08106072033492359 , 1e-12;
 is-approx raku_dlogis(4,2,3, log => True), -2.5940191290389203 , 1e-12;
@@ -372,14 +407,14 @@ is-approx raku_dlogis(14, 7), 0.0009102211801218265, 1e-12;
 is-approx raku_dlogis(1, 3), 0.1049935854035065, 1e-12;
 
 
-####	Testing raku_plogis	####
+diag("####    Testing raku_plogis    ####");
 is-approx raku_plogis(3), 0.9525741268224334, 1e-12;
 is-approx raku_plogis(3, 2, 3), 0.5825702064623147 , 1e-12;
 is-approx raku_plogis(4,2,3, log_p => True), -0.41437008685207205 , 1e-12;
 is-approx raku_plogis(14, 7), 0.9990889488055994, 1e-12;
 is-approx raku_plogis(1, 3), 0.11920292202211755, 1e-12;
 
-####	Testing raku_qlogis	####
+diag("####    Testing raku_qlogis    ####");
 is raku_qlogis(0), -Inf;
 is-approx raku_qlogis(0.2, 2, 3), -2.1588830833596715 , 1e-12;
 is raku_qlogis(1,2,3, log_p => True), NaN;
@@ -387,73 +422,80 @@ is raku_qlogis(14, 7), NaN;
 is raku_qlogis(0.5, 3), 3;
 
 
-####	Testing raku_rlogis	####
-element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rlogis($n)}(5),
+diag("####    Testing raku_rlogis    ####");
+element_wise_testing_with_precision -> $n {set_seed(111,222); raku_rlogis($n)}(5),
                                     (0.46988294460554764,0.19773530926871702,-0.6945353008974018,1.6565857139688709,0.20447545664046937),
                                     1e-12;
 
-element_wise_testing_with_precision -> $n {raku_set_seed(111,222); raku_rlogis($n,2)}(5),
+element_wise_testing_with_precision -> $n {set_seed(111,222); raku_rlogis($n,2)}(5),
                                     (2.4698829446055477,2.197735309268717,1.3054646991025982,3.656585713968871,2.2044754566404694),
                                     1e-12;
 
 
-####	Testing Studentized Range Distribution	####
+####    Studentized Range Distribution    ####
+
+diag("####    Testing raku_ptukey    ####");
 is raku_ptukey(2,3,1), NaN;
 is-approx raku_ptukey(1,6,5), 0.02721150208597321, 1e-12;
+
+diag("####    Testing raku_qtukey    ####");
 is raku_qtukey(1,6,5), Inf;
 is raku_qtukey(2,6,5), NaN;
 is-approx raku_qtukey(0.95,6,5), 6.032902683224805, 1e-12;
 
+####	Wilcoxon Rank Sum Distribution  	####
 
-diag("####	Testing raku_dwilcox	####");
+diag("####    Testing raku_dwilcox    ####");
 is-approx raku_dwilcox(3,2,4), 0.13333333333333333, 1e-12;
 is-approx raku_dwilcox(5,7,3, log => True), -3.1780538303479453, 1e-12;
 
 
-diag("####	Testing raku_pwilcox	####");
+diag("####    Testing raku_pwilcox    ####");
 is-approx raku_pwilcox(3,2,4), 0.4, 1e-12;
 is-approx raku_pwilcox(5,7,3, log_p => True), -2.0149030205422647, 1e-12;
 
-diag("####	Testing raku_qwilcox	####");
+diag("####    Testing raku_qwilcox    ####");
 is raku_qwilcox(3,2,4), NaN;
 is raku_qwilcox(0.1, 10, 5), 14;
 is raku_qwilcox(0, 10, 5), 0;
 is raku_qwilcox(1, 10, 5), 50;
 
-diag("####	Testing raku_rwilcox	####");
-is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 1, 2)}(2), (2, 2);
-is -> $n {raku_set_seed(111,222); raku_rwilcox($n, 3, 2)}(5), (3,4,3,3,6);
+diag("####    Testing raku_rwilcox    ####");
+is -> $n {set_seed(111,222); raku_rwilcox($n, 1, 2)}(2), (2, 2);
+is -> $n {set_seed(111,222); raku_rwilcox($n, 3, 2)}(5), (3,4,3,3,6);
 
-diag("####	Testing raku_dsignrank	####");
+####	Wilcoxon Signed Rank Distribution 	####
+
+diag("####    Testing raku_dsignrank    ####");
 is raku_dsignrank(3,2), 0.25;
 is-approx raku_dsignrank(5,7, log => True), -3.753417975251507, 1e-12;
 
-diag("####	Testing raku_psignrank	####");
+diag("####    Testing raku_psignrank    ####");
 is raku_psignrank(3,2), 1;
 is-approx raku_psignrank(5,7, log_p => True), -2.549445170925571, 1e-12; 
 
-diag("####	Testing raku_qsignrank	####");
+diag("####    Testing raku_qsignrank    ####");
 is raku_qsignrank(1,2), 3;
 is raku_qsignrank(0,7, log_p => True), 28;
 is raku_qsignrank(1, 7), 28;
 is raku_qsignrank(1, 7, log_p => True), NaN;    
 
 
-diag("####	Testing raku_rsignrank	####");
-is -> $n {raku_set_seed(111,222); raku_rsignrank($n, 40)}(3), (375, 326, 250);
-is -> $n {raku_set_seed(111,222); raku_rsignrank($n, 2)}(5), (3, 2, 3, 2, 2);
+diag("####    Testing raku_rsignrank    ####");
+is -> $n {set_seed(111,222); raku_rsignrank($n, 40)}(3), (375, 326, 250);
+is -> $n {set_seed(111,222); raku_rsignrank($n, 2)}(5), (3, 2, 3, 2, 2);
 
 
-# Other functions
+####	Gamma and Related functions 	####
 
-diag("####  Testing beta and lbeta  ####");
+diag("####    Testing beta and lbeta    ####");
 is-approx beta(2,3), 0.08333333333333333, 1e-12;
 is-approx beta(30,2), 0.001075268817204301, 1e-12;
 
 is-approx lbeta(2,3), -2.4849066497880004, 1e-12;
 is-approx lbeta(30,2), -6.835184586147302, 1e-12;
 
-diag("####  Testing gamma and lgamma  ####");
+diag("####    Testing gamma and lgamma    ####");
 is gamma(3), 2; 
 is-approx gamma(2.2), 1.1018024908797128, 1e-12; 
 is gamma(5), 24; 
@@ -467,7 +509,7 @@ is lgamma(-4), Inf;
 is-approx lgamma(100), 359.1342053695754, 1e-12;
 is-approx lgamma(42), 114.0342117814617, 1e-12;
 
-diag("####  Testing psi/di/tri-gamma  ####");
+diag("####    Testing psi/di/tri-gamma    ####");
 is-approx psigamma(5.Num), 1.5061176684318007, 1e-12;
 is-approx psigamma(5, 2), -0.04878973224511449, 1e-12;
 
@@ -480,7 +522,7 @@ is-approx trigamma(400), 0.002503127604163412, 1e-12;
 is-approx trigamma(4.2), 0.2686649407314008, 1e-12;
 
 
-diag("####  Testing choose and lchoose  ####");
+diag("####    Testing choose and lchoose    ####");
 is choose(3,1), 3;
 is choose(0,0), 1;
 is choose(3,5), 0;
@@ -488,7 +530,7 @@ is choose(30,4), 27405;
 is lchoose(3,4), -Inf;
 is-approx lchoose(30,4.2), 10.218480757480219, 1e-12;
 
-diag("####  Testing factorial and lfactorial  ####");
+diag("####    Testing factorial and lfactorial    ####");
 is factorial(9), 362880;
 is factorial(0), 1;
 is-approx factorial(0.2), 0.9181687423997607, 0.01;
@@ -503,7 +545,7 @@ is-approx lfactorial(0.2), -0.0853740900033158, 1e-12;
 
 
 
-diag("####	Testing multinomial coefficient	####");
+diag("####    Testing multinomial coefficient    ####");
 
 is multinomial_coef(0,0), 1;
 is multinomial_coef(0,2), 1;

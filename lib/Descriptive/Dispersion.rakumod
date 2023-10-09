@@ -1,11 +1,11 @@
-unit module Descriptive::Dispersion;
-
 #======================================================#
 # Author: Dr Suman Khanal
 # Date creation: Tuesday May 24 2022, 00:14:06
 # ~: Measures of dispersion
 # File: Dispersion.rakumod
 #======================================================#
+
+unit module Descriptive::Dispersion;
 
 
 # simple but has to do double pass

@@ -1,4 +1,10 @@
-unit module Correlation::BiweightMid;
+#======================================================#
+# Author: Dr Suman Khanal
+# Date creation: Tuesday May 24 2022, 00:12:24
+# ~: Biweight mid correlation coefficient
+# File: BiweightMid.rakumod
+#======================================================#
+
 
 #`[
 Calculating biweight midcorrelation which is
@@ -6,12 +12,7 @@ more robust against outliers
 https://en.wikipedia.org/wiki/Biweight_midcorrelation
 ]
 
-#======================================================#
-# Author: Dr Suman Khanal
-# Date creation: Tuesday May 24 2022, 00:12:24
-# ~: Biweight mid correlation coefficient
-# File: BiweightMid.rakumod
-#======================================================#
+unit module Correlation::BiweightMid;
 
 
 use Descriptive::CentralTendency;

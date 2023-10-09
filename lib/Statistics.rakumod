@@ -102,7 +102,7 @@ raku_pnorm(4, mean => 2, sd => 3); # 0.7475074624530771
 raku_pnorm(4, mean => 2, sd => 3, log_p => True); # -0.29101099055230867
 
 # Random number generator for normal distribution 
-raku_set_seed(111,222);
+set_seed(111,222);
 raku_rnorm(12) # (0.2933064931910023 -0.43157564134676835 0.1280404124560668 -1.001461811038476 
                  -0.9219453227924342 1.2988990178409578 -0.46867271131577315 -1.2678609176619775 
                   0.3596981905325252 0.35262105537769173 0.5770092689090144 -1.0392300758070165)
@@ -124,6 +124,10 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 =item [ ] non-parametric tests
 
 
+=head3 INSTALLATION
+
+The module contains **compiled** code. `gcc`, `cmake` and `ninja` 
+are required for compilation and should be available in `PATH`.
 
 
 =head3 ISSUES

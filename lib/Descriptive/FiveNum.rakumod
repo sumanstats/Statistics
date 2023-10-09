@@ -1,12 +1,12 @@
-unit module Descriptive::FiveNum;
-
-
 #======================================================#
 # Author: Dr Suman Khanal
 # Date creation: Tuesday May 24 2022, 00:15:19
 # ~: Five number summary
 # File: FiveNum.rakumod
 #======================================================#
+
+unit module Descriptive::FiveNum;
+
 
 
 sub fivenum(@data is copy) is export {
