@@ -20,6 +20,8 @@ is kendall_cor_coef(@x, @y), 0.07074995524624558;
 is kendall_cor_coef(@data1_ints, @data2_ints), 0.022222222222222223;
 is kendall_cor_coef(@data1_ints_floats, @data2_ints_floats), 0.15555555555555556;
 is kendall_cor_coef([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]), 1.0;
+is kendall_cor_coef([1, 2], [2, 3]), 1.0;
+is-approx kendall_cor_coef([-1, -2, 5], [6, -2, -1]), 0.33333333333333, 1e-12;
 is kendall_cor_coef([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]), -1.0;
 is kendall_cor_coef([1, 2, 3, 4, 5], [3, 4, 1, 5, 2]), 0.0;
 is-approx kendall_cor_coef([1, 2, 2, 4, 5], [5, 4, 3, 2, 1]), -0.94868, 0.00001;
