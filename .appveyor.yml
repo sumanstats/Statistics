@@ -13,6 +13,7 @@ branches:
   # whitelist
   only:
     - main
+    - testing
     
   # blacklist
   except:
@@ -40,7 +41,7 @@ install:
   
 
 test_script:
-  - ps: $Env:PATH += ";C:\msys64\mingw32\bin"     
+  - ps: $Env:PATH += ";C:\msys64\mingw64\bin"     
     # Install only dependencies, disable testing
     # Disable fetching dependencies
   - cmd: zef install --/test --test-depends --deps-only .
@@ -49,4 +50,4 @@ test_script:
 
   # No idea why test fails
   # Comment for now
-  # - cmd: zef install .  # Test project in current directory
+  - cmd: zef test . --verbose # Test project in current directory
