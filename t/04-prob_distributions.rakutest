@@ -22,13 +22,23 @@ sub element_wise_testing_with_precision(@functionoutput, @expectedoutput, $preci
 
 diag("####    Testing raku_dnorm    ####");
 is-approx raku_dnorm(5), 1.4867195147342977e-06, 1e-12;
+is-approx raku_dnorm(3, mean => 2, sd => 1), 0.24197072451914337, 1e-12;
+is raku_dnorm(3, mean => 2, sd => -1), NaN;
+is raku_dnorm(3, mean => 2, sd => 0), 0;
 
 diag("####    Testing raku_pnorm    ####");
 is-approx raku_pnorm(5), 0.9999997133484281, 1e-12;
-is raku_qnorm(5), NaN;
 is-approx raku_pnorm(4, mean => 2, sd => 3), 0.7475074624530771, 1e-12;
 is-approx raku_pnorm(4, mean => 2, sd => 3, log_p => True), 
                     -0.29101099055230867, 1e-12;
+
+diag("####    Testing raku_qnorm    ####");
+is raku_qnorm(5), NaN;
+is-approx raku_qnorm(0.1), -1.2815515655446008, 1e-12;
+is raku_qnorm(1), Inf;
+is raku_qnorm(0.5), 0;
+is-approx raku_qnorm(0.9, mean => 3, sd =>2), 5.563103131089202, 1e-12;
+
 
 diag("####    Testing raku_rnorm    ####");
 element_wise_testing_with_precision sub ($n) {set_seed(111, 222); raku_rnorm($n)}(12), 
