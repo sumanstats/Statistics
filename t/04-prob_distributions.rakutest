@@ -200,6 +200,13 @@ is sub ($n) {set_seed(1,9); raku_rbinom($n,2,0.2)}(3), (0, 0, 1);
 is sub ($n) {set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
 
 
+####	Multinomial distribution 	####
+# Test taken from here: 
+#      https://stackoverflow.com/questions/63368639/how-to-use-multinomial-function-in-c-with-rmath-h
+
+diag("####    Testing raku_multinom    ####");
+is sub ($n) {set_seed(123, 456); my @prob = [0.1, 0.2, 0.4, 0.3]; raku_multinom(100, 4 , @prob)}(4), (9,14,43,34);
+
 
 ####	Cauchy distribution 	####
 
