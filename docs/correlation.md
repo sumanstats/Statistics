@@ -2,7 +2,7 @@
 
 
 ```perl
-use Statistics::Correlation;
+use Statistics;
 ```
 
 The following correlation coefficients are implemented:

@@ -9,7 +9,7 @@ The following are basic functions expected of a Statistics package:
 + `mean`
 + `median`
 + `mode`
-+ percentile
++ `percentile`
 + `range`
 + `IQR` (interquartile range)
 + `mad`

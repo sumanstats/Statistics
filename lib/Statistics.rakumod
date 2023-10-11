@@ -33,6 +33,7 @@ unit module Statistics;
 [![Linux](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml)
 [![Win64](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml)
 [![MacOS](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/8k6m9d1e7lcby5bm/branch/main?svg=true)](https://ci.appveyor.com/project/sumanstats/statistics/branch/main)
 
 [![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
 

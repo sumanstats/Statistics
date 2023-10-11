@@ -13,7 +13,7 @@ branches:
   # whitelist
   only:
     - main
-    - testing
+    # - testing
     
   # blacklist
   except:
@@ -39,15 +39,15 @@ install:
   # run the powershell script, note .\
   - ps: .\rakudo.ps1
   
-
+# https://github.com/gcovr/gcovr/issues/189
+# Read on issues of using gcc in Windows
+# gcc, cmake and ninja should be in PATH
 test_script:
   - ps: $Env:PATH += ";C:\msys64\mingw64\bin"     
-    # Install only dependencies, disable testing
-    # Disable fetching dependencies
+  # Install only dependencies, disable testing
+  # Disable fetching dependencies
   - cmd: zef install --/test --test-depends --deps-only .
-    # Run Build.rakumod as per zef docs
-  - cmd: zef build . --verbose              
-
-  # No idea why test fails
-  # Comment for now
-  - cmd: zef test . --verbose # Test project in current directory
+  # Run Build.rakumod as per zef docs
+  - cmd: zef build . --verbose  
+  # Test project in current directory            
+  - cmd: zef test . --verbose 
