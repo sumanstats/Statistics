@@ -797,11 +797,15 @@ sub raku_rbinom($n!, $size!, $prob!)
 # TODO
 
 # https://stackoverflow.com/questions/63368639/how-to-use-multinomial-function-in-c-with-rmath-h
-# sub rmultinom(int32, CArray[num64], int32, CArray[int32])
-#     is native( RMATH ) { * }; 
-# sub raku_rmultinom($n, $size, @prob ) {
-#     
-#     }
+
+sub raku_multinom($n , $size, @prob is copy) is export {
+    @prob = @prob.map: {$_.Num};
+    my $prob = CArray[num64].new(@prob);
+    my $ints = CArray[int32].allocate($size);
+    rmultinom(100, $prob, $size, $ints);
+    return $ints.list
+}
+
 # sub raku_dmultinom($x, $size = NULL, $prob, $log = False)
 #     is export {
 
