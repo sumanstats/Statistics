@@ -95,12 +95,19 @@ linspace(2.1, 3.2, 5, endpoint => False, retstep => False); # [2.1, 2.32, 2.54, 
 linspace(1, 3, 3, endpoint => False, retstep => True); # ([1, 1.666667, 2.333333], 0.666667)
 
 
-# Normal distribution
+# pdf of normal distribution 
 raku_dnorm(5); # 1.4867195147342977e-06
+raku_dnorm(3, mean => 2, sd => 1); # 0.24197072451914337
+raku_dnorm(3, mean => 2, sd => -1); # NaN;
+raku_dnorm(3, mean => 2, sd => 0); # 0;
+
+# cdf of normal distribution 
 raku_pnorm(5); # 0.9999997133484281
-raku_qnorm(5); # NaN
 raku_pnorm(4, mean => 2, sd => 3); # 0.7475074624530771
-raku_pnorm(4, mean => 2, sd => 3, log_p => True); # -0.29101099055230867
+raku_pnorm(4, mean => 2, sd => 3, log_p => True) # -0.29101099055230867
+
+
+raku_qnorm(5); # NaN
 
 # Random number generator for normal distribution 
 set_seed(111,222);

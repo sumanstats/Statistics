@@ -7,7 +7,7 @@
 # use File::Directory::Tree;
 
 # Don't know the reason why File::Directory::Tree does not get installed in Windows
-# So for now copying its code here with few modification
+# So for now copying its code here with few modifications
 
 multi sub mktree (Cool:D $path is copy, Int :$mask = 0o777 ) {
 	return True if $path.IO ~~ :d;
@@ -62,20 +62,21 @@ class Build {
         my $libraries = $work_dir.IO.add("resources/libraries");
         if $libraries.IO.e {
             empty-directory $libraries # empty resources/libraries
-            # TODO find a mechanism not to build every time
+            # TODO check if dynamic library is already present
+            # find a mechanism not to build every time
         } else {
             mkdir $libraries
         }
         chdir $BUILD_DIR;
         for $SRC_DIR.IO.dir { 
             # If there are other C libraries inside src with 
-            # cmakelists they can be built into own shared library
+            # cmakelists, they can be built into their own shared library
 
             # The folder name within src/ folder and the library 
             # to be built should match in name 
             if $_.IO.d {
                 if $*KERNEL eq "win32" { # %*ENV<OS> eq "Windows_NT" I found only in windows
-                                         # could not find in glot.io
+                                         # could not find it in glot.io
                     run "cmake", $_, "-GNinja", "-DCMAKE_C_COMPILER=gcc";
                     } else {
                     run "cmake", $_, "-GNinja";
