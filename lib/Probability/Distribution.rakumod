@@ -1236,8 +1236,10 @@ sub lfactorial($x) is export
 }
 
 
-sub multinomial_coef(+@array_num) is export {
+# Similar to excel =MULTINOMIAL()
+sub multinomial_coef(+@array_num is copy) is export {
   if @array_num.any < 0 { return "Not possible to calculate multinomial coefficient for negative values" };
+  @array_num = @array_num.map: { $_.Int};
   my $sum = [+] @array_num;
   my $result = 1;
   my $i = 0;
