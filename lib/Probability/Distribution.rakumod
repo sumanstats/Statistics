@@ -802,7 +802,7 @@ sub raku_rmultinom($n , $size, @prob is copy) is export {
     @prob = @prob.map: {$_.Num};
     my $prob = CArray[num64].new(@prob);
     my $ints = CArray[int32].allocate($size);
-    rmultinom(100, $prob, $size, $ints);
+    rmultinom($n, $prob, $size, $ints);
     return $ints.list
 }
 
