@@ -206,7 +206,11 @@ is sub ($n) {set_seed(20,16); raku_rbinom($n,2,0.2)}(4), (0, 1, 0, 0);
 
 diag("####    Testing raku_rmultinom    ####");
 is sub ($n) {set_seed(123, 456); my @prob = [0.1, 0.2, 0.4, 0.3]; raku_rmultinom(100, 4 , @prob)}(4), (9,14,43,34);
-
+is -> $n {set_seed(123, 456); raku_rmultinom($n, 5, [0.1,0.2,0.3,0.2,0.2])}(0), (0, 0, 0, 0, 0);
+is -> $n {set_seed(123, 456); raku_rmultinom($n, 5, [0.1,0.2,0.3,0.2,0.2])}(1), (0, 0, 0, 0, 1);
+is -> $n {set_seed(123, 456); raku_rmultinom($n, 5, [0.1,0.2,0.3,0.2,0.2])}(2), (0, 0, 1, 0, 1);
+is -> $n {set_seed(123, 456); raku_rmultinom($n, 5, [0.1,0.2,0.3,0.2,0.2])}(3), (0, 0, 1, 0, 2);
+is -> $n {set_seed(123, 456); raku_rmultinom(100, $n, [0.1, 0.3, 0.5, 0.1])}(4), (9, 29, 49, 13);
 
 ####	Cauchy distribution 	####
 
