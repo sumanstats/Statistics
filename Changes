@@ -3,6 +3,13 @@ Revision history for Statistics
 
 {{$NEXT}}
 
+0.0.6 2023-10-15T00:09:21.986168+05:45
+- Added more robust multinomial coefficients
+- multinomial_coef_excel
+- Made raku_rmultinom working
+- Organized modules
+- Start working on docs
+
 0.0.3  2022-03-15T13:32:33+05:45
 - Publish to CPAN
 

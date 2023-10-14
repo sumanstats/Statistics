@@ -562,19 +562,4 @@ is lfactorial(0), 0;
 is-approx lfactorial(0.2), -0.0853740900033158, 1e-12;
 
 
-
-
-
-
-diag("####    Testing multinomial coefficient    ####");
-
-is multinomial_coef(0, 0), 1;
-is multinomial_coef(0, 0, -0), 1;
-is multinomial_coef((0, 2)), 1;
-is multinomial_coef(2.2, 1, 4), 105;
-is multinomial_coef(2.2, 1.2, 4.9), 105;
-is multinomial_coef(1, 1), 2;
-is multinomial_coef(3, 4, 5), 27720;
-is multinomial_coef(3, 4, 5, 9), 8147739600;
-
 done-testing;

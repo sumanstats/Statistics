@@ -1235,19 +1235,3 @@ sub lfactorial($x) is export
 {
     lgammafn(($x + 1).Num)
 }
-
-
-# Similar to excel =MULTINOMIAL()
-sub multinomial_coef(+@array_num is copy) is export {
-  if @array_num.any < 0 { return "Not possible to calculate multinomial coefficient for negative values" };
-  @array_num = @array_num.map: { $_.Int};
-  my $sum = [+] @array_num;
-  my $result = 1;
-  my $i = 0;
-  while $sum != 0 {
-    $result = $result * choose($sum, @array_num[$i]);
-    $sum = $sum - @array_num[$i];
-    $i++;
-  }
-  return $result
-}
