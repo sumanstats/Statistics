@@ -1235,4 +1235,3 @@ sub lfactorial($x) is export
 {
     lgammafn(($x + 1).Num)
 }
-

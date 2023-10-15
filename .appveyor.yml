@@ -13,7 +13,7 @@ branches:
   # whitelist
   only:
     - main
-    # - testing
+    - testing
     
   # blacklist
   except:
