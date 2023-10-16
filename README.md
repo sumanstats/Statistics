@@ -1,16 +1,20 @@
-[![Linux](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml)
-[![Win64](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml)
-[![MacOS](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/8k6m9d1e7lcby5bm/branch/main?svg=true)](https://ci.appveyor.com/project/sumanstats/statistics/branch/main)
-
-[![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)
-
       _____ _        _   _     _   _          
      / ____| |      | | (_)   | | (_)         
     | (___ | |_ __ _| |_ _ ___| |_ _  ___ ___ 
      \___ \| __/ _` | __| / __| __| |/ __/ __|
      ____) | || (_| | |_| \__ \ |_| | (__\__ \
     |_____/ \__\__,_|\__|_|___/\__|_|\___|___/v0.0.6
+
+
+[![Linux](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/linux.yml)
+[![Win64](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/windows-spec.yml)
+[![MacOS](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml/badge.svg)](https://github.com/sumanstats/Statistics/actions/workflows/macos.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/8k6m9d1e7lcby5bm/branch/main?svg=true)](https://ci.appveyor.com/project/sumanstats/statistics/branch/main)
+
+[![Version](https://raku.land/zef:sumankhanal/Statistics/badges/version)](https://raku.land/zef:sumankhanal/Statistics)
+[![Downloads](https://raku.land/zef:sumankhanal/Statistics/badges/downloads)](https://raku.land/zef:sumankhanal/Statistics)
+[![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-brightgreen.svg)](https://github.com/sumanstats/Statistics)    
+
 
 NAME
 ====
