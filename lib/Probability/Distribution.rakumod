@@ -12,21 +12,43 @@ use NativeCall;
 constant RMATH = %?RESOURCES<libraries/Rmath>;
 
 
+##========================================================##
+# NOTE:
+# cmake naively generates lib<libraryname>.dll in Windows
+# and lib<libraryname>.so in Linux
+# and lib<libraryname>.dylib in MacOS
 
-# Please note: In **windows** supply libraries/libRmath, not Rmath only, 
-#              tested in Windows 10
-#              However in **Linux** supply libraries/Rmath
+##========================================================##
+# Despite libRmath.so in Linux and libRmath.dylib in macos
+# constant RMATH = %?RESOURCES<libraries/Rmath>
+# libraries/Rmath in META6.json works
+# in both OSes
 
-# Also in resources field in META6.json in windows, put "libraries/libRmath"
-# In Linux put "libraries/Rmath"
+##==========================================##
+# BUT it does not in Windows, instead requires
+# constant RMATH = %?RESOURCES<libraries/libRmath>
+# libraries/libRmath in META6.json 
+#===========================================##
 
-# In windows I use msys2 shell from Rtools42, which has **make** available
-# Add **gcc and make from Rtool42 in your path** before installing this module.
+##=====================================================##
+# To avoid this and to make the module cross-platform
+# there is 
+# if (WIN32)
+#   set_target_properties(Rmath PROPERTIES PREFIX "")
+# endif()
+# in CMakeLists.txt, so that in Windows it builds only 
+# Rmath.dll that is compatible with
+##======================================================##
+# constant RMATH = %?RESOURCES<libraries/Rmath>
+# libraries/Rmath in META6.json in Windows
+##======================================================##
 
-# Better to avoid using **make** because it has so many different names 
-# (make, mingw32-make, gmake, nmake), not consistent 
-
-# Best would be to rather use **ninja** 
+##======================================================##
+# The module needs gcc, cmake and ninja for install. I find it better
+# to avoid using **make** because it has so many different names 
+# (make, mingw32-make, gmake, nmake), and might run into issues.
+# Best would be to use **ninja** 
+##======================================================##
 
 
 ####    Function signatures     ####

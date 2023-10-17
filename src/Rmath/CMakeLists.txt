@@ -69,13 +69,22 @@ add_library(Rmath SHARED
             src/qhyper.c     src/rf.c          src/wilcox.c   
             src/standalone/sunif.c)
 
+
+##======================================================##    
+# without this, cmake generates libRmath.dll        
 if (WIN32)
   set_target_properties(Rmath PROPERTIES PREFIX "")
 endif()
+##======================================================##
 
+##======================================================##
 # Generate makefiles compatible with GCC in windows with
-# mkdir build && cd build && cmake .. -G "MinGW Makefiles" && make
+# mkdir build && cd build && 
+#              cmake .. -G "MinGW Makefiles" and then run 
+#              make
 
-# Generate Ninja build files with cmake .. -GNinja and after that run ninja
+# Generate Ninja build files with mkdir build && cd build && 
+#              cmake .. -GNinja and after that run ninja
 
 # also possible to generate MSYS Makefiles in Rtools chain 4.2
+##======================================================##
