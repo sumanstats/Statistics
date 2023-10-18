@@ -816,14 +816,12 @@ sub raku_rbinom($n!, $size!, $prob!)
 #===========================================================
 ####	Multinomial distribution	####
 
-# TODO
 
 # https://stackoverflow.com/questions/63368639/how-to-use-multinomial-function-in-c-with-rmath-h
 
 sub raku_rmultinom($n , $size, @prob is copy) is export {
     @prob.append(0 xx $size - @prob);
-    @prob = @prob.map: {$_.Num};
-    my $prob = CArray[num64].new(@prob);
+    my $prob = CArray[num64].new(@prob».Num);
     my $ints = CArray[int32].allocate($size);
     rmultinom($n, $prob, $size, $ints);
     return $ints.list

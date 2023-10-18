@@ -132,3 +132,14 @@ Copyright 2022 Dr Suman Khanal
 
 This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
+
+SUPPORT
+-------
+
+If it helps, make a small donation for further support.
+
+<form action="https://www.paypal.com/donate" method="post" target="_top">
+<input type="hidden" name="hosted_button_id" value="HZSEMN4SHC3TL" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+<img alt="" border="0" src="https://www.paypal.com/en_NP/i/scr/pixel.gif" width="1" height="1" />
+</form>
