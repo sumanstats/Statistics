@@ -49,10 +49,9 @@ sub linspace(
     ) 
     is export {
     my $step = $endpoint ?? ($end - $start)/($num - 1) !!  ($end-$start)/($num);
-    my @list;
-    for 1..$num {
-        @list.push($start); 
-        $start += $step
+    my @list[$num];
+    for 0..($num-1) {
+        @list[$_] = $start + $_ * $step; 
         }
     $retstep ?? (@list, $step) !! @list
 }

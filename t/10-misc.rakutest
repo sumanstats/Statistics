@@ -24,7 +24,9 @@ is linspace(2.1, 3.2, 5, endpoint => False, retstep => False), [2.1, 2.32, 2.54,
 is linspace(1, 3, 3, endpoint => False, retstep => False), [1, 1.666667, 2.333333];
 is linspace(1, 3, 3, endpoint => True, retstep => False), [1, 2, 3];
 is linspace(1, 3, 3, endpoint => False, retstep => True), ([1, 1.666667, 2.333333], 0.666667);
-
+is "%.16f".sprintf(linspace(1,3,30000)[3000]) , "1.2000066668888962";
+is "%.16f".sprintf(linspace(1,3,300000)[3000]), "1.0200000666668890";
+is "%.5f".sprintf(linspace(1,3,10)[9]), "3.00000";
 
 is linspace(0, 0, 20, endpoint=>False), (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 is linspace(-1, 0, 20, endpoint => False), (-1,-0.95,-0.9,-0.85,-0.8,-0.75,-0.7,-0.65,-0.6,-0.55,-0.5,-0.45,-0.4,-0.35,-0.3,-0.25,-0.2,-0.15,-0.1,-0.05);
