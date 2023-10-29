@@ -7,6 +7,15 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 # /nologo /MT /std:c++latest /Ox /GL /DNDEBUG  /DWIN32 /DAO_ASSUME_WINDOWS98 -DMVM_HEAPSNAPSHOT_FORMAT=2 -D_GNU_SOURCE in MSVC
 # but did not work with MSVC
 
+# set warning level
+if (MSVC)
+    # warning level 4
+    add_compile_options(/W4)
+else()
+    # additional warnings
+    add_compile_options(-Wpedantic) # set later -Wall -Wextra 
+endif()
+
 
 ##################################################
 # Create target and set properties
@@ -67,7 +76,7 @@ add_library(Rmath SHARED
             src/qgamma.c     src/rchisq.c      src/stirlerr.c
             src/qgeom.c      src/rexp.c        src/toms708.c
             src/qhyper.c     src/rf.c          src/wilcox.c   
-            src/standalone/sunif.c)
+            src/standalone/sunif.c src/standalone/setN01_kind.c)
 
 
 ##======================================================##    

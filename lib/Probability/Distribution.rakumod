@@ -409,25 +409,48 @@ sub bessel_y(num64, num64) returns num64
 ####	Random number generators	####
 
 sub norm_rand() returns num64
+    is export
     is native( RMATH ) { * };
 
 sub unif_rand() returns num64
+    is export
     is native( RMATH ) { * };
 
 sub exp_rand() returns num64
+    is export
     is native( RMATH ) { * };
 
 multi set_seed(uint32, uint32)
     is native( RMATH ) { * };
 
+multi set_seed(UInt $a, UInt $b) is export {
+    # Don't give negative parameters, only unsigned Ints
+    set_seed(my uint32 $ = $a, my uint32 $ = $b)
+}
+
 sub get_seed(uint32 is rw, uint32 is rw)
     is native( RMATH ) { * };
 
-multi set_seed(UInt() $a, UInt() $b) is export {
-    # Don't give negative parameters
-    # Tolerates Num though, as it converts to UInt
-    set_seed(my uint32 $ = $a, my uint32 $ = $b)
+multi set_N01_kind(int32) is native( RMATH ) { * };
+
+multi set_N01_kind(Int $value) is export {
+    # create error
+    my $error = qq:to/END/;
+    The N01_type can only be one of: \n 
+    BUGGY_KINDERMAN_RAMAGE => 0,
+    AHRENS_DIETER => 1,
+    BOX_MULLER => 2,
+    INVERSION => 4,
+    KINDERMAN_RAMAGE => 5
+
+    USER_NORM not supported in standalone.
+    END
+    # check for acceptable value
+    if $value !~~ (0|1|2|4|5) {die $error};
+    set_N01_kind(my int32 $ = $value)        
 }
+
+
 
 ####	Normal distribution	####
 

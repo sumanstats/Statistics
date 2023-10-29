@@ -1,0 +1,20 @@
+use Test;
+use Statistics;
+
+
+diag("####    Testing set_N01_kind with unif_rand    ####");
+is-approx sub () {set_seed(123,456); set_N01_kind(4); unif_rand()}(), 0.3845709861220258;
+
+
+diag("####    Testing set_N01_kind with exp_rand    ####");
+is-approx sub () {set_seed(123,456); set_N01_kind(5); exp_rand()}(), 1.2314311250480485;
+
+
+diag("####    Testing set_N01_kind with norm_rand    ####");
+is-approx sub () {set_seed(123,456); set_N01_kind(1); norm_rand()}(), 1.119638151631605;
+is-approx sub () {set_seed(123,456); set_N01_kind(2); norm_rand()}(), -1.734578032014886;
+
+
+
+
+done-testing;

@@ -619,6 +619,8 @@ double  logspace_add(double logx, double logy);
 double  logspace_sub(double logx, double logy);
 
 
+void set_N01_kind(int value);
+
 /* ----------------- Private part of the header file ------------------- */
 
 #if defined(MATHLIB_STANDALONE) && !defined(MATHLIB_PRIVATE_H)
@@ -650,6 +652,8 @@ R_EXTERN int N01_kind;
 #else
 extern int N01_kind;
 # endif
+
+
 
 #endif /* MATHLIB_STANDALONE */
 
