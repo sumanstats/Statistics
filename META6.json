@@ -1,8 +1,13 @@
 {
   "auth": "zef:sumankhanal",
   "authors": [
-    "Suman Khanal"
+    "Suman Khanal <suman81765@gmail.com>"
   ],
+  "support": {
+    "email": "suman81765@gmail.com",
+    "source": "https://github.com/sumanstats/Statistics.git",
+    "bugtracker": "https://github.com/sumanstats/Statistics/issues"
+  },
   "build-depends": [
   ],
   "depends": [
@@ -10,7 +15,7 @@
   "description": "Doing statistics in Raku",
   "license": "Artistic-2.0",
   "name": "Statistics",
-  "perl": "6.*",
+  "raku": "6.*",
   "provides": {
     "Correlation::BiweightMid": "lib/Correlation/BiweightMid.rakumod",
     "Correlation::Kendall": "lib/Correlation/Kendall.rakumod",
