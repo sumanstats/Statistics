@@ -113,7 +113,10 @@ Features
 + [x] descriptive statistics
 + [x] correlation coefficients
 + [x] pdf, cdf of probability distributions (all the probability distributions in R v4.3.1 are included)
+  + The name of the functions and their parameters are same as in R, only difference being prefix the R function with `raku_` e.g. `pnorm` in R is `raku_pnorm` in Raku
 + [x] random number generators
+  + The generator is Marsaglia-multicarry with an entry point `set_seed(UInt, UInt)`
+  + The facilities to [change the normal random number generator](https://cran.r-project.org/doc/manuals/r-devel/R-admin.html#The-standalone-Rmath-library) are available through the function `set_N01_kind(UInt)` that can take value (0|1|2|4|5)
 + [ ] parametric tests
 + [ ] non-parametric tests
 

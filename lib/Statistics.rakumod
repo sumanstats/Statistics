@@ -140,12 +140,15 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 
 =head2 Features
 
-=item [x] descriptive statistics
-=item [x] correlation coefficients
-=item [x] pdf, cdf of probability distributions (all the probability distributions in R v4.3.1 are included)
-=item [x] random number generators
-=item [ ] parametric tests
-=item [ ] non-parametric tests
+=item1 [x] descriptive statistics
+=item1 [x] correlation coefficients
+=item1 [x] pdf, cdf of probability distributions (all the probability distributions in R v4.3.1 are included)
+=item2  The name of the functions and their parameters are same as in R, only difference being prefix the R function with C<raku_> e.g. C<pnorm> in R is C<raku_pnorm> in Raku
+=item1 [x] random number generators
+=item2  The generator is Marsaglia-multicarry with an entry point C<set_seed(UInt, UInt)>
+=item2  The facilities to L<change the normal random number generator|https://cran.r-project.org/doc/manuals/r-devel/R-admin.html#The-standalone-Rmath-library> are available through the function C<set_N01_kind(UInt)> that can take value (0|1|2|4|5)
+=item1 [ ] parametric tests
+=item1 [ ] non-parametric tests
 
 
 =head3 INSTALLATION

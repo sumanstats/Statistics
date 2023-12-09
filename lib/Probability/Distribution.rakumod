@@ -433,7 +433,7 @@ sub get_seed(uint32 is rw, uint32 is rw)
 
 multi set_N01_kind(int32) is native( RMATH ) { * };
 
-multi set_N01_kind(Int $value) is export {
+multi set_N01_kind(UInt $value) is export { # this one is exported 
     # create error
     my $error = qq:to/END/;
     The N01_type can only be one of: \n 
