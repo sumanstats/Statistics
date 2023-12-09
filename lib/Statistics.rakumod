@@ -87,11 +87,9 @@ kendall_cor_coef(@data1, @data2); # 0.8144262510988963
 # more robust, less sensitive to outliers
 bi_cor_coef(@data1, @data2); # 0.9146470012038392
 
-
 # numpy linspace
 linspace(2.1, 3.2, 5, endpoint => False, retstep => False); # [2.1, 2.32, 2.54, 2.76, 2.98]
 linspace(1, 3, 3, endpoint => False, retstep => True); # ([1, 1.666667, 2.333333], 0.666667)
-
 
 # pdf of normal distribution 
 raku_dnorm(5); # 1.4867195147342977e-06
@@ -104,7 +102,9 @@ raku_pnorm(5); # 0.9999997133484281
 raku_pnorm(4, mean => 2, sd => 3); # 0.7475074624530771
 raku_pnorm(4, mean => 2, sd => 3, log_p => True) # -0.29101099055230867
 
-
+# Quantiles 
+raku_qnorm(0.7) # with default  mean=>0, sd => 1; # 0.5244005127080407
+raku_qnorm(1); # Inf
 raku_qnorm(5); # NaN
 
 # Random number generator for normal distribution 
@@ -113,12 +113,22 @@ raku_rnorm(12) # (0.2933064931910023 -0.43157564134676835 0.1280404124560668 -1.
                  -0.9219453227924342 1.2988990178409578 -0.46867271131577315 -1.2678609176619775 
                   0.3596981905325252 0.35262105537769173 0.5770092689090144 -1.0392300758070165)
 
+# Binomial coefficients
+choose(3,1); # 3;
+choose(0,0); # 1;
+choose(3,5); # 0;
+choose(30,4); # 27405;
+
 # Multinomial coefficients
 multinomial_coef([3,1,1,3,4.2, 8, 90, 40]); # 2.717246116384229e+69;
 multinomial_coef([3,1,1,3,4.2, 8, 90, 140]); # 1.0317825100856673e+106;
 multinomial_coef([2,4,5,7]); # 220540320
 
+# Excel variant of multinomial coefficient
 multinomial_coef_excel([3,1.9,1,3,4.2]); # 554400;
+
+# Factorials
+factorial(9); # 362880
 
 =end code
 
@@ -132,7 +142,7 @@ Statistics is a module to make it easier to do statistics in Raku programming la
 
 =item [x] descriptive statistics
 =item [x] correlation coefficients
-=item [x] pdf, cdf of probability distributions 
+=item [x] pdf, cdf of probability distributions (all the probability distributions in R v4.3.1 are included)
 =item [x] random number generators
 =item [ ] parametric tests
 =item [ ] non-parametric tests
