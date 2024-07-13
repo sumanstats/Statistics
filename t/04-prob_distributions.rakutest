@@ -54,7 +54,8 @@ element_wise_testing_with_precision sub ($n) {set_seed(111, 222); raku_rnorm($n)
 diag("####    Testing raku_dgammma    ####");
 is raku_dgamma(2,4, rate => 1), 0.1804470443154836;
 is raku_dgamma(2,4, scale => 2), 0.030656620097620196;
-is raku_dgamma(2,4, rate => 7, scale => 1/7), 0.0026620006060902226;
+is raku_dgamma(2,4, rate => 7), 0.0026620006060902226;
+is raku_dgamma(2,4, scale => 1/7), 0.0026620006060902226;
 is raku_dgamma(2,4, scale => 1/7), 0.0026620006060902226;
 is raku_dgamma(2,4, scale => 2, log => True), -3.4849066497880004;
 
@@ -62,7 +63,8 @@ diag("####    Testing raku_pgamma    ####");
 is raku_pgamma(2,4), 0.142876539501453;
 is raku_pgamma(2,4, log_p => True), -1.9457743817619386;
 is raku_pgamma(2,4, scale => 4, log_p => True), -6.34721274558465;
-is raku_pgamma(2,4, rate => 4, scale => 1/4, log_p => True), -0.04330435635721676;
+is raku_pgamma(2,4, rate => 4, log_p => True), -0.04330435635721676;
+is raku_pgamma(2,4, scale => 1/4, log_p => True), -0.04330435635721676;
 
 diag("####    Testing raku_qgamma    ####");
 is raku_qgamma(2,4), NaN;
