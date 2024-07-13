@@ -552,7 +552,7 @@ is choose(0,0), 1;
 is choose(3,5), 0;
 is choose(30,4), 27405;
 is lchoose(3,4), -Inf;
-is-approx lchoose(30,4.2), 10.218480757480219, 1e-12;
+is-approx lchoose(30,4), 10.218480757480219, 1e-12;
 
 diag("####    Testing factorial and lfactorial    ####");
 is factorial(9), 362880;
