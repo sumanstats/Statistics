@@ -9,27 +9,52 @@ unit module Correlation::PearsonSpearman;
 
 # Fractional ranks in a set of data 
 
-sub fractional_ranking(@data is copy) {
-    my @new = @data.BagHash.sort(+*.key); # calling .reverse ranks the data from highest to lowest
-    my $i=1; # rank start at 1 
-    my %internal_hash; # its a hash which contains rank for each unique value
-    for @new {
-        if .value == 1 { # if value is 1 push the corresponding rank r as $i
-            %internal_hash.push(.key => $i); 
-            $i+=1
-        } else {
-            %internal_hash.push(.key => $i + (.value - 1)/2); # push  r + (n-1)/2
-            $i = $i + .value
+# sub fractional_ranking(@data is copy) {
+#     my @new = @data.BagHash.sort(+*.key); # calling .reverse ranks the data from highest to lowest
+#     my $i=1; # rank start at 1 
+#     my %internal_hash; # its a hash which contains rank for each unique value
+#     for @new {
+#         if .value == 1 { # if value is 1 push the corresponding rank r as $i
+#             %internal_hash.push(.key => $i); 
+#             $i+=1
+#         } else {
+#             %internal_hash.push(.key => $i + (.value - 1)/2); # push  r + (n-1)/2
+#             $i = $i + .value
+#         }
+#     }
+
+#     # iterate through data and provide rank for each individual values
+#     for @data {
+#         $_ = %internal_hash{$_}
+#         }
+#     return @data
+
+# }
+
+# Claude AI help
+# O(nlogn)
+sub fractional_ranking(@numbers) {
+    my @sorted = @numbers.pairs.sort: *.value;
+    my %rank;
+    my $rank = 0;
+    my $count = 0;
+    my $last = -Inf;
+
+    for @sorted -> $pair {
+        my ($index, $value) = $pair.kv;
+        if $value != $last {
+            %rank{$last} = $rank + ($count - 1) / 2 + 1 if $count;
+            $rank += $count;
+            $count = 0;
+            $last = $value;
         }
+        $count++;
     }
+    %rank{$last} = $rank + ($count - 1) / 2 + 1;
 
-    # iterate through data and provide rank for each individual values
-    for @data {
-        $_ = %internal_hash{$_}
-        }
-    return @data
-
+    return @numbers.map: { %rank{$_} };
 }
+
 
 
 # Function for calculating pearson correlation coefficient
