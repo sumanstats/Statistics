@@ -1,5 +1,5 @@
 # Set rakudo version to test
-$version = "2023.09"
+$version = "2025.08"
 $location_module = $env:APPVEYOR_BUILD_FOLDER
 $location_rakudo = New-Item -ItemType Directory "C:\rakudo64"
 
@@ -16,7 +16,7 @@ Expand-Archive -Path rakudo.zip -DestinationPath rakudo
 Move-Item .\rakudo\rakudo-moar-$version-01-win-x86_64-msvc\** $location_rakudo
 
 # Set Path
-$Env:PATH += ";$location_rakudo\bin;$location_rakudo\share\perl6\site\bin"
+$Env:PATH = "$location_rakudo\bin;$location_rakudo\share\perl6\site\bin;$Env:PATH"
 
 # Remove zip and folder
 Remove-Item rakudo.zip

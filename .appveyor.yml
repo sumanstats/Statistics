@@ -43,7 +43,7 @@ install:
 # Read on issues of using gcc in Windows
 # gcc, cmake and ninja should be in PATH
 test_script:
-  - ps: $Env:PATH += ";C:\msys64\mingw64\bin"     
+  - ps: $Env:PATH = "C:\msys64\mingw64\bin;$Env:PATH"     
   # Install only dependencies, disable testing
   # Disable fetching dependencies
   - cmd: zef install --/test --test-depends --deps-only .
